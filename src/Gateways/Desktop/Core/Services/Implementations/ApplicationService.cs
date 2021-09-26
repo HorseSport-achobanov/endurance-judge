@@ -1,5 +1,4 @@
 ﻿using EnduranceJudge.Application.Core.Exceptions;
-using EnduranceJudge.Core.Exceptions;
 using EnduranceJudge.Domain.Core.Exceptions;
 using EnduranceJudge.Gateways.Desktop.Core.Objects;
 using EnduranceJudge.Gateways.Desktop.Core.Static;

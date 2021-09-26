@@ -6,12 +6,12 @@
     xmlns:strings="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization"
     prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <ScrollViewer Style="{StaticResource Scroll}"
+    <ScrollViewer Style="{StaticResource Scroll-Wrapper}"
                   PreviewMouseWheel="HandleScroll">
 
         <Grid Style="{StaticResource Grid}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150px" />
+                <ColumnDefinition Width="250px" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -88,7 +88,7 @@
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="6" Grid.Column="1" >
                 <DockPanel Style="{StaticResource Stretch-Last}">
-                    <ListBox Style="{StaticResource List}"
+                    <ListBox Style="{StaticResource ListBox-Vertical}"
                              ItemsSource="{Binding Personnel}" />
                 </DockPanel>
             </Border>
@@ -96,7 +96,7 @@
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="7" Grid.Column="0" >
                 <TextBlock Style="{StaticResource Text-Label}"
-                           Text ="{x:Static strings:DesktopStrings.CompetitionsLabel}" />
+                           Text ="{x:Static strings:DesktopStrings.COMPETITIONS}" />
             </Border>
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="7" Grid.Column="1">
@@ -107,22 +107,20 @@
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="8" Grid.Column="1">
                 <DockPanel Style="{StaticResource Stretch-Last}">
-                    <ListBox Style="{StaticResource List}"
+                    <ListBox Style="{StaticResource ListBox-Vertical}"
                              ItemsSource="{Binding Competitions}" />
                 </DockPanel>
             </Border>
 
             <Border Style="{StaticResource Wrapper-Form-Buttons}"
                     Grid.Row="9" Grid.Column="0">
-                <Button Style="{StaticResource Button-Big-Horizontal}"
-                        Command="{Binding NavigateBack}"
-                        Content="{x:Static strings:DesktopStrings.BackButtonText}" />
+                <Button Style="{StaticResource Button-Form-Back}"
+                        Command="{Binding NavigateBack}" />
             </Border>
             <Border Style="{StaticResource Wrapper-Form-Buttons}"
                     Grid.Row="9" Grid.Column="1">
-                <Button Style="{StaticResource Button-Big-Horizontal}"
-                        Command="{Binding Submit}"
-                        Content="{x:Static strings:DesktopStrings.SaveButtonText}" />
+                <Button Style="{StaticResource Button-Form-Save}"
+                        Command="{Binding Submit}" />
             </Border>
         </Grid>
     </ScrollViewer>

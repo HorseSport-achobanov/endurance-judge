@@ -19,6 +19,10 @@
                     Content="{x:Static strings:DesktopStrings.MANAGER_PAGE_BUTTON_TEXT}" />
 
             <Button Style="{StaticResource Button-Header-Horizontal}"
+                    Command="{Binding NavigateToRanking}"
+                    Content="{x:Static strings:DesktopStrings.RANKING}" />
+
+            <Button Style="{StaticResource Button-Header-Horizontal}"
                     Command="{Binding NavigateToPrintExample}">Print example</Button>
         </StackPanel>
 </UserControl>

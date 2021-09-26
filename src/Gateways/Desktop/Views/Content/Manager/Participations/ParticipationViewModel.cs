@@ -4,6 +4,7 @@ using EnduranceJudge.Core.Mappings;
 using EnduranceJudge.Domain.Aggregates.Manager.Participations;
 using EnduranceJudge.Gateways.Desktop.Core.Static;
 using EnduranceJudge.Gateways.Desktop.Core.ViewModels;
+using EnduranceJudge.Gateways.Desktop.Services;
 using EnduranceJudge.Gateways.Desktop.Views.Content.Manager.ParticipationsInPhases;
 using Prism.Commands;
 using System;
@@ -16,10 +17,13 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Manager.Participations
     public class ParticipationViewModel
         : RootFormBase<GetParticipation, UpdateParticipation, Participation, ParticipationView>
     {
+        private readonly IDomainHandler domainHandler;
         private Participation participation;
 
-        public ParticipationViewModel(IApplicationService application) : base(application)
+        public ParticipationViewModel(IApplicationService application, IDomainHandler domainHandler)
+            : base(application)
         {
+            this.domainHandler = domainHandler;
             this.Start = new DelegateCommand(this.StartAction);
             this.Arrive = new DelegateCommand(this.ArriveAction);
             this.Inspect = new DelegateCommand(this.InspectAction);
@@ -58,32 +62,32 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Manager.Participations
 
         private void StartAction()
         {
-            this.participation.Start();
+            this.domainHandler.Handle(() => this.participation.Start());
             this.Update();
         }
         private void ArriveAction()
         {
-            this.participation.Arrive(DateTime.Now);
+            this.domainHandler.Handle(() => this.participation.Arrive(DateTime.Now));
             this.Update();
         }
         private void InspectAction()
         {
-            this.participation.Inspect(DateTime.Now);
+            this.domainHandler.Handle(() => this.participation.Inspect(DateTime.Now));
             this.Update();
         }
         private void ReInspectAction()
         {
-            this.participation.ReInspect(DateTime.Now);
+            this.domainHandler.Handle(() => this.participation.ReInspect(DateTime.Now));
             this.Update();
         }
         private void CompleteSuccessfulAction()
         {
-            this.participation.CompleteSuccessful();
+            this.domainHandler.Handle(() => this.participation.CompleteSuccessful());
             this.Update();
         }
         private void CompleteUnsuccessfulAction()
         {
-            this.participation.CompleteUnsuccessful("code");
+            this.domainHandler.Handle(() => this.participation.CompleteUnsuccessful("code"));
             this.Update();
         }
 

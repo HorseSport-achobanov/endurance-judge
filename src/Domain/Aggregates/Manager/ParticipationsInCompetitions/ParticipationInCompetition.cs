@@ -74,20 +74,27 @@ namespace EnduranceJudge.Domain.Aggregates.Manager.ParticipationsInCompetitions
             => this.Validate(() =>
             {
                 var nextPhase = this.Phases
-                    .OrderBy(x => x.OrderBy)
                     .Skip(this.participationsInPhases.Count)
                     .FirstOrDefault()
                     .IsNotDefault(NEXT_PHASE_IS_NULL_MESSAGE);
 
-                var restTime = this.CurrentPhase
-                    ?.PhasesForCategories
-                    .FirstOrDefault(x => x.Category == this.Category)
-                    ?.RestTimeInMinutes;
-                var nextStartTime = this.CurrentPhase?.ReInspectionTime?.AddMinutes(restTime!.Value)
-                    ?? this.CurrentPhase?.InspectionTime?.AddMinutes(restTime!.Value)
-                    ?? this.StartTime;
+                DateTime startTime;
+                if (this.ParticipationsInPhases.Any())
+                {
+                    var lastPhase = this.ParticipationsInPhases.Last();
+                    var restTime = lastPhase
+                        .PhasesForCategories
+                        .First(pfc => pfc.Category == this.Category)
+                        .RestTimeInMinutes;
+                    startTime = lastPhase.ReInspectionTime?.AddMinutes(restTime)
+                        ?? lastPhase.InspectionTime!.Value.AddMinutes(restTime);
+                }
+                else
+                {
+                    startTime = this.StartTime;
+                }
 
-                var participation = new ParticipationInPhase(nextPhase, nextStartTime);
+                var participation = new ParticipationInPhase(nextPhase, startTime);
                 this.participationsInPhases.Add(participation);
             });
         internal void CompleteSuccessful()

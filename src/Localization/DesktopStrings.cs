@@ -4,12 +4,12 @@
     {
         // ------
         // Common
-        public const string SaveButtonText = "Save";
+        public const string SAVE = "Save";
         public const string UPDATE_BUTTON = "Update";
         public const string SearchButtonText = "Search";
         public const string ClearButtonText = "Clear";
         public const string CREATE_BUTTON = "Create";
-        public const string BackButtonText = "Back";
+        public const string BACK = "Back";
         public const string BoolTrueValue = "Yes";
         public const string BoolFalseValue = "No";
 
@@ -30,7 +30,7 @@
         public const string ImportPageButtonText = "Import";
         public const string EventPageButtonText = "Event";
         public const string MANAGER_PAGE_BUTTON_TEXT = "Manager";
-        public const string RankingPageButtonText = "Ranking";
+        public const string RANKING = "Ranking";
 
         // -- Content
 
@@ -61,7 +61,7 @@
         public const string MembersOfJudgeCommitteeLabel = "Members of Judge Committee";
         public const string MembersOfVetCommitteeLabel = "Members of Vet Committee";
         public const string StewardsLabel = "Stewards";
-        public const string CompetitionsLabel = "Competitions";
+        public const string COMPETITIONS = "Competitions";
         public const string PersonnelLabel = "Personnel";
 
         // ------ Competition
@@ -85,12 +85,12 @@
         public const string ParticipantTitle = "ParticipantTitle";
         public const string RfIdLabel = "RFID Number";
         public const string NumberLabel = "Number";
-        public const string MaxAverageSpeedInKmPhLabel = "Maximum Average Speed In Kilometers";
-        public const string MaxAverageSpeedInKmPhVisibilityLabel = "Has Average Speed Limit";
+        public const string MAX_AVERAGE_SPEED_IN_KMH = "Max Average Speed (km/h)";
+        public const string HAS_AVERAGE_SPEED_LIMIT = "Has Average Speed Limit";
         public const string AthleteLabel = "Athlete";
         public const string HorseLabel = "Horse";
         public const string CategoryLabel = "Category";
-        public const string MaxRecoveryTimeInMinutesLabel = "Max Recovery Time In Minutes";
+        public const string MAX_RECOVERY_TIME_IN_MINS = "Max Recovery Time (mins)";
         public const string RestTimeInMinutesLabel = "Rest Time In Minutes";
         public const string PhasesForCategoryLabel = "Phases for Categories";
 
@@ -136,5 +136,10 @@
         public const string LENGTH_IN_KM = "Length";
         public const string HOURS_SYMBOL = "h";
         public const string KM_PER_HOUR = "km/h";
+        public const string KIDS = "Kids";
+        public const string ADULTS = "Adults";
+        public const string LENGTH = "Lenght";
+        public const string RANK_LIST = "Ranklist";
+        public const string CATEGORY = "Category";
     }
 }

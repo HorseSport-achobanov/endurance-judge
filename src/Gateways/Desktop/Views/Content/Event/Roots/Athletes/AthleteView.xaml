@@ -71,11 +71,11 @@
 
             <Button Style="{StaticResource Button}"
                     Command="{Binding NavigateBack}"
-                    Content="{x:Static strings:DesktopStrings.BackButtonText}" />
+                    Content="{x:Static strings:DesktopStrings.BACK}" />
 
             <Button Style="{StaticResource Button}"
                     Command="{Binding Submit}"
-                    Content="{x:Static strings:DesktopStrings.SaveButtonText}" />
+                    Content="{x:Static strings:DesktopStrings.SAVE}" />
         </DockPanel>
     </StackPanel>
 </UserControl>

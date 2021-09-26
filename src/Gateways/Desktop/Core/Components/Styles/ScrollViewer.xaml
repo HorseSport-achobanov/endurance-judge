@@ -4,6 +4,9 @@
     <Style x:Key="Scroll" TargetType="ScrollViewer">
         <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
         <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
+    </Style>
+
+    <Style x:Key="Scroll-Wrapper" TargetType="ScrollViewer">
         <Setter Property="Padding" Value="0 0 30px 0" />
     </Style>
 

@@ -29,7 +29,7 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Children.Competiti
         private int typeValue;
         private string typeString;
         private string name;
-        private DateTime startTime;
+        private DateTime startTime = DateTime.Today;
         public CompetitionType Type => (CompetitionType)this.TypeValue;
 
         public string TypeString

@@ -11,7 +11,7 @@
     </Style>
 
     <Style x:Key="Button-Back" TargetType="Button" BasedOn="{StaticResource Button}">
-        <Setter Property="Content" Value="{x:Static localization:DesktopStrings.BackButtonText}" />
+        <Setter Property="Content" Value="{x:Static localization:DesktopStrings.BACK}" />
     </Style>
 
     <Style x:Key="Button-Vertical" TargetType="Button" BasedOn="{StaticResource Button}">
@@ -44,12 +44,21 @@
         <Setter Property="Content" Value="{x:Static localization:DesktopStrings.CREATE_BUTTON}" />
     </Style>
 
-    <Style x:Key="Button-Form" TargetType="Button" BasedOn="{StaticResource Button-Vertical}">
+    <Style x:Key="Button-Form" TargetType="Button" BasedOn="{StaticResource Button}">
         <Setter Property="Width" Value="150px" />
+        <Setter Property="Margin" Value="5px 5px" />
     </Style>
 
     <Style x:Key="Button-Form-Create" TargetType="Button" BasedOn="{StaticResource Button-Form}">
         <Setter Property="Content" Value="{x:Static localization:DesktopStrings.CREATE_BUTTON}" />
+    </Style>
+
+    <Style x:Key="Button-Form-Back" TargetType="Button" BasedOn="{StaticResource Button-Form}">
+        <Setter Property="Content" Value="{x:Static localization:DesktopStrings.BACK}" />
+    </Style>
+
+    <Style x:Key="Button-Form-Save" TargetType="Button" BasedOn="{StaticResource Button-Form}">
+        <Setter Property="Content" Value="{x:Static localization:DesktopStrings.SAVE}" />
     </Style>
 
     <Style x:Key="Button-Form-Update" TargetType="Button" BasedOn="{StaticResource Button-Form}">

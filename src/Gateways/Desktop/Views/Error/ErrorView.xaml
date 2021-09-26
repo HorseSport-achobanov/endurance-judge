@@ -12,7 +12,7 @@
                 <RowDefinition Height="60px" />
             </Grid.RowDefinitions>
 
-            <ScrollViewer Style="{StaticResource Scroll}" HorizontalAlignment="Center"
+            <ScrollViewer Style="{StaticResource Scroll-Wrapper}" HorizontalAlignment="Center"
                           Grid.Row="0">
                 <TextBlock Style="{StaticResource Text-Error}"
                            Text="{Binding Message}"/>

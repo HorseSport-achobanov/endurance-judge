@@ -5,6 +5,7 @@ using EnduranceJudge.Domain.Aggregates.Event.Phases;
 using EnduranceJudge.Domain.Core.Models;
 using EnduranceJudge.Domain.Enums;
 using EnduranceJudge.Domain.States;
+using EnduranceJudge.Domain.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,8 +23,9 @@ namespace EnduranceJudge.Domain.Aggregates.Event.Competitions
             {
                 this.Type = state.Type.IsRequired(nameof(state.Type));
                 this.Name = state.Name.IsRequired(nameof(state.Name));
-                // TODO: fix
-                this.StartTime = DateTime.Now;
+                this.StartTime = state.StartTime
+                    .IsRequired(nameof(state.StartTime))
+                    .IsFutureDate();
             });
 
         public CompetitionType Type { get; private set; }

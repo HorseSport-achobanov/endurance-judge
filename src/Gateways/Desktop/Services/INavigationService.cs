@@ -9,6 +9,7 @@ namespace EnduranceJudge.Gateways.Desktop.Services
         void NavigateToImport();
         void NavigateToEvent();
         void NavigateToManager();
+        void NavigateToRanking();
         void ChangeTo<T>()
             where T : IView;
         void ChangeTo<T>(int entityId);

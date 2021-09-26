@@ -18,7 +18,7 @@ namespace EnduranceJudge.Gateways.Desktop.Core.Extensions
 
         public static object GetData(this NavigationContext context)
         {
-            var hasData = context.Parameters.TryGetValue<object>(DesktopConstants.FormDataParameter, out var data);
+            var hasData = context.Parameters.TryGetValue<object>(DesktopConstants.DataParameter, out var data);
             if (!hasData)
             {
                 return null;

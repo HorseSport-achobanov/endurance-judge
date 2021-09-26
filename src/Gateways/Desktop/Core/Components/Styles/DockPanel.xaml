@@ -6,11 +6,11 @@
     </Style>
 
     <Style x:Key="Stretch-Last" TargetType="DockPanel">
-        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
-    <Style x:Key="List-Item" TargetType="DockPanel">
-        <Setter Property="VerticalAlignment" Value="Center"></Setter>
+    <Style x:Key="Dock-Horizontal" TargetType="DockPanel">
+        <Setter Property="VerticalAlignment" Value="Center"/>
     </Style>
 
     <Style x:Key="Dock-Error" TargetType="DockPanel">

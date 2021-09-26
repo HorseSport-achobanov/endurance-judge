@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:personnel="clr-namespace:EnduranceJudge.Gateways.Desktop.Views.Content.Event.Children.Personnel"
+                    xmlns:localization="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization">
+
+    <DataTemplate DataType="{x:Type personnel:PersonnelViewModel}">
+        <DockPanel Style="{StaticResource Dock-Horizontal}">
+
+            <TextBlock Style="{StaticResource Text}"
+                       Text="{Binding RoleName}" />
+
+            <TextBlock Style="{StaticResource Text}"
+                       Text="{Binding Name}" />
+
+            <Button Style="{StaticResource Button}" HorizontalAlignment="Right"
+                    Command="{Binding NavigateToUpdate}"
+                    Content="{x:Static localization:DesktopStrings.UPDATE_BUTTON}" />
+        </DockPanel>
+    </DataTemplate>
+
+</ResourceDictionary>

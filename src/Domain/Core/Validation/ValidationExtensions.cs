@@ -4,7 +4,7 @@ using EnduranceJudge.Domain.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static EnduranceJudge.Localization.Strings.DomainStrings;
+using static EnduranceJudge.Localization.Strings.Domain;
 
 namespace EnduranceJudge.Domain.Core.Validation
 {

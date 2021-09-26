@@ -5,46 +5,50 @@
              xmlns:strings="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <Grid>
+    <Grid Style="{StaticResource Grid}">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition />
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <TextBlock Style="{StaticResource Text-H1}"
-                   Text="{x:Static strings:DesktopStrings.AthletesListTitle}" />
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="0">
+            <TextBlock Style="{StaticResource Text-H1}"
+                       Text="{x:Static strings:DesktopStrings.AthletesListTitle}" />
+        </Border>
 
-        <DockPanel Style="{StaticResource Stretch-Last}"
-                   Grid.Row="1">
-            <Button Style="{StaticResource Button}"
-                    Command="{Binding ChangeToCreate}"
-                    Content="{x:Static strings:DesktopStrings.CREATE_BUTTON}" />
-        </DockPanel>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="1">
+            <Button Style="{StaticResource Button-Form-Create}"
+                    Command="{Binding ChangeToCreate}" />
+        </Border>
 
-        <DockPanel Style="{StaticResource Stretch-Last}"
-                   Grid.Row="2">
-            <Button Style="{StaticResource Button}"
-                    Command="{Binding ClearSearch}"
-                    Content="{x:Static strings:DesktopStrings.ClearButtonText}" />
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="2">
+            <DockPanel Style="{StaticResource Stretch-Last}">
 
-            <Button Style="{StaticResource Button}"
-                    Command="{Binding Search}"
-                    Content="{x:Static strings:DesktopStrings.SearchButtonText}" />
+                <Button Style="{StaticResource Button-Horizontal}"
+                        Command="{Binding ClearSearch}"
+                        Content="{x:Static strings:DesktopStrings.ClearButtonText}" />
 
-            <TextBox Style="{StaticResource Input}"
-                     Text="{Binding SearchValue}" />
-        </DockPanel>
+                <Button Style="{StaticResource Button-Horizontal}"
+                        Command="{Binding Search}"
+                        Content="{x:Static strings:DesktopStrings.SearchButtonText}" />
 
-        <DockPanel Style="{StaticResource Stretch-Last}"
-                   Grid.Row="3">
-            <ScrollViewer VerticalScrollBarVisibility="Auto"
-                          CanContentScroll="True"
+                <TextBox Style="{StaticResource Input}"
+                         Text="{Binding SearchValue}" />
+            </DockPanel>
+        </Border>
+
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="3">
+            <ScrollViewer Style="{StaticResource Scroll}"
                           PreviewMouseWheel="HandleScroll">
-                <ListBox Style="{StaticResource List}"
+                <ListBox Style="{StaticResource ListBox-Vertical}"
                          ItemsSource="{Binding ListItems}" />
             </ScrollViewer>
-        </DockPanel>
+        </Border>
     </Grid>
 </UserControl>

@@ -1,6 +1,6 @@
 ﻿using EnduranceJudge.Domain.States;
 using EnduranceJudge.Gateways.Persistence.Core;
-using EnduranceJudge.Gateways.Persistence.Entities.ParticipantsInCompetitions;
+using EnduranceJudge.Gateways.Persistence.Entities.Participants;
 using EnduranceJudge.Gateways.Persistence.Entities.Phases;
 using EnduranceJudge.Gateways.Persistence.Entities.ResultsInPhases;
 using System;
@@ -16,8 +16,8 @@ namespace EnduranceJudge.Gateways.Persistence.Entities.ParticipationsInPhases
         public DateTime? ReInspectionTime { get; set; }
 
         [JsonIgnore]
-        public ParticipantInCompetitionEntity ParticipationInCompetition { get; set; }
-        public int ParticipationInCompetitionId { get; set; }
+        public ParticipantEntity Participant { get; set; }
+        public int ParticipantId { get; set; }
         [JsonIgnore]
         public ResultInPhaseEntity ResultInPhase { get; set; }
         public int? ResultInPhaseId { get; set; }

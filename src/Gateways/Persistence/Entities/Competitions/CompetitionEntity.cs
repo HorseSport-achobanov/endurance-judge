@@ -1,3 +1,4 @@
+using EnduranceJudge.Domain.Aggregates.Rankings.Competitions;
 using EnduranceJudge.Domain.Enums;
 using EnduranceJudge.Domain.States;
 using EnduranceJudge.Gateways.Persistence.Core;
@@ -10,8 +11,10 @@ using System.Collections.Generic;
 
 namespace EnduranceJudge.Gateways.Persistence.Entities.Competitions
 {
-    public class CompetitionEntity : EntityBase, ICompetitionState
+    public class CompetitionEntity : AggregateRootEntityBase, ICompetitionState
     {
+        private static readonly Type Ranking = typeof(Competition);
+
         public CompetitionType Type { get; set; }
         public string Name { get; set; }
         public DateTime StartTime { get; set; }
@@ -25,5 +28,7 @@ namespace EnduranceJudge.Gateways.Persistence.Entities.Competitions
 
         [JsonIgnore]
         public IList<ParticipantInCompetitionEntity> ParticipantsInCompetitions { get; set; }
+
+        public override IEnumerable<Type> DomainTypes { get; } = new[] { Ranking };
     }
 }

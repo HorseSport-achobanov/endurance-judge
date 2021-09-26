@@ -47,6 +47,19 @@ namespace EnduranceJudge.Gateways.Persistence.Entities.Competitions
                     d => d.Participants,
                     opt => opt.MapFrom(y => y.ParticipantsInCompetitions.Select(pic => pic.Participant)));
             profile.CreateMap<CompetitionEntity, CompetitionDto>();
+
+            this.MapToRankingAggregate(profile);
+        }
+
+        private void MapToRankingAggregate(IProfileExpression profile)
+        {
+            profile.CreateMap<CompetitionEntity, Domain.Aggregates.Rankings.Competitions.Competition>()
+                .ForMember(
+                    x => x.PhaseLengthsInKm,
+                    opt => opt.MapFrom(y => y.Phases.Select(x => x.LengthInKm)))
+                .ForMember(
+                    x => x.Participations,
+                    opt => opt.MapFrom(y => y.ParticipantsInCompetitions.Select(x => x.Participant)));
         }
     }
 }

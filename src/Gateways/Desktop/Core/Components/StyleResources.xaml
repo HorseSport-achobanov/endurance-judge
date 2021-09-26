@@ -15,7 +15,8 @@
         <ResourceDictionary Source="Styles/Border.xaml" />
         <ResourceDictionary Source="Styles/ScrollViewer.xaml" />
         <ResourceDictionary Source="Styles/Run.xaml" />
-        <ResourceDictionary Source="Styles/TimePicker.xaml" />
+        <ResourceDictionary Source="Styles/DateTimePicker.xaml" />
+        <ResourceDictionary Source="Styles/CheckBox.xaml" />
     </ResourceDictionary.MergedDictionaries>
 
 </ResourceDictionary>

@@ -4,7 +4,7 @@
 
     <DataTemplate DataType="{x:Type getEvent:EnduranceEventRootModel}">
         <StackPanel>
-            <ListBox Style="{StaticResource List}"
+            <ListBox Style="{StaticResource ListBox-Vertical}"
                      ItemsSource="{Binding Competitions}" />
         </StackPanel>
     </DataTemplate>

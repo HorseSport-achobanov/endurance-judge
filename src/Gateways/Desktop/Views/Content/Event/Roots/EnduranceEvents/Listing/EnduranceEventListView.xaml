@@ -9,11 +9,10 @@
         <TextBlock Style="{StaticResource Text-H1}"
                    Text="{x:Static strings:DesktopStrings.EnduranceEventListTitle}" />
 
-        <Button Style="{StaticResource Button-Big-Vertical}"
-                Command="{Binding ChangeToCreate}"
-                Content="{x:Static strings:DesktopStrings.CREATE_BUTTON}" />
+        <Button Style="{StaticResource Button-Form-Create}"
+                Command="{Binding ChangeToCreate}" />
 
-        <ListBox Style="{StaticResource List}"
+        <ListBox Style="{StaticResource ListBox-Vertical}"
                  ItemsSource="{Binding EnduranceEvents}" />
     </StackPanel>
 </UserControl>

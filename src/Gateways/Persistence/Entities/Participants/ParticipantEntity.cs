@@ -3,6 +3,7 @@ using EnduranceJudge.Gateways.Persistence.Core;
 using EnduranceJudge.Gateways.Persistence.Entities.Athletes;
 using EnduranceJudge.Gateways.Persistence.Entities.Horses;
 using EnduranceJudge.Gateways.Persistence.Entities.ParticipantsInCompetitions;
+using EnduranceJudge.Gateways.Persistence.Entities.ParticipationsInPhases;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,8 @@ namespace EnduranceJudge.Gateways.Persistence.Entities.Participants
 
         [JsonIgnore]
         public ICollection<ParticipantInCompetitionEntity> ParticipantsInCompetitions { get; set; }
+        [JsonIgnore]
+        public IList<ParticipationInPhaseEntity> ParticipationsInPhases { get; set; }
 
         public override IEnumerable<Type> DomainTypes { get; } = new[] { ImportDomain, EventDomain, ManagerDomain };
     }

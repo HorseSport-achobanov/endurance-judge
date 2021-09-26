@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="EnduranceJudge.Gateways.Desktop.Views.Content.Rankings.Categorizations.CategorizationView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:localization="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+        <StackPanel Style="{StaticResource List-Vertical}">
+            <Border Style="{StaticResource Border-Vertical}">
+                <StackPanel Style="{StaticResource List-Horizontal}" HorizontalAlignment="Center">
+
+                    <Button Style="{StaticResource Button-Big-Horizontal}"
+                            IsEnabled="{Binding HasKidsClassification}"
+                            Command="{Binding SelectKidsCategory}"
+                            Content="{x:Static localization:DesktopStrings.KIDS}"
+                            Grid.Column="0" />
+
+                    <Button Style="{StaticResource Button-Big-Horizontal}"
+                            IsEnabled="{Binding HasAdultsClassification}"
+                            Command="{Binding SelectAdultsCategory}"
+                            Content="{x:Static localization:DesktopStrings.ADULTS}"
+                            Grid.Column="1" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Border-Vertical}">
+                <Grid Style="{StaticResource Grid}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150px" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Border Style="{StaticResource Border-Vertical}"
+                            Grid.Row="0" Grid.Column="0" >
+                        <TextBlock Style="{StaticResource Text-Bold}"
+                                   Text="{x:Static localization:DesktopStrings.LENGTH}" />
+                    </Border>
+                    <Border Style="{StaticResource Border-Vertical}"
+                            Grid.Row="0" Grid.Column="1">
+                        <TextBox Style="{StaticResource Readonly}"
+                                 Text="{Binding TotalLengthInKm, Mode=OneWay}" />
+                    </Border>
+
+                    <Border Style="{StaticResource Border-Vertical}"
+                            Grid.Row="1" Grid.Column="0" >
+                        <TextBlock Style="{StaticResource Text-Bold}"
+                                   Text="{x:Static localization:DesktopStrings.CATEGORY}" />
+                    </Border>
+                    <Border Style="{StaticResource Border-Vertical}"
+                            Grid.Row="1" Grid.Column="1">
+                        <TextBox Style="{StaticResource Readonly}"
+                                 Text="{Binding CategoryName, Mode=OneWay}" />
+                    </Border>
+
+                    <Border Style="{StaticResource Border-Vertical}"
+                            Grid.Row="2" Grid.Column="0">
+                        <TextBlock Style="{StaticResource Text-Bold}"
+                                   Text="{x:Static localization:DesktopStrings.RANK_LIST}" />
+                    </Border>
+                    <Border Style="{StaticResource Border-Vertical}"
+                            Grid.Row="2" Grid.Column="1">
+                        <ListBox Style="{StaticResource ListBox-Vertical}"
+                                 ItemsSource="{Binding RankList}" />
+                    </Border>
+                </Grid>
+            </Border>
+        </StackPanel>
+</UserControl>

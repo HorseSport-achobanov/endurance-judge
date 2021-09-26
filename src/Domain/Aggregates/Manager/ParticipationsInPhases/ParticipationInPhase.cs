@@ -24,7 +24,7 @@ namespace EnduranceJudge.Domain.Aggregates.Manager.ParticipationsInPhases
             {
                 this.StartTime = startTime
                     .IsRequired(nameof(startTime))
-                    .HasDatePassed();
+                    .IsFutureDate();
 
                 phase.IsRequired(nameof(phase));
             });
@@ -90,7 +90,6 @@ namespace EnduranceJudge.Domain.Aggregates.Manager.ParticipationsInPhases
             {
                 if (!this.CanArrive)
                 {
-                    // TODO: Validations
                     return;
                 }
                 this.ArrivalTime = time.IsRequired(nameof(time));
@@ -100,7 +99,6 @@ namespace EnduranceJudge.Domain.Aggregates.Manager.ParticipationsInPhases
             {
                 if (!this.CanInspect)
                 {
-                    // TODO: Validations
                     return;
                 }
                 this.InspectionTime = time.IsRequired(nameof(time));
@@ -110,7 +108,6 @@ namespace EnduranceJudge.Domain.Aggregates.Manager.ParticipationsInPhases
             {
                 if (!this.CanReInspect)
                 {
-                    // TODO: Validations
                     return;
                 }
                 this.ReInspectionTime = time.IsRequired(nameof(time));
@@ -129,7 +126,6 @@ namespace EnduranceJudge.Domain.Aggregates.Manager.ParticipationsInPhases
             {
                 if (!this.CanComplete)
                 {
-                    // TODO: Validations
                     return;
                 }
                 this.ArrivalTime.IsNotDefault(ArrivalTimeIsNullMessage);

@@ -1,4 +1,4 @@
-﻿    using EnduranceJudge.Core.Models;
+﻿using EnduranceJudge.Core.Models;
 using EnduranceJudge.Core.Utilities;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -29,7 +29,7 @@ namespace EnduranceJudge.Gateways.Desktop.Core
         }
         public virtual bool IsNavigationTarget(NavigationContext context)
         {
-            return true;
+            return false;
         }
         public virtual void OnNavigatedFrom(NavigationContext navigationContext)
         {
@@ -43,7 +43,6 @@ namespace EnduranceJudge.Gateways.Desktop.Core
         {
             this.Journal?.GoBack();
         }
-
 
         public override bool Equals(object other)
         {

@@ -4,12 +4,14 @@
                     xmlns:localization="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization">
 
     <DataTemplate DataType="{x:Type participants:ParticipantViewModel}">
-        <DockPanel Style="{StaticResource Stretch-Last}">
-            <Button Style="{StaticResource Button}"
+        <DockPanel Style="{StaticResource Dock-Horizontal}">
+
+            <TextBlock Style="{StaticResource Text}"
+                       Text="{Binding Name}" />
+
+            <Button Style="{StaticResource Button}" HorizontalAlignment="Right"
                     Command="{Binding NavigateToUpdate}"
                     Content="{x:Static localization:DesktopStrings.UPDATE_BUTTON}" />
-
-            <ContentPresenter Content="{Binding Name}" />
         </DockPanel>
     </DataTemplate>
 

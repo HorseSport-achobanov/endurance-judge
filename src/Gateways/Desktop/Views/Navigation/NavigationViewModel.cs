@@ -12,6 +12,7 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Navigation
             this.NavigateToImport = new DelegateCommand(navigation.NavigateToImport);
             this.NavigateToEvent = new DelegateCommand(navigation.NavigateToEvent);
             this.NavigateToManager = new DelegateCommand(navigation.NavigateToManager);
+            this.NavigateToRanking = new DelegateCommand(navigation.NavigateToRanking);
 
             this.NavigateToPrintExample = new DelegateCommand(navigation.ChangeTo<PrintExampleView>);
         }
@@ -20,6 +21,7 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Navigation
         public DelegateCommand NavigateToEvent { get; }
         public DelegateCommand NavigateToManager { get; }
         public DelegateCommand NavigateToPrintExample { get; }
+        public DelegateCommand NavigateToRanking { get; }
 
     }
 }

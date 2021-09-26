@@ -99,10 +99,10 @@ namespace EnduranceJudge.Gateways.Persistence
             builder.Entity<CountryEntity>()
                 .HasKey(x => x.IsoCode);
 
-            builder.Entity<ParticipantInCompetitionEntity>()
+            builder.Entity<ParticipantEntity>()
                 .HasMany(pip => pip.ParticipationsInPhases)
-                .WithOne(pic => pic.ParticipationInCompetition)
-                .HasForeignKey(pip => pip.ParticipationInCompetitionId);
+                .WithOne(pic => pic.Participant)
+                .HasForeignKey(pip => pip.ParticipantId);
 
             builder.Entity<ParticipationInPhaseEntity>()
                 .HasOne(p => p.Phase)

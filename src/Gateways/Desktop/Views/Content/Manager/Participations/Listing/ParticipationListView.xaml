@@ -36,10 +36,10 @@
                     Command="{Binding Search}"
                     Content="{x:Static strings:DesktopStrings.SearchButtonText}" />
         </DockPanel>
-        <ScrollViewer Style="{StaticResource Scroll}"
+        <ScrollViewer Style="{StaticResource Scroll-Wrapper}"
                       PreviewMouseWheel="HandleScroll"
                       Grid.Row="4">
-            <ListBox Style="{StaticResource List}"
+            <ListBox Style="{StaticResource ListBox-Vertical}"
                      ItemsSource="{Binding ListItems}" />
         </ScrollViewer>
     </Grid>

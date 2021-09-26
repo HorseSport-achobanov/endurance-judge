@@ -9,12 +9,12 @@ namespace EnduranceJudge.Domain.Validation
     {
         private const string InvalidBirthDateTemplate = "has invalid birth date: {0}";
 
-        public static DateTime? HasDatePassed(this DateTime? dateTime)
+        public static DateTime? IsFutureDate(this DateTime? dateTime)
         {
-            return dateTime?.HasDatePassed();
+            return dateTime?.IsFutureDate();
         }
 
-        public static DateTime HasDatePassed(this DateTime dateTime)
+        public static DateTime IsFutureDate(this DateTime dateTime)
         {
             if (dateTime >= DateTime.Now)
             {

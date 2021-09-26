@@ -8,7 +8,8 @@ using Newtonsoft.Json;
 namespace EnduranceJudge.Gateways.Persistence.Entities.ResultsInPhases
 {
     public class ResultInPhaseEntity : EntityBase, IResultInPhaseState,
-        IMap<ResultInPhase>
+        IMap<ResultInPhase>,
+        IMapTo<Domain.Aggregates.Rankings.ResultsInPhases.ResultInPhase>
     {
         public bool IsRanked { get; set; }
         public string Code { get; set; }

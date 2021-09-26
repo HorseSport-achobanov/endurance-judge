@@ -8,6 +8,10 @@ namespace EnduranceJudge.Gateways.Desktop.Core.Components.Templates.ListItem
         {
         }
 
+        public ListItemViewModel(int id, DelegateCommandBase command) : this(id, id.ToString(), command)
+        {
+        }
+
         public ListItemViewModel(int id, string name, DelegateCommandBase command)
         {
             this.Id = id;

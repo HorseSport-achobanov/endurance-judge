@@ -34,7 +34,7 @@ namespace EnduranceJudge.Application.Events.Commands.EnduranceEvents
                 this.eventCommands = eventCommands;
             }
 
-            public override async Task DoHandle(SaveEnduranceEvent request,CancellationToken token)
+            public override async Task DoHandle(SaveEnduranceEvent request, CancellationToken token)
             {
                 var enduranceEvent = this.enduranceEventFactory.Create(request);
                 await this.eventCommands.Save<EnduranceEventRootModel>(enduranceEvent, token);

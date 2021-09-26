@@ -5,90 +5,122 @@
              xmlns:strings="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  CanContentScroll="True"
+    <ScrollViewer Style="{StaticResource Scroll-Wrapper}"
                   PreviewMouseWheel="HandleScroll">
+        <Grid Style="{StaticResource Grid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250px" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <StackPanel Style="{StaticResource Form}">
-
-            <TextBlock Style="{StaticResource Text-H1}"
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="0" Grid.Column="1">
+                <TextBlock Style="{StaticResource Text-H1}"
                        Text="{x:Static strings:DesktopStrings.ParticipantTitle}" />
+            </Border>
 
-            <DockPanel Style="{StaticResource Stretch-Last}">
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="1" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=RfId}"
                        Content="{x:Static strings:DesktopStrings.RfIdLabel}" />
-
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="1" Grid.Column="1">
                 <TextBox Style="{StaticResource Input}"
                          Text="{Binding RfId}"
                          Name="RfId" />
-            </DockPanel>
+            </Border>
 
-            <DockPanel Style="{StaticResource Stretch-Last}">
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="2" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=Number}"
                        Content="{x:Static strings:DesktopStrings.NumberLabel}" />
-
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="2" Grid.Column="1">
                 <TextBox Style="{StaticResource Input}"
                          Text="{Binding Number}"
                          Name="Number" />
-            </DockPanel>
+            </Border>
 
-            <DockPanel Style="{StaticResource Stretch-Last}">
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="3" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=ToggleIsAverageSpeedInKmPhVisibility}"
-                       Content="{x:Static strings:DesktopStrings.MaxAverageSpeedInKmPhVisibilityLabel}" />
-
-                <CheckBox Command="{Binding ToggleIsAverageSpeedInKmPhVisibility}"
+                       Content="{x:Static strings:DesktopStrings.HAS_AVERAGE_SPEED_LIMIT}" />
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="3" Grid.Column="1">
+                <CheckBox Style="{StaticResource CheckBox}"
+                          Command="{Binding ToggleIsAverageSpeedInKmPhVisibility}"
                           IsChecked="{
-                        Binding MaxAverageSpeedInKmPhVisibility,
-                        Converter={StaticResource VisibilityToBooleanConverter},
-                        Mode=OneWay}"
+                            Binding MaxAverageSpeedInKmPhVisibility,
+                            Converter={StaticResource VisibilityToBooleanConverter},
+                            Mode=OneWay}"
                           Name="ToggleIsAverageSpeedInKmPhVisibility">
                     Yes
                 </CheckBox>
-            </DockPanel>
+            </Border>
 
-            <DockPanel Style="{StaticResource Stretch-Last}" Visibility="{Binding MaxAverageSpeedInKmPhVisibility}">
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="4" Grid.Column="0" >
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=MaxAverageSpeedInKmPh}"
-                       Content="{x:Static strings:DesktopStrings.MaxAverageSpeedInKmPhLabel}" />
-
+                       Content="{x:Static strings:DesktopStrings.MAX_AVERAGE_SPEED_IN_KMH}" />
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}" Visibility="{Binding MaxAverageSpeedInKmPhVisibility}"
+                    Grid.Row="4" Grid.Column="1">
                 <TextBox Style="{StaticResource Input}"
                          Text="{Binding MaxAverageSpeedInKmPh}"
                          Name="MaxAverageSpeedInKmPh" />
-            </DockPanel>
+            </Border>
 
-            <DockPanel Style="{StaticResource Stretch-Last}">
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="5" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=Athlete}"
                        Content="{x:Static strings:DesktopStrings.AthleteLabel}" />
-
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="5" Grid.Column="1">
                 <ComboBox Style="{StaticResource Combo-Box}"
                           ItemsSource="{Binding AthleteItems}"
                           SelectedValue="{Binding AthleteId}"
-                          SelectedValuePath="Id"
                           Name="Athlete" />
-            </DockPanel>
+            </Border>
 
-            <DockPanel Style="{StaticResource Stretch-Last}">
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="6" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=Horse}"
                        Content="{x:Static strings:DesktopStrings.HorseLabel}" />
-
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="6" Grid.Column="1">
                 <ComboBox Style="{StaticResource Combo-Box}"
                           ItemsSource="{Binding HorseItems}"
                           SelectedValue="{Binding HorseId}"
-                          SelectedValuePath="Id"
                           Name="Horse" />
-            </DockPanel>
+            </Border>
 
-            <DockPanel Style="{StaticResource Stretch-Last}">
-
-                <Button Style="{StaticResource Button}"
-                        Command="{Binding NavigateBack}"
-                        Content="{x:Static strings:DesktopStrings.BackButtonText}" />
-            </DockPanel>
-        </StackPanel>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="7" Grid.Column="0">
+                <Button Style="{StaticResource Button-Form-Back}"
+                        Command="{Binding NavigateBack}"/>
+            </Border>
+        </Grid>
     </ScrollViewer>
 </UserControl>

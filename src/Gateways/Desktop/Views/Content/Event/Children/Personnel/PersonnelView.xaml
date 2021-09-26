@@ -5,43 +5,69 @@
              xmlns:strings="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  CanContentScroll="True"
+    <ScrollViewer Style="{StaticResource Scroll-Wrapper}"
                   PreviewMouseWheel="HandleScroll">
+        <Grid Style="{StaticResource Grid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250px" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <StackPanel Style="{StaticResource Form}">
-            <TextBox Style="{StaticResource Input-Id}"
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="0" Grid.Column="0">
+                <TextBox Style="{StaticResource Input-Id}"
                      Text="{Binding Id}" />
-
-            <TextBlock Style="{StaticResource Text-H1}"
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="0" Grid.Column="1">
+                <TextBlock Style="{StaticResource Text-H1}"
                        Text="{x:Static strings:DesktopStrings.PersonnelTitle}" />
+            </Border>
 
-            <DockPanel Style="{StaticResource Stretch-Last}">
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="1" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=Name}"
                        Content="{x:Static strings:DesktopStrings.NameLabel}" />
-
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="1" Grid.Column="1">
                 <TextBox Style="{StaticResource Input}"
                          Text="{Binding Name}"
                          Name="Name" />
-            </DockPanel>
-            <DockPanel Style="{StaticResource Stretch-Last}">
+            </Border>
+
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="2" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=Role}"
                        Content="{x:Static strings:DesktopStrings.RoleLabel}" />
-
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="2" Grid.Column="1">
                 <ComboBox Style="{StaticResource Combo-Box}"
                           ItemsSource="{Binding RoleItems}"
                           SelectedValue="{Binding Role}"
                           SelectedIndex="{Binding Role}"
                           Name="Role" />
-            </DockPanel>
-            <DockPanel Style="{StaticResource Stretch-Last}">
+            </Border>
 
-                <Button Style="{StaticResource Button}"
-                        Command="{Binding NavigateBack}"
-                        Content="{x:Static strings:DesktopStrings.BackButtonText}" />
-            </DockPanel>
-        </StackPanel>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="3" Grid.Column="0">
+                <Button Style="{StaticResource Button-Form-Back}"
+                        Command="{Binding NavigateBack}"/>
+            </Border>
+        </Grid>
     </ScrollViewer>
 </UserControl>

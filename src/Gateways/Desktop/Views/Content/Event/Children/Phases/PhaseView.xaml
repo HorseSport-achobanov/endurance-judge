@@ -5,70 +5,100 @@
              xmlns:strings="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto"
-                  CanContentScroll="True"
+    <ScrollViewer Style="{StaticResource Scroll-Wrapper}"
                   PreviewMouseWheel="HandleScroll">
 
-        <StackPanel Style="{StaticResource Form}">
-            <TextBox Style="{StaticResource Input-Id}"
-                     Text="{Binding Id}" />
+        <Grid Style="{StaticResource Grid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250px" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-            <TextBlock Style="{StaticResource Text-H1}"
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="0" Grid.Column="0">
+                <TextBox Style="{StaticResource Input-Id}"
+                         Text="{Binding Id}" />
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="0" Grid.Column="1">
+                <TextBlock Style="{StaticResource Text-H1}"
                        Text="{x:Static strings:DesktopStrings.PhaseTitle}" />
+            </Border>
 
-            <DockPanel Style="{StaticResource Stretch-Last}">
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="1" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=OrderBy}"
                        Content="{x:Static strings:DesktopStrings.ORDER_LABEL}" />
-
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="1" Grid.Column="1">
                 <TextBox Style="{StaticResource Input}"
                          Text="{Binding OrderBy}"
                          Name="OrderBy" />
-            </DockPanel>
+            </Border>
 
-            <DockPanel Style="{StaticResource Stretch-Last}">
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="2" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=LengthInKm}"
                        Content="{x:Static strings:DesktopStrings.LengthInKmLabel}" />
-
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="2" Grid.Column="1">
                 <TextBox Style="{StaticResource Input}"
                          Text="{Binding LengthInKm}"
                          Name="LengthInKm" />
-            </DockPanel>
+            </Border>
 
-            <DockPanel Style="{StaticResource Stretch-Last}">
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="3" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=IsFinal}"
                        Content="{x:Static strings:DesktopStrings.IsFinalLabel}" />
-
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="3" Grid.Column="1">
                 <ComboBox Style="{StaticResource Combo-Box}"
                           ItemsSource="{Binding BoolItems}"
                           SelectedValue="{Binding IsFinalValue}"
                           SelectedIndex="{Binding IsFinalValue}"
                           Name="IsFinal" />
-            </DockPanel>
+            </Border>
 
-            <StackPanel Style="{StaticResource List-Vertical}">
-
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="4" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=NavigateToCreatePhaseForCategory}"
                        Content="{x:Static strings:DesktopStrings.PhasesForCategoryLabel}" />
-
-                <Button Style="{StaticResource Button}"
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="4" Grid.Column="1">
+                <Button Style="{StaticResource Button-Form-Create}"
                         Command="{Binding NavigateToCreatePhaseForCategory}"
-                        Content="{x:Static strings:DesktopStrings.CREATE_BUTTON}"
                         Name="NavigateToCreatePhaseForCategory" />
+            </Border>
 
-                <ListBox Style="{StaticResource List}"
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="5" Grid.Column="1">
+                <ListBox Style="{StaticResource ListBox-Vertical}"
                          ItemsSource="{Binding PhasesForCategories}" />
-            </StackPanel>
+            </Border>
 
-            <DockPanel Style="{StaticResource Stretch-Last}">
-
-                <Button Style="{StaticResource Button}"
-                        Command="{Binding NavigateBack}"
-                        Content="{x:Static strings:DesktopStrings.BackButtonText}" />
-            </DockPanel>
-        </StackPanel>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="6" Grid.Column="0">
+                <Button Style="{StaticResource Button-Form-Back}"
+                        Command="{Binding NavigateBack}" />
+            </Border>
+        </Grid>
     </ScrollViewer>
 </UserControl>

@@ -4,7 +4,7 @@
                     xmlns:content="clr-namespace:EnduranceJudge.Gateways.Desktop.Core.Components">
 
     <DataTemplate DataType="local:SimpleListItemViewModel">
-        <DockPanel Style="{StaticResource List-Item}">
+        <DockPanel Style="{StaticResource Dock-Horizontal}">
             <TextBlock Text="{Binding Name}" />
         </DockPanel>
     </DataTemplate>
