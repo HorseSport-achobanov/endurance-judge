@@ -38,7 +38,7 @@
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="2" Grid.Column="0">
                 <TextBlock Style="{StaticResource Text-Label}"
-                           Text ="{x:Static strings:DesktopStrings.NameLabel}" />
+                           Text ="{x:Static strings:DesktopStrings.NAME}" />
             </Border>
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="2" Grid.Column="1">
@@ -53,7 +53,7 @@
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="3" Grid.Column="0" >
                 <TextBlock Style="{StaticResource Text-Label}"
-                           Text ="{x:Static strings:DesktopStrings.PopulatedPlaceLabel}"/>
+                           Text ="{x:Static strings:DesktopStrings.POPULATED_PLACE}"/>
             </Border>
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="3" Grid.Column="1" >
@@ -64,14 +64,13 @@
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="4" Grid.Column="0" >
                 <TextBlock Style="{StaticResource Text-Label}"
-                           Text="{x:Static strings:DesktopStrings.CountryLabel}" />
+                           Text="{x:Static strings:DesktopStrings.COUNTRY}" />
             </Border>
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="4" Grid.Column="1" >
                 <ComboBox Style="{StaticResource Combo-Box}"
-                          ItemsSource="{Binding Countries}"
-                          SelectedValue="{Binding SelectedCountryIsoCode}"
-                          SelectedValuePath="IsoCode"/>
+                          ItemsSource="{Binding CountryItems}"
+                          SelectedValue="{Binding CountryId}"/>
             </Border>
 
             <Border Style="{StaticResource Border-Vertical}"
@@ -82,7 +81,7 @@
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="5" Grid.Column="1">
                 <Button Style="{StaticResource Button-Form-Create}"
-                        Command="{Binding NavigateToPersonnel}" />
+                        Command="{Binding CreatePersonnel}" />
             </Border>
 
             <Border Style="{StaticResource Border-Vertical}"
@@ -101,7 +100,7 @@
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="7" Grid.Column="1">
                 <Button Style="{StaticResource Button-Form-Create}"
-                        Command="{Binding NavigateToCompetition}" />
+                        Command="{Binding CreateCompetition}" />
             </Border>
 
             <Border Style="{StaticResource Border-Vertical}"

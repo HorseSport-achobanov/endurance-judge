@@ -14,22 +14,29 @@
                     <TextBlock Style="{StaticResource Text-Bold}"
                                Text="{Binding TypeString}" />
 
-                    <Button Style="{StaticResource Button-Form-Update}" HorizontalAlignment="Right"
+                    <Button Style="{StaticResource Button-Form}"
+                            Command="{Binding Toggle}"
+                            Content="{Binding ToggleText}" />
+
+                    <Button Style="{StaticResource Button-Form}" HorizontalAlignment="Right"
                             Command="{Binding NavigateToUpdate}"
                             Content="{x:Static localization:DesktopStrings.UPDATE_COMPETITION}" />
                 </DockPanel>
             </Border>
 
-            <Border Style="{StaticResource Border-Vertical}">
-                <TextBlock Style="{StaticResource Text}"
-                           Text="{x:Static localization:DesktopStrings.PHASES}" />
-            </Border>
+            <StackPanel Visibility="{Binding ToggleVisibility}">
 
-            <Border Style="{StaticResource Border-Vertical}">
-                <ListBox Style="{StaticResource ListBox-Vertical}"
-                         ItemsSource="{Binding Phases}" />
-            </Border>
+                <Border Style="{StaticResource Border-Vertical}">
+                    <TextBlock Style="{StaticResource Text}"
+                               Text="{x:Static localization:DesktopStrings.PHASES}" />
+                </Border>
 
+                <Border Style="{StaticResource Border-Vertical}">
+                    <ListBox Style="{StaticResource ListBox-Vertical}"
+                             ItemsSource="{Binding Phases}" />
+                </Border>
+
+            </StackPanel>
         </StackPanel>
     </DataTemplate>
 

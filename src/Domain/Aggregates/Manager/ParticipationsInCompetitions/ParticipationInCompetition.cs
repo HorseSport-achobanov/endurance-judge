@@ -9,12 +9,9 @@ using System.Linq;
 
 namespace EnduranceJudge.Domain.Aggregates.Manager.ParticipationsInCompetitions
 {
-    public class ParticipationInCompetition : DomainBase<ParticipationInCompetitionException>
+    public class ParticipationInCompetition : DomainObjectBase<ParticipationInCompetitionObjectException>
     {
-        private const string NEXT_PHASE_IS_NULL_MESSAGE = "cannot start - there is no Next Phase.";
-        private const string CURRENT_PHASE_IS_NULL_MESSAGE = "cannot complete - no current phase.";
-
-        private readonly List<ParticipationInPhase> participationsInPhases = new();
+        private readonly List<PhaseEntryManager> participationsInPhases = new();
         private readonly List<PhaseDto> phases = new();
 
         private ParticipationInCompetition()
@@ -32,7 +29,7 @@ namespace EnduranceJudge.Domain.Aggregates.Manager.ParticipationsInCompetitions
                 .OrderBy(x => x.OrderBy)
                 .ToList();
         }
-        public IReadOnlyList<ParticipationInPhase> ParticipationsInPhases
+        public IReadOnlyList<PhaseEntryManager> ParticipationsInPhases
         {
             get => this.participationsInPhases.AsReadOnly();
             private init => this.participationsInPhases = value
@@ -40,7 +37,7 @@ namespace EnduranceJudge.Domain.Aggregates.Manager.ParticipationsInCompetitions
                 .ToList();
         }
 
-        public ParticipationInPhase CurrentPhase
+        public PhaseEntryManager CurrentPhaseEntry
             => this.participationsInPhases.SingleOrDefault(participation => !participation.IsComplete);
         public bool IsNotComplete
             => this.Phases?.Count != this.participationsInPhases?.Count
@@ -75,16 +72,13 @@ namespace EnduranceJudge.Domain.Aggregates.Manager.ParticipationsInCompetitions
             {
                 var nextPhase = this.Phases
                     .Skip(this.participationsInPhases.Count)
-                    .FirstOrDefault()
-                    .IsNotDefault(NEXT_PHASE_IS_NULL_MESSAGE);
+                    .First();
 
                 DateTime startTime;
                 if (this.ParticipationsInPhases.Any())
                 {
                     var lastPhase = this.ParticipationsInPhases.Last();
                     var restTime = lastPhase
-                        .PhasesForCategories
-                        .First(pfc => pfc.Category == this.Category)
                         .RestTimeInMinutes;
                     startTime = lastPhase.ReInspectionTime?.AddMinutes(restTime)
                         ?? lastPhase.InspectionTime!.Value.AddMinutes(restTime);
@@ -94,29 +88,29 @@ namespace EnduranceJudge.Domain.Aggregates.Manager.ParticipationsInCompetitions
                     startTime = this.StartTime;
                 }
 
-                var participation = new ParticipationInPhase(nextPhase, startTime);
+                var participation = new PhaseEntryManager(nextPhase, startTime);
                 this.participationsInPhases.Add(participation);
             });
         internal void CompleteSuccessful()
             => this.Validate(() =>
             {
-                this.CurrentPhase
-                    .IsNotDefault(CURRENT_PHASE_IS_NULL_MESSAGE)
-                    .CompleteSuccessful();
-
-                if (this.IsNotComplete)
+                if (this.HasExceededSpeedRestriction)
                 {
-                    this.StartPhase();
+                    this.CompleteUnsuccessful("speedyGonzalez");
+                }
+                else
+                {
+                    this.CurrentPhaseEntry.CompleteSuccessful();
+                    if (this.IsNotComplete)
+                    {
+                        this.StartPhase();
+                    }
                 }
             });
         internal void CompleteUnsuccessful(string code)
             => this.Validate(() =>
             {
-                this.CurrentPhase
-                    .IsNotDefault(CURRENT_PHASE_IS_NULL_MESSAGE)
-                    .CompleteUnsuccessful(code);
-
-                this.StartPhase();
+                this.CurrentPhaseEntry.CompleteUnsuccessful(code);
             });
 
     }

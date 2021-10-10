@@ -15,7 +15,7 @@ namespace EnduranceJudge.Gateways.Desktop.Core.Objects
 
         public void Register(ServiceDescriptor service)
         {
-            if (service.Lifetime == ServiceLifetime.Transient && service.Lifetime == ServiceLifetime.Scoped)
+            if (service.Lifetime is ServiceLifetime.Transient or ServiceLifetime.Scoped)
             {
                 this.RegisterTransient(service);
             }

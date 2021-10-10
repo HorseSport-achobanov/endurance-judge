@@ -6,12 +6,18 @@
     <DataTemplate DataType="{x:Type local:ListItemViewModel}">
         <StackPanel>
             <DockPanel Style="{StaticResource Dock-Horizontal}">
+
+                <Button Style="{StaticResource Button}"
+                        Content="{x:Static strings:DesktopStrings.REMOVE}"
+                        Command="{Binding Remove}"
+                        CommandParameter="{Binding Id}" />
+
                 <TextBlock Style="{StaticResource Text}"
                            Text="{Binding Name}" />
 
                 <Button Style="{StaticResource Button}" HorizontalAlignment="Right"
-                        Content="{x:Static strings:DesktopStrings.UPDATE_BUTTON}"
-                        Command="{Binding Command}"
+                        Content="{x:Static strings:DesktopStrings.UPDATE}"
+                        Command="{Binding Action}"
                         CommandParameter="{Binding Id}" />
             </DockPanel>
         </StackPanel>

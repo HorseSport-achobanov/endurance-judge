@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace EnduranceJudge.Domain.Aggregates.Rankings.Stateless.Categorizations
 {
-    public class Categorization : DomainBase<CategorizationException>
+    public class Categorization : DomainObjectBase<CategorizationObjectException>
     {
         internal Categorization(Competition competition)
         {

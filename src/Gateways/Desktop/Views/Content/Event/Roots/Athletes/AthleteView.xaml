@@ -3,79 +3,112 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:strings="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization"
-             xmlns:athletes="clr-namespace:EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.Athletes"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-     <StackPanel Style="{StaticResource Form}">
+       <Grid Style="{StaticResource Grid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250px" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
         <TextBox Style="{StaticResource Input-Id}"
-                  Text="{Binding Id}" />
+                Text="{Binding Id}" />
 
-        <TextBlock Style="{StaticResource Text-H1}"
-                   Text="{x:Static strings:DesktopStrings.AthleteTitle}" />
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="0" Grid.Column="1">
+            <TextBlock Style="{StaticResource Text-H1}"
+                       Text="{x:Static strings:DesktopStrings.AthleteTitle}" />
+        </Border>
 
-        <DockPanel Style="{StaticResource Stretch-Last}">
-
-             <Label Style="{StaticResource Label-Primary}"
-                    Target="{Binding ElementName=FeiId}"
-                    Content="{x:Static strings:DesktopStrings.FeiIdLabel}" />
-
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="1" Grid.Column="0">
+             <TextBlock Style="{StaticResource Text-Bold}"
+                    Text="{x:Static strings:DesktopStrings.FEI_ID}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="1" Grid.Column="1">
              <TextBox Style="{StaticResource Input}"
-                      Text="{Binding FeiId}"
-                      Name="FeiId" />
-        </DockPanel>
-        <DockPanel Style="{StaticResource Stretch-Last}">
+                      Text="{Binding FeiId}" />
+        </Border>
 
-            <Label Style="{StaticResource Label-Primary}"
-                   Target="{Binding ElementName=FirstName}"
-                   Content="{x:Static strings:DesktopStrings.FirstNameLabel}" />
-
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="2" Grid.Column="0">
+            <TextBlock Style="{StaticResource Text-Bold}"
+                   Text="{x:Static strings:DesktopStrings.FIRST_NAME}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="2" Grid.Column="1">
             <TextBox Style="{StaticResource Input}"
-                     Text="{Binding FirstName}"
-                     Name="FirstName" />
-        </DockPanel>
-        <DockPanel Style="{StaticResource Stretch-Last}">
+                     Text="{Binding FirstName}"/>
+        </Border>
 
-            <Label Style="{StaticResource Label-Primary}"
-                   Target="{Binding ElementName=LastName}"
-                   Content="{x:Static strings:DesktopStrings.LastNameLabel}" />
-
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="3" Grid.Column="0">
+            <TextBlock Style="{StaticResource Text-Bold}"
+                   Text="{x:Static strings:DesktopStrings.LAST_NAME}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="3" Grid.Column="1">
             <TextBox Style="{StaticResource Input}"
-                     Text="{Binding LastName}"
-                     Name="LastName" />
-        </DockPanel>
-        <DockPanel Style="{StaticResource Stretch-Last}">
+                     Text="{Binding LastName}" />
+        </Border>
 
-            <Label Style="{StaticResource Label-Primary}"
-                   Target="{Binding ElementName=CountryItems}"
-                   Content="{x:Static strings:DesktopStrings.CountryLabel}" />
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="4" Grid.Column="0">
+            <TextBlock Style="{StaticResource Text-Bold}"
+                   Text="{x:Static strings:DesktopStrings.CLUB}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="4" Grid.Column="1">
+            <TextBox Style="{StaticResource Input}"
+                     Text="{Binding Club}" />
+        </Border>
 
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="5" Grid.Column="0">
+            <TextBlock Style="{StaticResource Text-Bold}"
+                   Text="{x:Static strings:DesktopStrings.COUNTRY}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="5" Grid.Column="1">
             <ComboBox Style="{StaticResource Combo-Box}"
                       ItemsSource="{Binding CountryItems}"
                       SelectedValue="{Binding CountryIsoCode}"
-                      SelectedValuePath="IsoCode"
-                      Name="CountryItems" />
-        </DockPanel>
-        <DockPanel Style="{StaticResource Stretch-Last}">
+                      SelectedValuePath="IsoCode"/>
+        </Border>
 
-            <Label Style="{StaticResource Label-Primary}"
-                   Target="{Binding ElementName=CategoryId}"
-                   Content="{x:Static strings:DesktopStrings.CategoryLabel}" />
-
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="6" Grid.Column="0">
+            <TextBlock Style="{StaticResource Text-Bold}"
+                   Text="{x:Static strings:DesktopStrings.CategoryLabel}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="6" Grid.Column="1">
             <ComboBox Style="{StaticResource Combo-Box}"
                       ItemsSource="{Binding CategoryItems}"
-                      SelectedValue="{Binding CategoryId}"
-                      SelectedValuePath="Id"
-                      Name="CategoryId" />
-        </DockPanel>
-        <DockPanel Style="{StaticResource Stretch-Last}">
+                      SelectedValue="{Binding CategoryId}" />
+        </Border>
 
-            <Button Style="{StaticResource Button}"
-                    Command="{Binding NavigateBack}"
-                    Content="{x:Static strings:DesktopStrings.BACK}" />
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="7" Grid.Column="0">
+            <Button Style="{StaticResource Button-Form-Back}"
+                    Command="{Binding NavigateBack}" />
 
-            <Button Style="{StaticResource Button}"
-                    Command="{Binding Submit}"
-                    Content="{x:Static strings:DesktopStrings.SAVE}" />
-        </DockPanel>
-    </StackPanel>
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="7" Grid.Column="1">
+            <Button Style="{StaticResource Button-Form-Save}"
+                    Command="{Binding Submit}" />
+        </Border>
+    </Grid>
 </UserControl>

@@ -5,16 +5,16 @@ using System.Windows.Input;
 
 namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.Horses.Listing
 {
-    public partial class HorseScrollableView : UserControl, IScrollableView
+    public partial class HorseListView : UserControl, IScrollableView
     {
         private readonly IMouseInputService mouseInput;
 
-        public HorseScrollableView()
+        public HorseListView()
         {
             InitializeComponent();
         }
 
-        public HorseScrollableView(IMouseInputService mouseInput) : this()
+        public HorseListView(IMouseInputService mouseInput) : this()
         {
             this.mouseInput = mouseInput;
         }

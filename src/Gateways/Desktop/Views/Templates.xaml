@@ -8,10 +8,10 @@
         <ResourceDictionary Source="Content/Event/Children/Competitions/Configuration/CompetitionTemplate.xaml" />
         <ResourceDictionary Source="Content/Event/Children/Personnel/Configuration/PersonnelTemplate.xaml" />
         <ResourceDictionary Source="Content/Event/Children/Phases/Configuration/PhaseTemplate.xaml" />
-        <ResourceDictionary Source="Content/Event/Children/PhasesForCategory/Configuration/PhaseForCategoryTemplate.xaml" />
-        <ResourceDictionary Source="Content/Event/Children/Participants/Configuration/ParticipantTemplate.xaml" />
+        <ResourceDictionary Source="Content/Event/Roots/Participants/Configuration/ParticipantTemplate.xaml" />
         <ResourceDictionary Source="Content/Event/Children/Personnel/Configuration/PersonnelTemplate.xaml" />
         <ResourceDictionary Source="Content/Manager/ParticipationsInPhases/ParticipationInPhaseTemplate.xaml" />
+        <ResourceDictionary Source="Content/Manager/Participations/ParticipationTemplate.xaml" />
         <ResourceDictionary Source="Content/Rankings/Categorizations/ParticipationTemplate.xaml" />
     </ResourceDictionary.MergedDictionaries>
 

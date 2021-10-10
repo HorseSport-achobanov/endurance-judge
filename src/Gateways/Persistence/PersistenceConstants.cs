@@ -18,12 +18,5 @@ namespace EnduranceJudge.Gateways.Persistence
                 return assemblies;
             }
         }
-
-        public static class Types
-        {
-            public static readonly Type DbSet = typeof(DbSet<>);
-            public static readonly Type List = typeof(List<>);
-            public static readonly Type Action = typeof(Action<,>);
-        }
     }
 }

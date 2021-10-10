@@ -5,16 +5,8 @@
                     xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit">
 
     <DataTemplate DataType="{x:Type local:ParticipationInPhaseViewModel}">
-        <Border Style="{StaticResource Border-Horizontal}" Padding="15px 0 15px 0">
+        <Border Style="{StaticResource Border-Participation-In-Phase}" >
             <StackPanel Style="{StaticResource List-Vertical}">
-
-                <Border Style="{StaticResource Border-Vertical}"
-                        Grid.Row="0" Grid.Column="1">
-                    <TextBlock Style="{StaticResource Text-H2}">
-                        <Run Text="{Binding PhaseLengthInKm, Mode=OneWay}" />
-                        <Run Text="{x:Static localization:DesktopStrings.KM}" />
-                    </TextBlock>
-                </Border>
 
                 <Border Style="{StaticResource Border-Vertical}"
                         Grid.Row="0" Grid.Column="1">

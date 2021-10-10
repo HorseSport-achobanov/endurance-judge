@@ -1,5 +1,6 @@
 ﻿using Prism.Regions;
 using System;
+using static EnduranceJudge.Gateways.Desktop.DesktopConstants;
 
 namespace EnduranceJudge.Gateways.Desktop.Core.Extensions
 {
@@ -7,8 +8,19 @@ namespace EnduranceJudge.Gateways.Desktop.Core.Extensions
     {
         public static int? GetId(this NavigationContext context)
         {
-            var hasId = context.Parameters.TryGetValue<int>(DesktopConstants.EntityIdParameter, out var id);
+            var hasId = context.Parameters.TryGetValue<int>(Parameters.ID, out var id);
             if (!hasId)
+            {
+                return null;
+            }
+
+            return id;
+        }
+
+        public static int? GetPrincipalId(this NavigationContext context)
+        {
+            var hasPrincipalId = context.Parameters.TryGetValue<int>(Parameters.PRINCIPAL_ID, out var id);
+            if (!hasPrincipalId)
             {
                 return null;
             }
@@ -27,32 +39,10 @@ namespace EnduranceJudge.Gateways.Desktop.Core.Extensions
             return data;
         }
 
-        public static bool HasChildId(this NavigationContext context)
-        {
-            return context.Parameters.ContainsKey(DesktopConstants.NewChildIdParameter);
-        }
-
         public static Guid GetChildId(this NavigationContext context)
         {
             var id = context.Parameters.GetValue<Guid>(DesktopConstants.NewChildIdParameter);
             return id;
-        }
-
-        public static bool HasChild(this NavigationContext context)
-        {
-            return context.Parameters.ContainsKey(DesktopConstants.ChildDataParameter);
-        }
-
-        public static T GetChild<T>(this NavigationContext context)
-        {
-            context.Parameters.TryGetValue<T>(DesktopConstants.ChildDataParameter, out var child);
-            return child;
-        }
-
-        public static bool IsUpdateOnly(this NavigationContext context)
-        {
-            var isUpdateOnly = context.Parameters.ContainsKey(DesktopConstants.UpdateOnlyParameter);
-            return isUpdateOnly;
         }
 
         public static string GetMessage(this NavigationContext context)

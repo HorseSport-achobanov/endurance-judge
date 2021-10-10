@@ -1,7 +1,4 @@
-using EnduranceJudge.Core.Exceptions;
-using EnduranceJudge.Core.Mappings;
-using EnduranceJudge.Domain.Core.Models;
-using System;
+using EnduranceJudge.Domain.Core.Exceptions;
 using System.Collections.Generic;
 using System.Linq;
 using static EnduranceJudge.Localization.Strings.Domain;
@@ -14,7 +11,7 @@ namespace EnduranceJudge.Domain.Core.Validation
         {
             if (value?.Equals(default(TValue)) ?? true)
             {
-                throw new CoreException(IsRequiredTemplate, name, value);
+                throw new DomainException(IsRequiredTemplate, name, value);
             }
 
             return value;
@@ -24,7 +21,7 @@ namespace EnduranceJudge.Domain.Core.Validation
         {
             if (value?.Equals(default(TValue)) ?? true)
             {
-                throw new CoreException(IsRequiredTemplate, name);
+                throw new DomainException(IsRequiredTemplate, name);
             }
 
             return value;
@@ -34,7 +31,7 @@ namespace EnduranceJudge.Domain.Core.Validation
         {
             if (!value?.Equals(default(TValue)) ?? false)
             {
-                throw new CoreException(message);
+                throw new DomainException(message);
             }
 
             return value;
@@ -44,7 +41,7 @@ namespace EnduranceJudge.Domain.Core.Validation
         {
             if (!enumerable.Any())
             {
-                throw new CoreException(message);
+                throw new DomainException(message);
             }
         }
 
@@ -52,7 +49,7 @@ namespace EnduranceJudge.Domain.Core.Validation
         {
             if (enumerable.Any())
             {
-                throw new CoreException(message);
+                throw new DomainException(message);
             }
         }
     }

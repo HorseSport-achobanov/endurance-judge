@@ -38,7 +38,7 @@
                     Grid.Row="1" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=OrderBy}"
-                       Content="{x:Static strings:DesktopStrings.ORDER_LABEL}" />
+                       Content="{x:Static strings:DesktopStrings.ORDER}" />
             </Border>
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="1" Grid.Column="1">
@@ -60,6 +60,7 @@
                          Name="LengthInKm" />
             </Border>
 
+
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="3" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
@@ -78,26 +79,38 @@
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="4" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
-                       Target="{Binding ElementName=NavigateToCreatePhaseForCategory}"
-                       Content="{x:Static strings:DesktopStrings.PhasesForCategoryLabel}" />
+                       Target="{Binding ElementName=MaxRecoveryTimeInMins}"
+                       Content="{x:Static strings:DesktopStrings.MAX_RECOVERY_TIME_IN_MINS}" />
             </Border>
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="4" Grid.Column="1">
-                <Button Style="{StaticResource Button-Form-Create}"
-                        Command="{Binding NavigateToCreatePhaseForCategory}"
-                        Name="NavigateToCreatePhaseForCategory" />
+                <TextBox Style="{StaticResource Input}"
+                         Text="{Binding MaxRecoveryTimeInMins}"
+                         Name="MaxRecoveryTimeInMins" />
             </Border>
 
             <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="5" Grid.Column="0">
+                <Label Style="{StaticResource Label-Primary}"
+                       Target="{Binding ElementName=RestTimeInMins}"
+                       Content="{x:Static strings:DesktopStrings.REST_TIME_IN_MINS}" />
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="5" Grid.Column="1">
-                <ListBox Style="{StaticResource ListBox-Vertical}"
-                         ItemsSource="{Binding PhasesForCategories}" />
+                <TextBox Style="{StaticResource Input}"
+                         Text="{Binding RestTimeInMins}"
+                         Name="RestTimeInMins" />
             </Border>
 
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="6" Grid.Column="0">
                 <Button Style="{StaticResource Button-Form-Back}"
                         Command="{Binding NavigateBack}" />
+            </Border>
+            <Border Style="{StaticResource Wrapper-Form-Buttons}"
+                    Grid.Row="6" Grid.Column="1">
+                <Button Style="{StaticResource Button-Form-Save}"
+                        Command="{Binding Submit}" />
             </Border>
         </Grid>
     </ScrollViewer>

@@ -1,4 +1,5 @@
-﻿using EnduranceJudge.Gateways.Desktop.Core.Objects;
+﻿using EnduranceJudge.Core.Utilities;
+using EnduranceJudge.Gateways.Desktop.Core.Objects;
 using EnduranceJudge.Gateways.Desktop.Services;
 using EnduranceJudge.Gateways.Desktop.Views.Error;
 using Prism.Events;
@@ -16,8 +17,8 @@ namespace EnduranceJudge.Gateways.Desktop.Core.Static
 
         private static void Subscribe()
         {
-            var eventAggregator = ServiceProvider.GetService<IEventAggregator>();
-            navigation = navigation ?? ServiceProvider.GetService<INavigationService>();
+            var eventAggregator = StaticProvider.GetService<IEventAggregator>();
+            navigation = navigation ?? StaticProvider.GetService<INavigationService>();
 
             eventAggregator
                 .GetEvent<ErrorEvent>()

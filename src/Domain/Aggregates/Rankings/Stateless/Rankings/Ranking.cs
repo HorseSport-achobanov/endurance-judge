@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace EnduranceJudge.Domain.Aggregates.Rankings.Stateless.Rankings
 {
-    public class Ranking : DomainBase<RankingException>
+    public class Ranking : DomainObjectBase<RankingObjectException>
     {
         private readonly List<Categorization> categorizations = new();
 

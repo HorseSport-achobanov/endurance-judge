@@ -7,6 +7,13 @@
 
     <Style x:Key="ListBox-Horizontal" TargetType="ListBox">
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <WrapPanel IsItemsHost="True" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
 </ResourceDictionary>

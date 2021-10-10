@@ -1,4 +1,3 @@
-using AutoMapper.Execution;
 using EnduranceJudge.Core.Models;
 using System;
 using System.Collections.Generic;
@@ -88,11 +87,10 @@ namespace EnduranceJudge.Core.Utilities
             return types;
         }
 
-        public static IEnumerable<Type> GetExportedTypes(Assembly? assembly = null)
+        public static IEnumerable<Type> GetInstanceTypes(IEnumerable<Assembly> assemblies)
         {
-            assembly = assembly ?? Assembly.GetExecutingAssembly();
-            var exportedTypes = assembly
-                .GetExportedTypes()
+            var exportedTypes = assemblies
+                .SelectMany(x => x.GetExportedTypes())
                 .Where(x => !x.IsInterface && !x.IsAbstract);
             return exportedTypes;
         }

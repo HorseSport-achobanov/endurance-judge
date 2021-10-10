@@ -14,4 +14,8 @@
         <Setter Property="IsReadOnly" Value="True" />
     </Style>
 
+    <Style x:Key="Input-Time" TargetType="TextBox" BasedOn="{StaticResource Input}">
+        <Setter Property="Width" Value="30px" />
+    </Style>
+
 </ResourceDictionary>

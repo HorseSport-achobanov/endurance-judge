@@ -1,6 +1,6 @@
 namespace EnduranceJudge.Domain.Core.Models
 {
-    public interface IAggregateRoot : IDomainModel
+    public interface IAggregateRoot
     {
     }
 }

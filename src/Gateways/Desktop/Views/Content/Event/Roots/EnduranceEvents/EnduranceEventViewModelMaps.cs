@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
-using EnduranceJudge.Application.Events.Commands.EnduranceEvents;
-using EnduranceJudge.Application.Events.Queries.GetEvent;
-using EnduranceJudge.Core.Extensions;
+using EnduranceJudge.Application.Aggregates.Configurations;
+using EnduranceJudge.Application.Core.Models;
 using EnduranceJudge.Core.Mappings;
+using EnduranceJudge.Domain.State.Countries;
+using EnduranceJudge.Domain.State.EnduranceEvents;
+using EnduranceJudge.Gateways.Desktop.Views.Content.Event.Children.Personnel;
+using System.Collections.ObjectModel;
 
 namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.EnduranceEvents
 {
@@ -10,14 +13,20 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.EnduranceEve
     {
         public void AddFromMaps(IProfileExpression profile)
         {
-            profile.CreateMap<EnduranceEventViewModel, SaveEnduranceEvent>()
-                .MapMember(d => d.CountryIsoCode, s => s.SelectedCountryIsoCode);
+            profile.CreateMap<EnduranceEvent, EnduranceEventViewModel>()
+                .AfterMap((s, d) =>
+                {
+                    var personnel = PersonnelAggregator
+                        .Aggregate(s)
+                        .MapEnumerable<PersonnelViewModel>();
+                    d.Personnel.AddRange(personnel);
+                });
+            profile.CreateMap<Country, ListItemModel>();
+
         }
 
         public void AddToMaps(IProfileExpression profile)
         {
-            profile.CreateMap<EnduranceEventRootModel, EnduranceEventViewModel>()
-                .MapMember(d => d.SelectedCountryIsoCode, s => s.CountryIsoCode);
         }
     }
 }

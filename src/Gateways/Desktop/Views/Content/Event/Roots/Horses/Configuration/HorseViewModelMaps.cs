@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using EnduranceJudge.Application.Events.Models;
 using EnduranceJudge.Core.Mappings;
 using EnduranceJudge.Core.Mappings.Converters;
+using EnduranceJudge.Domain.State.Horses;
 
 namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.Horses.Configuration
 {
@@ -9,7 +9,7 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.Horses.Confi
     {
         public void AddFromMaps(IProfileExpression profile)
         {
-            profile.CreateMap<HorseRootModel, HorseViewModel>()
+            profile.CreateMap<Horse, HorseViewModel>()
                 .ForMember(
                     x => x.IsStallionValue,
                     opt => opt.ConvertUsing(new BoolToIntConverter(), x => x.IsStallion));
@@ -17,7 +17,7 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.Horses.Confi
 
         public void AddToMaps(IProfileExpression profile)
         {
-            profile.CreateMap<HorseViewModel, HorseRootModel>();
+            profile.CreateMap<HorseViewModel, Horse>();
         }
     }
 }

@@ -1,11 +1,10 @@
-﻿using EnduranceJudge.Application.Actions.Ranking.Queries.GetCompetitionList;
-using EnduranceJudge.Gateways.Desktop.Core;
+﻿using EnduranceJudge.Gateways.Desktop.Core;
 using EnduranceJudge.Domain.Aggregates.Rankings.Stateless.Rankings;
 using EnduranceJudge.Gateways.Desktop.Core.Components.Templates.ListItem;
-using EnduranceJudge.Gateways.Desktop.Core.Static;
 using EnduranceJudge.Gateways.Desktop.Services;
 using Prism.Commands;
 using Prism.Regions;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,13 +13,11 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Rankings.Categorizations
 {
     public class CategorizationListViewModel : ViewModelBase
     {
-        private readonly IApplicationService application;
         private readonly INavigationService navigation;
         private Ranking ranking;
 
-        public CategorizationListViewModel(IApplicationService application, INavigationService navigation)
+        public CategorizationListViewModel(INavigationService navigation)
         {
-            this.application = application;
             this.navigation = navigation;
         }
 
@@ -34,11 +31,12 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Rankings.Categorizations
 
         private async Task Load()
         {
-            var query = new GetCompetitionList();
-            var competitions = await this.application.Execute(query);
-            this.ranking = new Ranking(competitions);
-            var items = ranking.Categorizations.Select(this.ToListItem);
-            this.CategorizationItems.AddRange(items);
+            throw new NotImplementedException();
+            // var query = new GetCompetitionList();
+            // var competitions = await this.application.Execute(query);
+            // this.ranking = new Ranking(competitions);
+            // var items = ranking.Categorizations.Select(this.ToListItem);
+            // this.CategorizationItems.AddRange(items);
         }
 
         private ListItemViewModel ToListItem(Domain.Aggregates.Rankings.Stateless.Categorizations.Categorization categorization)

@@ -5,16 +5,17 @@
         // ------
         // Common
         public const string SAVE = "Save";
-        public const string UPDATE_BUTTON = "Update";
-        public const string SearchButtonText = "Search";
-        public const string ClearButtonText = "Clear";
+        public const string UPDATE = "Update";
+        public const string REMOVE = "Remove";
+        public const string SEARCH = "Search";
+        public const string CLEAR = "Clear";
         public const string CREATE_BUTTON = "Create";
         public const string BACK = "Back";
         public const string BoolTrueValue = "Yes";
         public const string BoolFalseValue = "No";
 
         public const string RestInMinutesText = "Rest (min)";
-        public const string RecoveryInMinutesText = "Recovery (min)";
+        public const string RECOVERY_IN_MINUTES_TEXT = "Recovery (min)";
         public const string LengthInKmText = "Length (km)";
         public const string IsFinalText = "Final";
         public const string PHASES = "Phases";
@@ -41,17 +42,17 @@
         // ---- Event Page
 
         // ------ Navigation Strip
-        public const string EnduranceEventButtonText = "Endurance Events";
-        public const string AthletesButtonText = "Athletes";
-        public const string HorsesButtonText = "Horses";
+        public const string ENDURANCE_EVENTS = "Endurance Events";
+        public const string ATHLETES = "Athletes";
+        public const string HORSES = "Horses";
 
         // ------ Endurance Event
         public const string EnduranceEventTitle = "Endurance Event";
         public const string EnduranceEventListTitle = "Endurance Events";
-        public const string NameLabel = "Name";
+        public const string NAME = "Name";
         public const string START_TIME = "Start Time";
-        public const string PopulatedPlaceLabel = "Populated Place";
-        public const string CountryLabel = "Country";
+        public const string POPULATED_PLACE = "Populated Place";
+        public const string COUNTRY = "Country";
         public const string PresidentGroundJuryLabel = "President Ground Jury";
         public const string PresidentVetCommissionLabel = "President Vet Commission";
         public const string ForeignJudgeLabel = "Foreign Judge";
@@ -66,17 +67,17 @@
 
         // ------ Competition
         public const string CompetitionTitle = "Competition";
-        public const string TypeLabel = "Type";
+        public const string TYPE = "Type";
 
         // ------ Personnel
         public const string PersonnelTitle = "Personnel";
-        public const string RoleLabel = "Role";
+        public const string ROLE = "Role";
 
         // ------ Phase
         public const string PhaseTitle = "Phase";
         public const string PhaseListItemDisplayTemplate = "{0}km - Is Final: {1}";
         public const string LengthInKmLabel = "Length in Km";
-        public const string ORDER_LABEL = "Order";
+        public const string ORDER = "Order";
         public const string IsFinalLabel = "Is Final Phase";
         public const string PhasesLabel = "Phases";
         public const string ParticipantsLabel = "Participants";
@@ -87,35 +88,36 @@
         public const string NumberLabel = "Number";
         public const string MAX_AVERAGE_SPEED_IN_KMH = "Max Average Speed (km/h)";
         public const string HAS_AVERAGE_SPEED_LIMIT = "Has Average Speed Limit";
-        public const string AthleteLabel = "Athlete";
-        public const string HorseLabel = "Horse";
+        public const string ATHLETE = "Athlete";
+        public const string HORSE = "Horse";
         public const string CategoryLabel = "Category";
         public const string MAX_RECOVERY_TIME_IN_MINS = "Max Recovery Time (mins)";
-        public const string RestTimeInMinutesLabel = "Rest Time In Minutes";
+        public const string REST_TIME_IN_MINS = "Rest Time (mins)";
         public const string PhasesForCategoryLabel = "Phases for Categories";
 
         // ------ Athlete
         public const string AthleteTitle = "Athlete";
         public const string AthletesListTitle = "Athletes";
-        public const string FeiIdLabel = "Fei ID";
-        public const string FirstNameLabel = "First Name";
-        public const string LastNameLabel = "Last Name";
+        public const string FEI_ID = "Fei ID";
+        public const string FIRST_NAME = "First Name";
+        public const string LAST_NAME = "Last Name";
 
         // ------ Horse
         public const string HorseTitle = "Horse";
         public const string HorsesListTitle = "Horses";
-        public const string BreedLabel = "Breed";
+        public const string BREED = "Breed";
         public const string TrainerFeiId = "Trainer FEI ID";
         public const string TrainerFirstNameLabel = "Trainer First Name";
         public const string TrainerLastNameLabel = "Trainer Last Name";
         public const string IsStallionLabel = "Is Stallion";
+        public const string CLUB = "Club";
 
         // ------ PhaseForCategory
         public const string PhaseForCategoryTitle = "Phase For Category";
 
         // ---- Manager Page
         public const string PARTICIPATIONS = "Participations";
-        public const string PARTICIPATION = "Participation";
+        public const string MANAGER = "Manager";
         public const string NUMBER = "Number";
         public const string HAS_EXCEEDED_SPEED_RESTRICTIONS = "Has Exceeded Speed";
         public const string IS_COMPLETE = "Is complete";
@@ -141,5 +143,12 @@
         public const string LENGTH = "Lenght";
         public const string RANK_LIST = "Ranklist";
         public const string CATEGORY = "Category";
+        public const string START_PARTICIPATIONS = "START PARTICIPATIONS";
+        public const string COMPLETE_UNSUCCESSFULLY = "Disqualify";
+        public const string COMPLETE = "Complete";
+        public const string UPDATE_PERSONNEL = "Update Personnel";
+        public const string CANNOT_REMOVE_USED_IN_PARTICIPANT = "Cannot be remobed because it is used in an existing Participant";
+        public const string ALREADY_PARTICIPATING_TEMPLATE = "Cannot be created - '{0}' is already participating.";
+        public const string PARTICIPANTS = "Participants";
     }
 }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
-using EnduranceJudge.Application.Events.Common;
 using EnduranceJudge.Core.Mappings;
 using EnduranceJudge.Core.Mappings.Converters;
+using EnduranceJudge.Domain.State.Phases;
 
 namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Children.Phases.Configuration
 {
@@ -9,13 +9,13 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Children.Phases.Co
     {
         public void AddFromMaps(IProfileExpression profile)
         {
-            profile.CreateMap<PhaseDependantModel, PhaseViewModel>()
+            profile.CreateMap<Phase, PhaseViewModel>()
                 .ForMember(x => x.IsFinalValue, opt => opt.ConvertUsing(new BoolToIntConverter(), y => y.IsFinal));
         }
 
         public void AddToMaps(IProfileExpression profile)
         {
-            profile.CreateMap<PhaseViewModel, PhaseDependantModel>();
+            profile.CreateMap<PhaseViewModel, Phase>();
         }
     }
 }

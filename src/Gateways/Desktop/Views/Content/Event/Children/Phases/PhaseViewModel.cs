@@ -1,33 +1,36 @@
-﻿using EnduranceJudge.Domain.States;
+﻿using EnduranceJudge.Application.Aggregates.Configurations.Contracts;
+using EnduranceJudge.Domain.Aggregates.Configuration;
+using EnduranceJudge.Domain.State.Phases;
 using EnduranceJudge.Gateways.Desktop.Core.ViewModels;
-using EnduranceJudge.Gateways.Desktop.Views.Content.Event.Children.PhasesForCategory;
 using EnduranceJudge.Localization;
-using Prism.Commands;
-using Prism.Regions;
-using System.Collections.ObjectModel;
 
 namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Children.Phases
 {
-    public class PhaseViewModel : ChildFormBase<PhaseView>, IPhaseState
+    public class PhaseViewModel : FormBase<PhaseView, Phase>, IPhaseState
     {
-        private PhaseViewModel()
-        {
-            this.NavigateToCreatePhaseForCategory = new DelegateCommand(
-                this.NavigateToNewChild<PhaseForCategoryView>);
-        }
-
-        public DelegateCommand NavigateToCreatePhaseForCategory { get; }
-        public ObservableCollection<PhaseForCategoryViewModel> PhasesForCategories { get; } = new();
-
         private string isFinalText;
         private int isFinalValue;
         private int lengthInKm;
         private int orderBy;
+        private int maxRecoveryTimeInMinutes;
+        private int restTimeInMinutes;
 
-        public string IsFinalText
+        private PhaseViewModel() : this(null) { }
+        public PhaseViewModel(IQueries<Phase> phases) : base(phases)
         {
-            get => this.isFinalText;
-            set => this.SetProperty (ref this.isFinalText, value);
+        }
+
+        protected override void ActOnSubmit()
+        {
+            var configuration = new ConfigurationManager();
+            if (this.PrincipalId.HasValue)
+            {
+                configuration.Phases.Create(this.PrincipalId.Value, this);
+            }
+            else
+            {
+                configuration.Phases.Update(this);
+            }
         }
 
         public int IsFinalValue
@@ -41,6 +44,12 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Children.Phases
                     : string.Empty;
             }
         }
+        public bool IsFinal => this.IsFinalValue == 1;
+        public string IsFinalText
+        {
+            get => this.isFinalText;
+            set => this.SetProperty (ref this.isFinalText, value);
+        }
         public int LengthInKm
         {
             get => this.lengthInKm;
@@ -51,12 +60,15 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Children.Phases
             get => this.orderBy;
             set => this.SetProperty(ref this.orderBy, value);
         }
-
-        public override void HandleChildren(NavigationContext context)
+        public int MaxRecoveryTimeInMins
         {
-            this.AddOrUpdateChild(context, this.PhasesForCategories);
+            get => this.maxRecoveryTimeInMinutes;
+            set => this.SetProperty(ref this.maxRecoveryTimeInMinutes, value);
         }
-
-        public bool IsFinal => this.IsFinalValue == 1;
+        public int RestTimeInMins
+        {
+            get => this.restTimeInMinutes;
+            set => this.SetProperty(ref this.restTimeInMinutes, value);
+        }
     }
 }

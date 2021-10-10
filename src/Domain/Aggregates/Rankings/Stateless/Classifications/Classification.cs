@@ -9,7 +9,7 @@ using static EnduranceJudge.Localization.Strings.Domain;
 
 namespace EnduranceJudge.Domain.Aggregates.Rankings.Stateless.Classifications
 {
-    public class Classification : DomainBase<ClassificationException>
+    public class Classification : DomainObjectBase<ClassificationObjectException>
     {
         internal Classification(Category category, Competition competition)
         {
@@ -35,7 +35,7 @@ namespace EnduranceJudge.Domain.Aggregates.Rankings.Stateless.Classifications
             {
                 if (participations.Any(x => x.IsNotComplete))
                 {
-                    throw new ClassificationException
+                    throw new ClassificationObjectException
                     {
                         DomainMessage = Ranking.INCOMPLETE_PARTICIPATIONS,
                     };

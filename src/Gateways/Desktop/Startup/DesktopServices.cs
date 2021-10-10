@@ -1,5 +1,4 @@
 using EnduranceJudge.Application;
-using EnduranceJudge.Application.Core;
 using EnduranceJudge.Core;
 using EnduranceJudge.Gateways.Desktop.Core.Objects;
 using EnduranceJudge.Core.Services;
@@ -35,7 +34,6 @@ namespace EnduranceJudge.Gateways.Desktop.Startup
 
             return services
                 .AddCore(assemblies)
-                .AddApplication()
                 .AddPersistence(assemblies)
                 .AddInitializers(assemblies);
         }
@@ -45,7 +43,7 @@ namespace EnduranceJudge.Gateways.Desktop.Startup
                 .Scan(scan => scan
                     .FromAssemblies(assemblies)
                     .AddClasses(classes =>
-                        classes.AssignableTo<IInitializerInterface>())
+                        classes.AssignableTo<IInitializer>())
                     .AsSelfWithInterfaces()
                     .WithSingletonLifetime());
 

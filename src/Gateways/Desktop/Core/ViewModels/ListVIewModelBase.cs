@@ -1,46 +1,58 @@
-﻿using EnduranceJudge.Application.Events.Common;
+﻿using EnduranceJudge.Application.Contracts;
+using EnduranceJudge.Application.Core.Models;
 using EnduranceJudge.Gateways.Desktop.Core.Components.Templates.ListItem;
-using EnduranceJudge.Gateways.Desktop.Core.Static;
 using EnduranceJudge.Gateways.Desktop.Services;
-using MediatR;
 using Prism.Commands;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace EnduranceJudge.Gateways.Desktop.Core.ViewModels
 {
-    public abstract class ListViewModelBase<TQuery, TView> : ViewModelBase
-        where TQuery : IRequest<IEnumerable<ListItemModel>>, new()
+    public abstract class ListViewModelBase<TView> : ViewModelBase
         where TView : IView
     {
-        protected ListViewModelBase(IApplicationService application, INavigationService navigation)
+        private readonly IDomainHandler domainHandler;
+        private readonly IPersistence persistence;
+        protected ListViewModelBase(
+            INavigationService navigation,
+            IDomainHandler domainHandler,
+            IPersistence persistence)
         {
+            this.domainHandler = domainHandler;
+            this.persistence = persistence;
             this.Navigation = navigation;
-            this.ChangeToCreate = new DelegateCommand(this.ChangeToCreateAction);
-            this.Application = application;
+            this.Create = new DelegateCommand(this.CreateAction);
         }
 
         protected INavigationService Navigation { get; }
-        protected IApplicationService Application { get; }
 
         public ObservableCollection<ListItemViewModel> ListItems { get; protected init; }
             = new (Enumerable.Empty<ListItemViewModel>());
 
-        public DelegateCommand ChangeToCreate { get; }
+        public DelegateCommand Create { get; }
 
         public override void OnNavigatedTo(Prism.Regions.NavigationContext context)
         {
             base.OnNavigatedTo(context);
-
-            this.LoadEvents();
+            this.Load();
         }
 
-        private async Task LoadEvents()
+        protected abstract IEnumerable<ListItemModel> LoadData();
+        protected abstract void RemoveDomain(int id);
+
+        protected virtual void CreateAction()
         {
-            var getEventsList = new TQuery();
-            var eventsList = await this.Application.Execute(getEventsList);
+            this.Navigation.ChangeTo<TView>();
+        }
+        protected virtual void UpdateAction(int? id)
+        {
+            this.Navigation.ChangeToUpdateForm<TView>(id!.Value);
+        }
+
+        protected virtual void Load() => this.domainHandler.Handle(() =>
+        {
+            var eventsList = this.LoadData();
 
             var viewModels = eventsList
                 .Select(this.ToViewModel)
@@ -48,22 +60,20 @@ namespace EnduranceJudge.Gateways.Desktop.Core.ViewModels
 
             this.ListItems.Clear();
             this.ListItems.AddRange(viewModels);
-        }
+        });
+        protected virtual void RemoveAction(int? id) => this.domainHandler.Handle(() =>
+        {
+            this.RemoveDomain(id!.Value);
+            var item = this.ListItems.FirstOrDefault(i => i.Id == id!.Value);
+            this.ListItems.Remove(item);
+            this.persistence.Snapshot();
+        });
 
         private ListItemViewModel ToViewModel(ListItemModel listable)
         {
-            var command = new DelegateCommand<int?>(this.ChangeToUpdateAction);
-            return new ListItemViewModel(listable.Id, listable.Name, command);
-        }
-
-        protected virtual void ChangeToCreateAction()
-        {
-            this.Navigation.ChangeTo<TView>();
-        }
-
-        protected virtual void ChangeToUpdateAction(int? id)
-        {
-            this.Navigation.ChangeTo<TView>(id.Value);
+            var update = new DelegateCommand<int?>(this.UpdateAction);
+            var remove = new DelegateCommand<int?>(this.RemoveAction);
+            return new ListItemViewModel(listable.Id, listable.Name, update, remove);
         }
     }
 }

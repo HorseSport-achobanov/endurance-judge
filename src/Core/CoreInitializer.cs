@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EnduranceJudge.Core
 {
-    public class CoreInitializer : IInitializerInterface
+    public class CoreInitializer : IInitializer
     {
         private readonly IMapper mapper;
 

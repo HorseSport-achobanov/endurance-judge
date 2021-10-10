@@ -21,11 +21,17 @@ namespace EnduranceJudge.Gateways.Desktop
             }
         }
 
-        public const string EntityIdParameter = "Parameter0";
+        public static class Parameters
+        {
+            public const string ID = "Id";
+            public const string PRINCIPAL_ID = "PrincipalId";
+        }
+
         public const string DataParameter = "Parameter1";
-        public const string ChildDataParameter = "Parameter2";
+        public const string CHILD_DATA_PARAMETER = "Parameter2";
         public const string NewChildIdParameter = "Parameter3";
-        public const string UpdateOnlyParameter = "Parameter4";
+        public const string UPDATE_PARAMETER = "Parameter4";
+        public const string REMOVE_PARAMETER = "Parameter6";
         public const string MESSAGE_PARAMETER = "Parameter5";
 
         public static class Types

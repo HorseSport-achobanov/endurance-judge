@@ -1,4 +1,4 @@
-﻿using EnduranceJudge.Application.Events.Common;
+﻿using EnduranceJudge.Application.Core.Models;
 using EnduranceJudge.Core.Mappings;
 using EnduranceJudge.Core.Models;
 using EnduranceJudge.Localization;
@@ -26,9 +26,9 @@ namespace EnduranceJudge.Gateways.Desktop.Core.Components.Templates.SimpleListIt
             this.Name = name;
         }
 
-        public int Id { get; }
+        public int Id { get; private set; }
 
-        public string Name { get; }
+        public string Name { get; private set; }
 
         public static IEnumerable<SimpleListItemViewModel> FromEnum<T>()
             where T : struct, Enum

@@ -5,6 +5,9 @@ namespace EnduranceJudge.Domain
 {
     public static class DomainConstants
     {
+        public const string EVENT_DEFAULT_NAME = "Event";
+        public const string COUNTRY_DEFAULT_CODE = "BUL";
+
         public static class Gender
         {
             public const string Female = "F";

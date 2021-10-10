@@ -26,7 +26,7 @@
         <Setter Property="Padding" Value="5px" />
     </Style>
 
-    <Style x:Key="Text-H2" TargetType="TextBlock" BasedOn="{StaticResource Text-Centered}">
+    <Style x:Key="Text-H2" TargetType="TextBlock" BasedOn="{StaticResource Text}">
         <Setter Property="Foreground" Value="#f7c56e" />
         <Setter Property="FontSize" Value="18px" />
         <Setter Property="FontWeight" Value="Bold" />

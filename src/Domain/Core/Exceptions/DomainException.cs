@@ -1,14 +1,17 @@
-﻿using System;
+using System;
 
 namespace EnduranceJudge.Domain.Core.Exceptions
 {
-    public abstract class DomainException : Exception
+    public class DomainException : Exception
     {
-        public string DomainMessage { private get; init; }
+        public DomainException(string message)
+            : base(message)
+        {
+        }
 
-        public override string Message
-            => string.Format($"{this.Entity} {this.DomainMessage}");
-
-        protected abstract string Entity { get; }
+        public DomainException(string template, params object[] arguments)
+            : base(string.Format(template, arguments))
+        {
+        }
     }
 }

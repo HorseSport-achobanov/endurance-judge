@@ -1,7 +1,6 @@
 ﻿using EnduranceJudge.Gateways.Desktop.Core.Objects;
 using Prism.Events;
 using System;
-using System.Threading.Tasks;
 
 namespace EnduranceJudge.Gateways.Desktop.Services.Implementations
 {
@@ -14,21 +13,7 @@ namespace EnduranceJudge.Gateways.Desktop.Services.Implementations
             this.eventAggregator = eventAggregator;
         }
 
-        public async Task<T> Handle<T>(Func<T> action)
-        {
-            try
-            {
-                var result = action();
-                return result;
-            }
-            catch (Exception exception)
-            {
-                this.Handle(exception);
-                return default;
-            }
-        }
-
-        public void Handle(Action action)
+        public bool Handle(Action action)
         {
             try
             {
@@ -37,7 +22,9 @@ namespace EnduranceJudge.Gateways.Desktop.Services.Implementations
             catch (Exception exception)
             {
                 this.Handle(exception);
+                return false;
             }
+            return true;
         }
 
         private void Handle(Exception exception)

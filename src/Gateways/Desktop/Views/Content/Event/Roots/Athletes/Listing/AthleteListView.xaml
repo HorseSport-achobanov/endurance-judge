@@ -22,7 +22,7 @@
         <Border Style="{StaticResource Border-Vertical}"
                 Grid.Row="1">
             <Button Style="{StaticResource Button-Form-Create}"
-                    Command="{Binding ChangeToCreate}" />
+                    Command="{Binding Create}" />
         </Border>
 
         <Border Style="{StaticResource Border-Vertical}"
@@ -31,11 +31,11 @@
 
                 <Button Style="{StaticResource Button-Horizontal}"
                         Command="{Binding ClearSearch}"
-                        Content="{x:Static strings:DesktopStrings.ClearButtonText}" />
+                        Content="{x:Static strings:DesktopStrings.CLEAR}" />
 
                 <Button Style="{StaticResource Button-Horizontal}"
                         Command="{Binding Search}"
-                        Content="{x:Static strings:DesktopStrings.SearchButtonText}" />
+                        Content="{x:Static strings:DesktopStrings.SEARCH}" />
 
                 <TextBox Style="{StaticResource Input}"
                          Text="{Binding SearchValue}" />

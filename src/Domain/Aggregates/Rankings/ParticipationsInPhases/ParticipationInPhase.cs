@@ -1,12 +1,12 @@
 using EnduranceJudge.Domain.Core.Validation;
-using EnduranceJudge.Domain.Aggregates.Manager.ResultsInPhases;
+using EnduranceJudge.Domain.State.ResultsInPhases;
 using EnduranceJudge.Domain.Aggregates.Rankings.DTOs;
 using EnduranceJudge.Domain.Core.Models;
 using System;
 
 namespace EnduranceJudge.Domain.Aggregates.Rankings.ParticipationsInPhases
 {
-    public class ParticipationInPhase : DomainBase<RankingParticipationInPhaseException>
+    public class ParticipationInPhase : DomainObjectBase<RankingParticipationInPhaseObjectException>
     {
         private ParticipationInPhase()
         {

@@ -12,15 +12,21 @@ namespace EnduranceJudge.Gateways.Desktop.Core.Components.Templates.ListItem
         {
         }
 
-        public ListItemViewModel(int id, string name, DelegateCommandBase command)
+        public ListItemViewModel(int id, string name, DelegateCommandBase action) : this(id, name, action, null)
+        {
+        }
+
+        public ListItemViewModel(int id, string name, DelegateCommandBase action, DelegateCommandBase remove)
         {
             this.Id = id;
             this.Name = name;
-            this.Command = command;
+            this.Action = action;
+            this.Remove = remove;
         }
 
         public int Id { get; }
         public string Name { get; }
-        public DelegateCommandBase Command { get; }
+        public DelegateCommandBase Action { get; }
+        public DelegateCommandBase Remove { get; }
     }
 }

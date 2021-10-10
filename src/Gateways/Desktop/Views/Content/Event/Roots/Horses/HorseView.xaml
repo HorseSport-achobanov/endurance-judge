@@ -3,98 +3,134 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              xmlns:strings="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization"
-             xmlns:horses="clr-namespace:EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.Horses"
              prism:ViewModelLocator.AutoWireViewModel="True">
 
-     <StackPanel Style="{StaticResource Form}">
-         <TextBlock Style="{StaticResource Text-H1}"
-                    Text="{x:Static strings:DesktopStrings.HorseTitle}" />
+    <Grid Style="{StaticResource Grid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="250px" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
 
         <TextBox Style="{StaticResource Input-Id}"
-                 Text="{Binding Id}" />
+                Text="{Binding Id}" />
 
-        <DockPanel Style="{StaticResource Stretch-Last}">
-            <Label Style="{StaticResource Label-Primary}"
-                   Target="{Binding ElementName=FeiId}"
-                   Content="{x:Static strings:DesktopStrings.FeiIdLabel}" />
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="0" Grid.Column="1">
+            <TextBlock Style="{StaticResource Text-H1}"
+                       Text="{x:Static strings:DesktopStrings.HorseTitle}" />
+        </Border>
 
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="1" Grid.Column="0">
+            <TextBlock Style="{StaticResource Text}"
+                   Text="{x:Static strings:DesktopStrings.FEI_ID}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="1" Grid.Column="1">
             <TextBox Style="{StaticResource Input}"
-                     Text="{Binding FeiId}"
-                     Name="FeiId" />
-        </DockPanel>
+                     Text="{Binding FeiId}" />
+        </Border>
 
-        <DockPanel Style="{StaticResource Stretch-Last}">
-            <Label Style="{StaticResource Label-Primary}"
-                   Target="{Binding ElementName=Name}"
-                   Content="{x:Static strings:DesktopStrings.NameLabel}" />
-
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="2" Grid.Column="0">
+            <TextBlock Style="{StaticResource Text-Bold}"
+                       Text="{x:Static strings:DesktopStrings.NAME}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="2" Grid.Column="1">
             <TextBox Style="{StaticResource Input}"
-                     Text="{Binding Name}"
-                     Name="Name" />
-        </DockPanel>
+                     Text="{Binding Name}" />
+        </Border>
 
-        <DockPanel Style="{StaticResource Stretch-Last}">
-            <Label Style="{StaticResource Label-Primary}"
-                   Target="{Binding ElementName=IsStallion}"
-                   Content="{x:Static strings:DesktopStrings.IsStallionLabel}" />
-
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="3" Grid.Column="0">
+            <TextBlock Style="{StaticResource Text-Bold}"
+                       Text="{x:Static strings:DesktopStrings.IsStallionLabel}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="3" Grid.Column="1">
             <ComboBox Style="{StaticResource Combo-Box}"
                       ItemsSource="{Binding BoolItems}"
                       SelectedValue="{Binding IsStallionValue}"
-                      SelectedIndex="{Binding IsStallionValue}"
-                      Name="IsStallion" />
-        </DockPanel>
+                      SelectedIndex="{Binding IsStallionValue}" />
+        </Border>
 
-        <DockPanel Style="{StaticResource Stretch-Last}">
-            <Label Style="{StaticResource Label-Primary}"
-                   Target="{Binding ElementName=Breed}"
-                   Content="{x:Static strings:DesktopStrings.BreedLabel}" />
-
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="4" Grid.Column="0">
+            <TextBlock Style="{StaticResource Text-Bold}"
+                       Text="{x:Static strings:DesktopStrings.TrainerFeiId}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="4" Grid.Column="1">
             <TextBox Style="{StaticResource Input}"
-                     Text="{Binding Breed}"
-                     Name="Breed" />
-        </DockPanel>
+                     Text="{Binding TrainerFeiId}" />
+        </Border>
 
-        <DockPanel Style="{StaticResource Stretch-Last}">
-            <Label Style="{StaticResource Label-Primary}"
-                   Target="{Binding ElementName=TrainerFeiId}"
-                   Content="{x:Static strings:DesktopStrings.TrainerFeiId}" />
-
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="5" Grid.Column="0">
+            <TextBlock Style="{StaticResource Text-Bold}"
+                       Text="{x:Static strings:DesktopStrings.BREED}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="5" Grid.Column="1">
             <TextBox Style="{StaticResource Input}"
-                     Text="{Binding TrainerFeiId}"
-                     Name="TrainerFeiId" />
-        </DockPanel>
+                     Text="{Binding Breed}" />
+        </Border>
 
-        <DockPanel Style="{StaticResource Stretch-Last}">
-            <Label Style="{StaticResource Label-Primary}"
-                   Target="{Binding ElementName=TrainerFirstName}"
-                   Content="{x:Static strings:DesktopStrings.TrainerFirstNameLabel}" />
-
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="6" Grid.Column="0">
+            <TextBlock Style="{StaticResource Text-Bold}"
+                       Text="{x:Static strings:DesktopStrings.TrainerFirstNameLabel}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="6" Grid.Column="1">
             <TextBox Style="{StaticResource Input}"
-                     Text="{Binding TrainerFirstName}"
-                     Name="TrainerFirstName" />
-        </DockPanel>
+                     Text="{Binding TrainerFirstName}" />
+        </Border>
 
-        <DockPanel Style="{StaticResource Stretch-Last}">
-
-            <Label Style="{StaticResource Label-Primary}"
-                   Target="{Binding ElementName=TrainerLastName}"
-                   Content="{x:Static strings:DesktopStrings.TrainerLastNameLabel}" />
-
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="7" Grid.Column="0">
+            <TextBlock Style="{StaticResource Text-Bold}"
+                       Text="{x:Static strings:DesktopStrings.TrainerLastNameLabel}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="7" Grid.Column="1">
             <TextBox Style="{StaticResource Input}"
-                     Text="{Binding TrainerLastName}"
-                     Name="TrainerLastName" />
-        </DockPanel>
+                     Text="{Binding TrainerLastName}" />
+        </Border>
 
-        <DockPanel Style="{StaticResource Stretch-Last}">
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="8" Grid.Column="0">
+            <TextBlock Style="{StaticResource Text-Bold}"
+                   Text="{x:Static strings:DesktopStrings.CLUB}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="8" Grid.Column="1">
+            <TextBox Style="{StaticResource Input}"
+                     Text="{Binding Club}" />
+        </Border>
 
-            <Button Style="{StaticResource Button}"
-                    Command="{Binding NavigateBack}"
-                    Content="{x:Static strings:DesktopStrings.BACK}" />
-
-            <Button Style="{StaticResource Button}"
-                    Command="{Binding Submit}"
-                    Content="{x:Static strings:DesktopStrings.SAVE}" />
-        </DockPanel>
-    </StackPanel>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="9" Grid.Column="0">
+            <Button Style="{StaticResource Button-Form-Back}"
+                    Command="{Binding NavigateBack}" />
+        </Border>
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="9" Grid.Column="1">
+            <Button Style="{StaticResource Button-Form-Save}"
+                    Command="{Binding Submit}" />
+        </Border>
+    </Grid>
 </UserControl>

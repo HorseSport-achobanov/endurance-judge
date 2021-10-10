@@ -1,17 +1,15 @@
 using EnduranceJudge.Domain.Aggregates.Manager.ParticipationsInCompetitions;
 using EnduranceJudge.Domain.Aggregates.Manager.ParticipationsInPhases;
 using EnduranceJudge.Domain.Core.Models;
-using EnduranceJudge.Domain.Core.Validation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static EnduranceJudge.Localization.Strings.Domain.Manager.Participation;
 
 namespace EnduranceJudge.Domain.Aggregates.Manager.Participations
 {
-    public class Participation : DomainBase<ManagerParticipationException>, IAggregateRoot
+    public class Participation : DomainObjectBase<ManagerParticipationObjectException>
     {
-        private const string ALREADY_STARTED_MESSAGE = "has already started";
-
         private List<ParticipationInCompetition> participationsInCompetitions = new();
 
         private Participation()
@@ -25,25 +23,24 @@ namespace EnduranceJudge.Domain.Aggregates.Manager.Participations
             private set => this.participationsInCompetitions = value.ToList();
         }
 
-
-        public bool CanStart
+        public DateTime StartTime => this.ParticipationsInCompetitions
+            .First()
+            .StartTime;
+        public bool HasNotStarted
             => !this.IsComplete
                 && this.ParticipationsInCompetitions.All(x => !x.ParticipationsInPhases.Any());
         public bool CanArrive => !this.IsComplete && this.AnyParticipationInPhase(pip => pip.CanArrive);
         public bool CanInspect => !this.IsComplete && this.AnyParticipationInPhase(pip => pip.CanInspect);
         public bool CanReInspect => !this.IsComplete && this.AnyParticipationInPhase(pip => pip.CanReInspect);
         public bool CanComplete => !this.IsComplete && this.AnyParticipationInPhase(pip => pip.CanComplete);
-        public bool HasExceededSpeedRestriction
-            => this.participationsInCompetitions.All(participation => participation.HasExceededSpeedRestriction);
         public bool IsComplete => this.participationsInCompetitions.All(participation => !participation.IsNotComplete);
 
         public void Start()
             => this.Validate(() =>
             {
-                if (!this.CanStart)
+                if (!this.HasNotStarted)
                 {
                     return;
-                    // TODO: AddValidation to these checks;
                 }
 
                 foreach (var participation in this.ParticipationsInCompetitions)
@@ -51,25 +48,58 @@ namespace EnduranceJudge.Domain.Aggregates.Manager.Participations
                     participation.StartPhase();
                 }
             });
-        public void Arrive(DateTime time)
+        public void UpdateProgress(DateTime time)
+        => this.Validate(() =>
         {
-            this.Update(participation => participation.CurrentPhase.Arrive(time));
+            if (this.HasNotStarted)
+            {
+                this.Throw(HAS_NOT_STARTED);
+            }
+            if (this.CanComplete)
+            {
+                this.Throw(CAN_ONLY_BE_COMPLETED);
+            }
+
+            if (this.CanArrive)
+            {
+                this.Arrive(time);
+            }
+            else if (this.CanInspect)
+            {
+                this.Inspect(time);
+            }
+            else if (this.CanReInspect)
+            {
+                this.ReInspect(time);
+            }
+        });
+
+        internal void Arrive(DateTime time)
+        {
+            this.Update(participation => participation.CurrentPhaseEntry.Arrive(time));
         }
-        public void Inspect(DateTime time)
+        internal void Inspect(DateTime time)
         {
-            this.Update(participation => participation.CurrentPhase.Inspect(time));
+            this.Update(participation => participation.CurrentPhaseEntry.Inspect(time));
         }
-        public void ReInspect(DateTime time)
+        internal void ReInspect(DateTime time)
         {
-            this.Update(participation => participation.CurrentPhase.ReInspect(time));
+            this.Update(participation => participation.CurrentPhaseEntry.ReInspect(time));
         }
         public void CompleteSuccessful()
         {
-            //TODO: If HasExceededSpeedRestrictions ...
+            if (!this.CanComplete)
+            {
+                this.Throw(CANNOT_BE_COMPLETED);
+            }
             this.Update(participation => participation.CompleteSuccessful());
         }
         public void CompleteUnsuccessful(string code)
         {
+            if (!this.CanComplete)
+            {
+                this.Throw(CANNOT_BE_COMPLETED);
+            }
             this.Update(participation => participation.CompleteUnsuccessful(code));
         }
 
@@ -82,7 +112,7 @@ namespace EnduranceJudge.Domain.Aggregates.Manager.Participations
             }
         }
 
-        private bool AnyParticipationInPhase(Func<ParticipationInPhase, bool> predicate)
+        private bool AnyParticipationInPhase(Func<PhaseEntryManager, bool> predicate)
         {
             return this.ParticipationsInCompetitions.Any(pic =>
                 pic.ParticipationsInPhases.Any(predicate));

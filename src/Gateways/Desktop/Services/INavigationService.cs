@@ -12,7 +12,10 @@ namespace EnduranceJudge.Gateways.Desktop.Services
         void NavigateToRanking();
         void ChangeTo<T>()
             where T : IView;
-        void ChangeTo<T>(int entityId);
+        void ChangeToNewForm<T>(int principalId)
+            where T : IView;
+        void ChangeToUpdateForm<T>(int id)
+            where T : IView;
         void ChangeTo<T>(params NavigationParameter[] parameters);
         void ChangeTo(Type view, params NavigationParameter[] parameters);
     }

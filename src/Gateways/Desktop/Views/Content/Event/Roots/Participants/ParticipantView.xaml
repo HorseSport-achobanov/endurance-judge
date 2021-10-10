@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.Participants.ParticipantView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:strings="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <ScrollViewer Style="{StaticResource Scroll-Wrapper}"
+                  PreviewMouseWheel="HandleScroll">
+        <Grid Style="{StaticResource Grid}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="250px" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="0" Grid.Column="1">
+                <TextBlock Style="{StaticResource Text-H1}"
+                       Text="{x:Static strings:DesktopStrings.ParticipantTitle}" />
+            </Border>
+
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="1" Grid.Column="0">
+                <Label Style="{StaticResource Label-Primary}"
+                       Target="{Binding ElementName=RfId}"
+                       Content="{x:Static strings:DesktopStrings.RfIdLabel}" />
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="1" Grid.Column="1">
+                <TextBox Style="{StaticResource Input}"
+                         Text="{Binding RfId}"
+                         Name="RfId" />
+            </Border>
+
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="2" Grid.Column="0">
+                <Label Style="{StaticResource Label-Primary}"
+                       Target="{Binding ElementName=Number}"
+                       Content="{x:Static strings:DesktopStrings.NumberLabel}" />
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="2" Grid.Column="1">
+                <TextBox Style="{StaticResource Input}"
+                         Text="{Binding Number}"
+                         Name="Number" />
+            </Border>
+
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="3" Grid.Column="0">
+                <Label Style="{StaticResource Label-Primary}"
+                       Target="{Binding ElementName=ToggleIsAverageSpeedInKmPhVisibility}"
+                       Content="{x:Static strings:DesktopStrings.HAS_AVERAGE_SPEED_LIMIT}" />
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="3" Grid.Column="1">
+                <CheckBox Style="{StaticResource CheckBox}"
+                          Command="{Binding ToggleIsAverageSpeedInKmPhVisibility}"
+                          IsChecked="{
+                            Binding MaxAverageSpeedInKmPhVisibility,
+                            Converter={StaticResource VisibilityToBooleanConverter},
+                            Mode=OneWay}"
+                          Name="ToggleIsAverageSpeedInKmPhVisibility">
+                    Yes
+                </CheckBox>
+            </Border>
+
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="4" Grid.Column="0" >
+                <Label Style="{StaticResource Label-Primary}"
+                       Target="{Binding ElementName=MaxAverageSpeedInKmPh}"
+                       Content="{x:Static strings:DesktopStrings.MAX_AVERAGE_SPEED_IN_KMH}" />
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}" Visibility="{Binding MaxAverageSpeedInKmPhVisibility}"
+                    Grid.Row="4" Grid.Column="1">
+                <TextBox Style="{StaticResource Input}"
+                         Text="{Binding MaxAverageSpeedInKmPh}"
+                         Name="MaxAverageSpeedInKmPh" />
+            </Border>
+
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="5" Grid.Column="0">
+                <Label Style="{StaticResource Label-Primary}"
+                       Target="{Binding ElementName=Athlete}"
+                       Content="{x:Static strings:DesktopStrings.ATHLETE}" />
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="5" Grid.Column="1">
+                <ComboBox Style="{StaticResource Combo-Box}"
+                          ItemsSource="{Binding AthleteItems}"
+                          SelectedValue="{Binding AthleteId}"
+                          Name="Athlete" />
+            </Border>
+
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="6" Grid.Column="0">
+                <Label Style="{StaticResource Label-Primary}"
+                       Target="{Binding ElementName=Horse}"
+                       Content="{x:Static strings:DesktopStrings.HORSE}" />
+            </Border>
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="6" Grid.Column="1">
+                <ComboBox Style="{StaticResource Combo-Box}"
+                          ItemsSource="{Binding HorseItems}"
+                          SelectedValue="{Binding HorseId}"
+                          Name="Horse" />
+            </Border>
+
+            <Border Style="{StaticResource Border-Vertical}"
+                    Grid.Row="7" Grid.Column="0">
+                <Button Style="{StaticResource Button-Form-Back}"
+                        Command="{Binding NavigateBack}"/>
+            </Border>
+            <Border Style="{StaticResource Wrapper-Form-Buttons}"
+                    Grid.Row="7" Grid.Column="1">
+                <Button Style="{StaticResource Button-Form-Save}"
+                        Command="{Binding Submit}" />
+            </Border>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

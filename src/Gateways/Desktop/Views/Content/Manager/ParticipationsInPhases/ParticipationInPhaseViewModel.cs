@@ -5,7 +5,7 @@ using System;
 
 namespace EnduranceJudge.Gateways.Desktop.Views.Content.Manager.ParticipationsInPhases
 {
-    public class ParticipationInPhaseViewModel : ViewModelBase, IMapFrom<ParticipationInPhase>
+    public class ParticipationInPhaseViewModel : ViewModelBase, IMapFrom<PhaseEntryManager>
     {
         public int OrderBy { get; private set; }
 

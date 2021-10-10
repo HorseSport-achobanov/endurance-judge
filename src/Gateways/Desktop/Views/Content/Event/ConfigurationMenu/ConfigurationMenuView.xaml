@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="EnduranceJudge.Gateways.Desktop.Views.Content.Event.ConfigurationMenu.ConfigurationMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:strings="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <StackPanel Style="{StaticResource List-Vertical}">
+        <Button Style="{StaticResource Button-Big-Vertical}"
+                Command="{Binding Event}"
+                Content="{x:Static strings:DesktopStrings.ENDURANCE_EVENTS}" />
+
+        <Button Style="{StaticResource Button-Big-Vertical}"
+                Command="{Binding AthleteList}"
+                Content="{x:Static strings:DesktopStrings.ATHLETES}" />
+
+        <Button Style="{StaticResource Button-Big-Vertical}"
+                Command="{Binding HorseList}"
+                Content="{x:Static strings:DesktopStrings.HORSES}" />
+
+        <Button Style="{StaticResource Button-Big-Vertical}"
+                Command="{Binding ParticipantList}"
+                Content="{x:Static strings:DesktopStrings.PARTICIPANTS}" />
+    </StackPanel>
+</UserControl>

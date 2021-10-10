@@ -6,7 +6,6 @@ namespace EnduranceJudge.Gateways.Desktop.Services
 {
     public interface IDomainHandler : IService
     {
-        Task<T> Handle<T>(Func<T> action);
-        public void Handle(Action action);
+        public bool Handle(Action action);
     }
 }

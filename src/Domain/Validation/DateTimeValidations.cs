@@ -1,34 +1,16 @@
-using EnduranceJudge.Core.Exceptions;
-using EnduranceJudge.Domain.Core.Validation;
+using EnduranceJudge.Domain.Core.Exceptions;
 using System;
-using System.ComponentModel.DataAnnotations;
+using static EnduranceJudge.Localization.Strings.Domain;
 
 namespace EnduranceJudge.Domain.Validation
 {
     public static class DateTimeValidations
     {
-        private const string InvalidBirthDateTemplate = "has invalid birth date: {0}";
-
-        public static DateTime? IsFutureDate(this DateTime? dateTime)
-        {
-            return dateTime?.IsFutureDate();
-        }
-
         public static DateTime IsFutureDate(this DateTime dateTime)
-        {
-            if (dateTime >= DateTime.Now)
-            {
-                throw new CoreException(InvalidBirthDateTemplate, dateTime);
-            }
-
-            return dateTime;
-        }
-
-        public static DateTime IsDateInTheFuture(this DateTime dateTime, string message)
         {
             if (dateTime <= DateTime.Now)
             {
-                throw new CoreException(InvalidBirthDateTemplate, dateTime);
+                throw new DomainException(INVALID_FUTURE_DATE_TEMPLATE, dateTime);
             }
 
             return dateTime;

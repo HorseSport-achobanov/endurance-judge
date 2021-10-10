@@ -14,7 +14,7 @@ namespace EnduranceJudge.Application
             }
         }
 
-        public const string WorkFileName = "endurance-judge-file";
+        public const string STORAGE_FILE_NAME = "endurance-judge-data";
 
         public static class FileExtensions
         {
@@ -26,10 +26,11 @@ namespace EnduranceJudge.Application
         {
             public static class ImportNational
             {
-                public const int FirstEntryRow = 4;
-                public const int FeiIdColumn = 27;
-                public const int NameColumn = 2;
-                public const int BreedColumn = 22;
+                public const int FIRST_ENTRY_ROW = 4;
+                public const int FEI_ID_COLUMN = 27;
+                public const int NAME_COLUMN = 2;
+                public const int BREED_COLUMN = 22;
+                public const int CLUB_COLUMN = 30;
             }
         }
     }

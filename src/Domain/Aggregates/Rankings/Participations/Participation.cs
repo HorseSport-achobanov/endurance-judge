@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace EnduranceJudge.Domain.Aggregates.Rankings.Participations
 {
-    public class Participation : DomainBase<RankingParticipationException>
+    public class Participation : DomainObjectBase<RankingParticipationObjectException>
     {
         private const string NOT_RANKED_MESSAGE = "cannot be classified as they are not qualified for ranking.";
 

@@ -1,0 +1,137 @@
+﻿<UserControl x:Class="EnduranceJudge.Gateways.Desktop.Views.Content.Manager.ManagerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:localization="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <Grid Style="{StaticResource Grid}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Style="{StaticResource Text-H1}"
+                   Text="{x:Static localization:DesktopStrings.MANAGER}"
+                   Grid.Row="0"/>
+
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="1">
+            <StackPanel Style="{StaticResource List-Vertical}">
+
+                <Border Style="{StaticResource Border-Vertical}" Visibility="{Binding StartVisibility}">
+                    <Button Style="{StaticResource Button-Big-Vertical}"
+                            Command="{Binding Start}"
+                            Content="{x:Static localization:DesktopStrings.START_PARTICIPATIONS}" />
+                </Border>
+
+                <Border Style="{StaticResource Border-Vertical}">
+                    <StackPanel Style="{StaticResource List-Horizontal}">
+
+                        <Border Style="{StaticResource Border-Horizontal}" Width="140px">
+                            <StackPanel Style="{StaticResource List-Horizontal}">
+                                <Label Style="{StaticResource Label-Primary}"
+                                       Target="{Binding ElementName=InputNumber}"
+                                       Content="_Number:" />
+                                <TextBox Style="{StaticResource Input}" Width="60px"
+                                         Text="{Binding InputNumber}"
+                                         Name="InputNumber" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Border-Horizontal}" Width="200px">
+                            <StackPanel Style="{StaticResource List-Vertical}">
+                                <Border Style="{StaticResource Border-Vertical}">
+                                    <StackPanel Style="{StaticResource List-Horizontal}">
+
+                                <Border Style="{StaticResource Border-Horizontal}">
+                                    <StackPanel Style="{StaticResource List-Horizontal}">
+                                        <Label Style="{StaticResource Label-Primary}"
+                                               Target="{Binding ElementName=InputHours}"
+                                               Content="_H:" />
+                                        <TextBox Style="{StaticResource Input-Time}"
+                                                 Text="{Binding InputHours}"
+                                                 Name="InputHours"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Style="{StaticResource Border-Horizontal}">
+                                    <StackPanel Style="{StaticResource List-Horizontal}">
+                                        <Label Style="{StaticResource Label-Primary}"
+                                               Target="{Binding ElementName=InputMinutes}"
+                                               Content="_M:" />
+                                        <TextBox Style="{StaticResource Input-Time}"
+                                                 Text="{Binding InputMinutes}"
+                                                 Name="InputMinutes" />
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Style="{StaticResource Border-Horizontal}">
+                                    <StackPanel Style="{StaticResource List-Horizontal}">
+                                        <Label Style="{StaticResource Label-Primary}"
+                                               Target="{Binding ElementName=InputSeconds}"
+                                               Content="_S:" />
+                                        <TextBox Style="{StaticResource Input-Time}"
+                                                 Text="{Binding InputSeconds}"
+                                                 Name="InputSeconds" />
+                                    </StackPanel>
+                                </Border>
+                            </StackPanel>
+                                </Border>
+
+                                <Border Style="{StaticResource Border-Vertical}">
+                                    <StackPanel Style="{StaticResource List-Horizontal}">
+                                        <Label Style="{StaticResource Label-Primary}"
+                                               Target="{Binding ElementName=DeQualificationCode}"
+                                               Content="_DQ:"/>
+                                        <TextBox Style="{StaticResource Input}" Width="150px"
+                                                 Text="{Binding DeQualificationCode}"
+                                                 Name="DeQualificationCode"/>
+                                    </StackPanel>
+                                </Border>
+
+                                <Border Style="{StaticResource Border-Vertical}">
+                                    <TextBlock Style="{StaticResource Text}"
+                                               Text="Complete phase successfully:" />
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Border-Horizontal}">
+                            <StackPanel Style="{StaticResource List-Vertical}">
+
+                                <Border Style="{StaticResource Border-Vertical}">
+                                    <Button Style="{StaticResource Button-Big-Horizontal}"
+                                            Command="{Binding Update}"
+                                            Content="{x:Static localization:DesktopStrings.UPDATE}" />
+                                </Border>
+
+                                <Border Style="{StaticResource Border-Vertical}">
+                                    <Button Style="{StaticResource Button-Big-Horizontal}"
+                                            Command="{Binding CompleteUnsuccessful}"
+                                            Content="{x:Static localization:DesktopStrings.COMPLETE_UNSUCCESSFULLY}" />
+                                </Border>
+
+                                <Border Style="{StaticResource Border-Vertical}">
+                                    <Button Style="{StaticResource Button-Big-Horizontal}"
+                                            Command="{Binding Complete}"
+                                            Content="{x:Static localization:DesktopStrings.COMPLETE}" />
+                                </Border>
+                            </StackPanel>
+                        </Border>
+
+                    </StackPanel>
+                </Border>
+
+                <Border Style="{StaticResource Border-Vertical}">
+                    <ListBox Style="{StaticResource ListBox-Vertical}"
+                             ItemsSource="{Binding Participations}" />
+                </Border>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

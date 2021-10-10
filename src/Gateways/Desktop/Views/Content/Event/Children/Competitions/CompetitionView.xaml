@@ -22,8 +22,6 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
             <Border Style="{StaticResource Border-Vertical}"
@@ -41,7 +39,7 @@
                     Grid.Row="1" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=Name}"
-                       Content="{x:Static strings:DesktopStrings.NameLabel}"/>
+                       Content="{x:Static strings:DesktopStrings.NAME}"/>
             </Border>
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="1" Grid.Column="1">
@@ -54,7 +52,7 @@
                     Grid.Row="2" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
                        Target="{Binding ElementName=Type}"
-                       Content="{x:Static strings:DesktopStrings.TypeLabel}" />
+                       Content="{x:Static strings:DesktopStrings.TYPE}" />
             </Border>
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="2" Grid.Column="1">
@@ -80,14 +78,14 @@
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="4" Grid.Column="0">
                 <Label Style="{StaticResource Label-Primary}"
-                       Target="{Binding ElementName=NavigateToCreatePhase}"
+                       Target="{Binding ElementName=CreatePhase}"
                        Content="{x:Static strings:DesktopStrings.PhasesLabel}" />
             </Border>
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="4" Grid.Column="1">
                 <Button Style="{StaticResource Button-Form-Create}"
-                        Command="{Binding NavigateToCreatePhase}"
-                        Name="NavigateToCreatePhase"/>
+                        Command="{Binding CreatePhase}"
+                        Name="CreatePhase"/>
             </Border>
 
             <Border Style="{StaticResource Border-Vertical}"
@@ -98,27 +96,13 @@
 
             <Border Style="{StaticResource Border-Vertical}"
                     Grid.Row="6" Grid.Column="0">
-                <Label Style="{StaticResource Label-Primary}"
-                       Target="{Binding ElementName=NavigateToCreateParticipant}"
-                       Content="{x:Static strings:DesktopStrings.ParticipantsLabel}" />
-            </Border>
-            <Border Style="{StaticResource Border-Vertical}"
-                    Grid.Row="6" Grid.Column="1">
-                <Button Style="{StaticResource Button-Form-Create}"
-                        Command="{Binding NavigateToCreateParticipant}"
-                        Name="NavigateToCreateParticipant"/>
-            </Border>
-
-            <Border Style="{StaticResource Border-Vertical}"
-                    Grid.Row="7" Grid.Column="1">
-                <ListBox Style="{StaticResource ListBox-Vertical}"
-                         ItemsSource="{Binding Participants}" />
-            </Border>
-
-            <Border Style="{StaticResource Border-Vertical}"
-                    Grid.Row="8" Grid.Column="0">
                 <Button Style="{StaticResource Button-Form-Back}"
                         Command="{Binding NavigateBack}" />
+            </Border>
+            <Border Style="{StaticResource Wrapper-Form-Buttons}"
+                    Grid.Row="6" Grid.Column="1">
+                <Button Style="{StaticResource Button-Form-Save}"
+                        Command="{Binding Submit}" />
             </Border>
         </Grid>
     </ScrollViewer>

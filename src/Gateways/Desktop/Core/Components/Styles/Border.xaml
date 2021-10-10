@@ -28,4 +28,9 @@
         <Setter Property="MinHeight" Value="150px" />
     </Style>
 
+    <Style x:Key="Border-Participation-In-Phase" TargetType="Border" BasedOn="{StaticResource Border-Horizontal}">
+        <Setter Property="Width" Value="120px" />
+        <Setter Property="Padding" Value="15px 0 15px 0" />
+    </Style>
+
 </ResourceDictionary>

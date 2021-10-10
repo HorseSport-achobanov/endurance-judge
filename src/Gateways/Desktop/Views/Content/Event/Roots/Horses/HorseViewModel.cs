@@ -1,19 +1,14 @@
-﻿using EnduranceJudge.Application.Events.Commands;
-using EnduranceJudge.Application.Events.Models;
-using EnduranceJudge.Application.Events.Queries.GetHorse;
+﻿using EnduranceJudge.Application.Aggregates.Configurations.Contracts;
 using EnduranceJudge.Core.Models;
-using EnduranceJudge.Domain.Aggregates.Common.Horses;
-using EnduranceJudge.Gateways.Desktop.Core.Static;
+using EnduranceJudge.Domain.Aggregates.Configuration;
+using EnduranceJudge.Domain.State.Horses;
 using EnduranceJudge.Gateways.Desktop.Core.ViewModels;
-using EnduranceJudge.Gateways.Desktop.Services;
 
 namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.Horses
 {
-    public class HorseViewModel : RootFormBase<GetHorse, UpdateHorse, HorseRootModel, HorseView>,
-        IHorseState,
-        IListable
+    public class HorseViewModel : FormBase<HorseView, Horse>, IHorseState, IListable
     {
-        private HorseViewModel(IApplicationService application) : base(application)
+        private HorseViewModel(IQueries<Horse> horses) : base(horses)
         {
         }
 
@@ -21,9 +16,16 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.Horses
         private string feiId;
         private string name;
         private string breed;
+        private string club;
         private string trainerFeiId;
         private string trainerFirstName;
         private string trainerLastName;
+
+        protected override void ActOnSubmit()
+        {
+            var configurations = new ConfigurationManager();
+            configurations.Horses.Save(this);
+        }
 
         public string FeiId
         {
@@ -34,6 +36,11 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.Horses
         {
             get => this.name;
             set => this.SetProperty(ref this.name, value);
+        }
+        public string Club
+        {
+            get => this.club;
+            set => this.SetProperty(ref this.club, value);
         }
         public int IsStallionValue
         {
@@ -62,5 +69,6 @@ namespace EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.Horses
         }
 
         public bool IsStallion => this.isStallionValue != 0;
+
     }
 }

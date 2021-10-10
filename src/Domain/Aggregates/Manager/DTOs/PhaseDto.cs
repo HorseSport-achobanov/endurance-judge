@@ -1,14 +1,14 @@
-using EnduranceJudge.Domain.States;
-using System.Collections.Generic;
+using EnduranceJudge.Domain.State.Phases;
 
 namespace EnduranceJudge.Domain.Aggregates.Manager.DTOs
 {
     public class PhaseDto : IPhaseState
     {
-        public int Id { get; private set; }
-        public int OrderBy { get; private set; }
-        public int LengthInKm { get; private set; }
-        public bool IsFinal { get; private set; }
-        public IList<PhaseForCategoryDto> PhasesForCategories { get; private set; }
+        public int Id { get; private init; }
+        public int OrderBy { get; private init; }
+        public int LengthInKm { get; private init; }
+        public bool IsFinal { get; private init; }
+        public int MaxRecoveryTimeInMins { get; private init; }
+        public int RestTimeInMins { get; private init; }
     }
 }

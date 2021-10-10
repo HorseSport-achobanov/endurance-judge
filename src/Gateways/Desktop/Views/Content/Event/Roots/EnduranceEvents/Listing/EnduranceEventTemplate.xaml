@@ -1,12 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:getEvent="clr-namespace:EnduranceJudge.Application.Events.Queries.GetEvent;assembly=EnduranceJudge.Application">
-
-    <DataTemplate DataType="{x:Type getEvent:EnduranceEventRootModel}">
-        <StackPanel>
-            <ListBox Style="{StaticResource ListBox-Vertical}"
-                     ItemsSource="{Binding Competitions}" />
-        </StackPanel>
-    </DataTemplate>
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!-- -->
+    <!-- <DataTemplate DataType="{x:Type getEvent:EnduranceEventRootModel}"> -->
+    <!--     <StackPanel> -->
+    <!--         <ListBox Style="{StaticResource ListBox-Vertical}" -->
+    <!--                  ItemsSource="{Binding Competitions}" /> -->
+    <!--     </StackPanel> -->
+    <!-- </DataTemplate> -->
 
 </ResourceDictionary>

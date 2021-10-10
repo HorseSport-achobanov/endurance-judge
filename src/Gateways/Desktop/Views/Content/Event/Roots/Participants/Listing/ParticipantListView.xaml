@@ -1,0 +1,55 @@
+﻿<UserControl x:Class="EnduranceJudge.Gateways.Desktop.Views.Content.Event.Roots.Participants.Listing.ParticipantListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:prism="http://prismlibrary.com/"
+             xmlns:strings="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization"
+             prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <Grid Style="{StaticResource Grid}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="50px" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="0">
+            <TextBlock Style="{StaticResource Text-H1}"
+                       Text="{x:Static strings:DesktopStrings.PARTICIPANTS}"
+                       Grid.Row="0" />
+        </Border>
+
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="1">
+            <Button Style="{StaticResource Button-Form-Create}"
+                    Command="{Binding Create}" />
+        </Border>
+
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="2">
+            <DockPanel Style="{StaticResource Stretch-Last}">
+
+                <Button Style="{StaticResource Button-Horizontal}"
+                        Command="{Binding ClearSearch}"
+                        Content="{x:Static strings:DesktopStrings.CLEAR}" />
+
+                <Button Style="{StaticResource Button-Horizontal}"
+                        Command="{Binding Search}"
+                        Content="{x:Static strings:DesktopStrings.SEARCH}" />
+
+                <TextBox Style="{StaticResource Input}"
+                         Text="{Binding SearchValue}" />
+            </DockPanel>
+        </Border>
+
+        <Border Style="{StaticResource Border-Vertical}"
+                Grid.Row="3">
+            <ScrollViewer Style="{StaticResource Scroll}"
+                          PreviewMouseWheel="HandleScroll">
+                <ListBox Style="{StaticResource ListBox-Vertical}"
+                         ItemsSource="{Binding ListItems}" />
+            </ScrollViewer>
+        </Border>
+    </Grid>
+</UserControl>

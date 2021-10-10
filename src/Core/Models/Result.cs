@@ -42,10 +42,10 @@ namespace EnduranceJudge.Core.Models
 
         public T Data { get; set; }
 
-        public static new Result<T> Success(T data)
+        public new static Result<T> Success(T data)
             => new Result<T>(data);
 
-        public static new Result<T> Failure(params string[] errors)
+        public new static Result<T> Failure(params string[] errors)
             => new Result<T>(Result.Failure(errors));
     }
 }
