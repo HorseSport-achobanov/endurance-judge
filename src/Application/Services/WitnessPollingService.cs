@@ -23,7 +23,7 @@ public class WitnessPollingService : IWitnessPollingService
         this.logger = logger;
         this.dataService = dataService;
         this.witnessEventQueue = witnessEventQueue;
-        this.persistence = persistence;
+        this.persistence = persistence; // test
     }
 
     public void ApplyEvents()
