@@ -20,7 +20,6 @@ public class Participation : DomainBase<ParticipationException>
     public Competition CompetitionConstraint { get; private set; }
 
     public double? Distance
-
         => this.CompetitionConstraint
             ?.Laps
             .Select(x => x.LengthInKm)

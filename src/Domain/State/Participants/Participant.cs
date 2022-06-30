@@ -13,15 +13,12 @@ public class Participant : DomainBase<ParticipantException>, IParticipantState
     private const string NAME_FORMAT = "{0} - {1} with {2}";
 
     private ObservableCollection<LapRecord> lapRecords = new();
-    private readonly ReadOnlyObservableCollection<LapRecord> lapRecordsReadonly;
 
     private Participant()
     {
-        this.lapRecordsReadonly = new(this.lapRecords);
     }
     public Participant(Athlete athlete, Horse horse, IParticipantState state = null) : base(GENERATE_ID)
     {
-        this.lapRecordsReadonly = new ReadOnlyObservableCollection<LapRecord>(this.lapRecords);
         this.Athlete = athlete;
         this.Horse = horse;
         this.RfId = state?.RfId;
