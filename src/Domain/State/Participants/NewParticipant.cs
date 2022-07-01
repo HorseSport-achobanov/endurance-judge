@@ -27,4 +27,10 @@ public class NewParticipant : NewDomainBase, IParticipantState
         set => this.SetValue(ref this.maxAverageSpeedInKmPh, value);
     }
     public ObservableCollection<NewLapRecord> LapRecords => this.LapRecords;
+
+    public void Add(NewLapRecord record)
+    {
+        this.LapRecords.Add(record);
+        this.RaisePropertyChanged(nameof(this.LapRecords));
+    }
 }

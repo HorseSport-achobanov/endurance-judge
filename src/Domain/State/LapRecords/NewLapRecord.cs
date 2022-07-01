@@ -1,9 +1,14 @@
-﻿using EnduranceJudge.Domain.Core.Models;
+﻿using EnduranceJudge.Domain.AggregateRoots.Common.Performances;
+using EnduranceJudge.Domain.Core.Models;
+using EnduranceJudge.Domain.State.Laps;
+using EnduranceJudge.Domain.State.Results;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace EnduranceJudge.Domain.State.LapRecords;
 
-public class NewLapRecord : NewDomainBase, ILapRecordState
+public class NewLapRecord : NewDomainBase, IPerformance
 {
     private DateTime startTime;
     private DateTime? arrivalTime;
@@ -11,22 +16,36 @@ public class NewLapRecord : NewDomainBase, ILapRecordState
     private DateTime? reInspectionTime;
     private bool isReInspectionRequired;
     private bool isRequiredInspectionRequired;
+    private DateTime? requiredInspectionTime;
+    private DateTime? nextStartTime;
+    private TimeSpan? recoverySpan;
+    private TimeSpan? time;
+    private double? averageSpeed;
+    private double? averageSpeedTotal;
+    private double totalLength;
+    private Result result;
     
     public NewLapRecord(
         DateTime startTime,
         DateTime? arrivalTime,
-        DateTime? inspectionTime = null,
-        DateTime? reInspectionTime = null,
-        bool? isReInspectionRequired = null,
-        bool? isRequiredInspectionRequired = null)
+        ILapState lap,
+        IEnumerable<double> previousLengths,
+        IEnumerable<double> previousAverageSpeeds)
     {
         this.StartTime = startTime;
         this.ArrivalTime = arrivalTime;
-        this.InspectionTime = inspectionTime;
-        this.ReInspectionTime = reInspectionTime;
-        this.IsReInspectionRequired = isReInspectionRequired ?? this.IsReInspectionRequired;
-        this.IsRequiredInspectionRequired = isRequiredInspectionRequired ?? this.IsRequiredInspectionRequired;
+        this.IsFinal = lap.IsFinal;
+        this.LengthInKm = lap.LengthInKm;
+        this.RestTimeInMins = lap.RestTimeInMins;
+        this.IsCompulsoryInspectionRequired = lap.IsCompulsoryInspectionRequired;
+        this.PreviousLengths = previousLengths.ToList();
+        this.PreviousAverageSpeeds = previousAverageSpeeds.ToList();
     }
+    
+    public bool IsFinal { get; private set; }
+    public double LengthInKm { get; private set; }
+    public int RestTimeInMins { get; private set; }
+    public bool IsCompulsoryInspectionRequired { get; private set; }
 
     public DateTime StartTime
     {
@@ -58,4 +77,47 @@ public class NewLapRecord : NewDomainBase, ILapRecordState
         get => this.isRequiredInspectionRequired;
         set => this.SetValue(ref this.isRequiredInspectionRequired, value);
     }
+    public DateTime? RequiredInspectionTime
+    {
+        get => this.requiredInspectionTime;
+        internal set => this.SetValue(ref this.requiredInspectionTime, value);
+    }
+    public DateTime? NextStartTime
+    {
+        get => this.nextStartTime;
+        internal set => this.SetValue(ref this.nextStartTime, value);
+    }
+    public TimeSpan? RecoverySpan
+    {
+        get => this.recoverySpan;
+        internal set => this.SetValue(ref this.recoverySpan, value);
+    }
+    public TimeSpan? Time
+    {
+        get => this.time;
+        internal set => this.SetValue(ref this.time, value);
+    }
+    public double? AverageSpeed
+    {
+        get => this.averageSpeed;
+        internal set => this.SetValue(ref this.averageSpeed, value);
+    }
+    public double? AverageSpeedTotal
+    {
+        get => this.averageSpeedTotal;
+        internal set => this.SetValue(ref this.averageSpeedTotal, value);
+    }
+    public double TotalLength
+    {
+        get => this.totalLength;
+        internal set => this.SetValue(ref this.totalLength, value);
+    }
+    public Result Result
+    {
+        get => this.result;
+        internal set => this.SetValue(ref this.result, value);
+    }
+
+    public List<double> PreviousLengths { get; private set; }
+    public List<double> PreviousAverageSpeeds { get; private set; }
 }

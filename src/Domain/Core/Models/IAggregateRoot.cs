@@ -6,3 +6,7 @@ namespace EnduranceJudge.Domain.Core.Models;
 public interface IAggregateRoot : IAggregate, ITransientService
 {
 }
+
+public interface INewAggregateRoot : IAggregate, ISingletonService
+{
+}

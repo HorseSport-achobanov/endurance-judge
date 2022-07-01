@@ -12,6 +12,7 @@ public static class DomainConstants
 {
     public const string EVENT_DEFAULT_NAME = "Event";
     public const string COUNTRY_DEFAULT_CODE = "BUL";
+    public const string GENERIC_VALIDATION_KEY = "domain_generic";
 
     public static class Gender
     {

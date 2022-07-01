@@ -13,6 +13,7 @@ public class Participant : DomainBase<ParticipantException>, IParticipantState
     private const string NAME_FORMAT = "{0} - {1} with {2}";
 
     private ObservableCollection<LapRecord> lapRecords = new();
+    private ObservableCollection<NewLapRecord> newLapRecords = new();
 
     private Participant()
     {
@@ -36,9 +37,20 @@ public class Participant : DomainBase<ParticipantException>, IParticipantState
         get => this.lapRecords;
         private set => this.lapRecords = new ObservableCollection<LapRecord>(value.ToList());
     }
+    public ObservableCollection<NewLapRecord> NewLapRecords
+    {
+        get => this.newLapRecords;
+        private set => this.newLapRecords = new ObservableCollection<NewLapRecord>(value.ToList());
+    }
 
     public void Add(LapRecord record)
-        => this.lapRecords.Add(record);
+    {
+        var lengths = this.newLapRecords.Select(x => x.LengthInKm);
+        var averageSpeeds = this.newLapRecords.Select(x => x.AverageSpeed!.Value);
+        var newLap = new NewLapRecord(record.StartTime, record.ArrivalTime, record.Lap, lengths, averageSpeeds);
+        this.newLapRecords.Add(newLap);
+        this.lapRecords.Add(record);
+    }
 
     public string Name => FormatName(this.Number, this.Athlete.Name, this.Horse.Name);
 
