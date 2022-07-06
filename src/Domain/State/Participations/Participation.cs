@@ -12,11 +12,17 @@ public class Participation : DomainBase<ParticipationException>
     internal Participation(Participant participant, Competition competition) : base(GENERATE_ID)
     {
         this.Participant = participant;
+        this.NewParticipant = new NewParticipant
+        {
+            RfId = participant.RfId,
+            Number = participant.Number,
+        };
         this.CompetitionConstraint = competition;
     }
 
     private List<int> competitionsIds = new();
     public Participant Participant { get; private set; }
+    public NewParticipant NewParticipant { get; private set; }
     public Competition CompetitionConstraint { get; private set; }
 
     public double? Distance

@@ -5,7 +5,6 @@ using EnduranceJudge.Domain.State.Laps;
 using EnduranceJudge.Domain.State.Results;
 using System;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace EnduranceJudge.Domain.State.LapRecords;
 

@@ -5,4 +5,6 @@
 
     <converters:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
     <converters1:SeverityToColorConverter x:Key="SeverityToColorConverter" />
+    <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
+    
 </ResourceDictionary>

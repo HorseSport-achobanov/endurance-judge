@@ -8,9 +8,9 @@ namespace EnduranceJudge.Gateways.Desktop.Core;
 
 public class ValueSerializer
 {
-    private const string DEFAULT_TIME = "--:--:--";
-    private const string DEFAULT_SPAN = "-:-:-.-";
-    private const string DEFAULT_DOUBLE = "-.---";
+    public const string DEFAULT_TIME = "--:--:--";
+    public const string DEFAULT_SPAN = "-:-:-.-";
+    public const string DEFAULT_DOUBLE = "-.---";
 
     public static DateTime? ParseTime(string value)
     {

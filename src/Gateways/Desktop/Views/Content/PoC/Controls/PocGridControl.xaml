@@ -1,0 +1,30 @@
+﻿<DockPanel x:Class="EnduranceJudge.Gateways.Desktop.Views.Content.PoC.Controls.PocGridControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:manager="clr-namespace:EnduranceJudge.Gateways.Desktop.Controls.Manager"
+             xmlns:controls="clr-namespace:EnduranceJudge.Gateways.Desktop.Views.Content.PoC.Controls">
+    <!-- Performances -->
+    <StackPanel Style="{StaticResource List-Horizontal}" Name="Root">
+        <manager:PerformanceLabelsControl Number="{Binding Number}" />
+        
+        <ItemsControl x:Name="Laps" ItemsSource="{Binding LapRecords}">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Style="{StaticResource List-Horizontal}"  />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <controls:PocLapControl Lap="{Binding}" /> <!-- readonly? -->
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </StackPanel>
+    
+    <Button Style="{StaticResource Button-Horizontal}"
+            DockPanel.Dock="Right"
+            Visibility="{Binding PrintVisibility}"
+            VerticalAlignment="Top"
+            Content="Print"
+            Command="{Binding Print}"/>
+</DockPanel>

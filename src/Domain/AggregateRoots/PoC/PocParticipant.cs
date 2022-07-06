@@ -66,7 +66,7 @@ internal class PocParticipant
     private PocLap GetCurrentLap()
         => this.laps.Last();
 
-    private void CreateLap(DateTime startTime)
+    public void CreateLap(DateTime startTime)
     {
         var config = this.competition.Laps
             .Skip(this.participant.LapRecords.Count)

@@ -1,0 +1,31 @@
+﻿<StackPanel x:Class="EnduranceJudge.Gateways.Desktop.Views.Content.PoC.Controls.PocLapControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    
+    <!-- Arrival Time -->
+    <Border Style="{StaticResource Border-Performance-Cell}">
+        <TextBlock Style="{StaticResource Text}" 
+                   Text="{Binding ArrivalTime, Converter={StaticResource DateTimeToStringConverter} }" />
+    </Border>
+    <!-- Inspection Time -->
+    <Border Style="{StaticResource Border-Performance-Cell}">
+        <TextBlock Style="{StaticResource Text}" 
+                   Text="{Binding InspectionTime, Converter={StaticResource DateTimeToStringConverter} }" />
+    </Border>
+    <!-- ReInspection Time -->
+    <Border Style="{StaticResource Border-Performance-Cell}">
+        <TextBlock Style="{StaticResource Text}" 
+                   Text="{Binding ReInspectionTime, Converter={StaticResource DateTimeToStringConverter} }" />
+    </Border>
+    <!-- RequiredInspection Time -->
+    <Border Style="{StaticResource Border-Performance-Cell}">
+        <TextBlock Style="{StaticResource Text}" 
+                   Text="{Binding RequiredInspectionTime, Converter={StaticResource DateTimeToStringConverter} }" />
+    </Border>
+    <!-- CompulsoryRequiredInspection Time -->
+    <Border Style="{StaticResource Border-Performance-Cell}">
+        <TextBlock Style="{StaticResource Text}" 
+                   Text="{Binding CompulsoryRequiredInspectionTime, Converter={StaticResource DateTimeToStringConverter} }" />
+    </Border>
+    
+</StackPanel>

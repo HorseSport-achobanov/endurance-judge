@@ -26,7 +26,7 @@ public class NewParticipant : NewDomainBase, IParticipantState
         get => this.maxAverageSpeedInKmPh;
         set => this.SetValue(ref this.maxAverageSpeedInKmPh, value);
     }
-    public ObservableCollection<NewLapRecord> LapRecords => this.LapRecords;
+    public ObservableCollection<NewLapRecord> LapRecords => this.lapRecords;
 
     public void Add(NewLapRecord record)
     {

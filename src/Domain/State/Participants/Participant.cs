@@ -13,7 +13,6 @@ public class Participant : DomainBase<ParticipantException>, IParticipantState
     private const string NAME_FORMAT = "{0} - {1} with {2}";
 
     private ObservableCollection<LapRecord> lapRecords = new();
-    private ObservableCollection<NewLapRecord> newLapRecords = new();
 
     private Participant()
     {
@@ -37,18 +36,15 @@ public class Participant : DomainBase<ParticipantException>, IParticipantState
         get => this.lapRecords;
         private set => this.lapRecords = new ObservableCollection<LapRecord>(value.ToList());
     }
-    public ObservableCollection<NewLapRecord> NewLapRecords
-    {
-        get => this.newLapRecords;
-        private set => this.newLapRecords = new ObservableCollection<NewLapRecord>(value.ToList());
-    }
 
+    // public NewParticipant NewParticipant { get; set; }
     public void Add(LapRecord record)
     {
-        var lengths = this.newLapRecords.Select(x => x.LengthInKm);
-        var averageSpeeds = this.newLapRecords.Select(x => x.AverageSpeed!.Value);
-        var newLap = new NewLapRecord(record.StartTime, record.ArrivalTime, record.Lap, lengths, averageSpeeds);
-        this.newLapRecords.Add(newLap);
+        // var lengths = this.NewParticipant.LapRecords.Select(x => x.LengthInKm);
+        // var averageSpeeds = this.NewParticipant.LapRecords.Select(x => x.AverageSpeed!.Value);
+        // var newLap = new NewLapRecord(record.StartTime, record.ArrivalTime, record.Lap, lengths, averageSpeeds);
+        // this.NewParticipant.LapRecords.Add(newLap);
+        
         this.lapRecords.Add(record);
     }
 
@@ -58,7 +54,7 @@ public class Participant : DomainBase<ParticipantException>, IParticipantState
     {
         return string.Format(NAME_FORMAT, number, athleteName, horseName);
     }
-
+    
     public void __REMOVE_RECORDS__()
     {
         this.lapRecords.Clear();
