@@ -2,6 +2,7 @@
 using EnduranceJudge.Domain.Annotations;
 using EnduranceJudge.Domain.Core.Exceptions;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -17,7 +18,7 @@ public class NewDomainBase : DomainBase<NewDomainException>, INotifyPropertyChan
 
     protected void SetValue<T>(ref T property, T value, [CallerMemberName] string propertyName = null)
     {
-        if (!property.Equals(value))
+        if (!EqualityComparer<T>.Default.Equals(property, value))
         {
             property = value;
             this.RaisePropertyChanged(propertyName);

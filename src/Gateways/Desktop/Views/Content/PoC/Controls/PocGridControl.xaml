@@ -5,11 +5,14 @@
              xmlns:controls="clr-namespace:EnduranceJudge.Gateways.Desktop.Views.Content.PoC.Controls">
     <!-- Performances -->
     <StackPanel Style="{StaticResource List-Horizontal}" Name="Root">
-        <manager:PerformanceLabelsControl Number="{Binding Number}" />
+        <manager:PerformanceLabelsControl DataContext="{Binding NewParticipant}"
+                                          Number="{Binding Number}" />
         
-        <ItemsControl x:Name="Laps" ItemsSource="{Binding LapRecords}">
+        <ItemsControl x:Name="Laps"
+                      DataContext="{Binding Path=NewParticipant}"
+                      ItemsSource="{Binding Path=LapRecords}">
             <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
+                <ItemsPanelTemplate> 
                     <StackPanel Style="{StaticResource List-Horizontal}"  />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>

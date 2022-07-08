@@ -54,5 +54,9 @@ public class CompetitionsAggregate : IAggregate
             throw Helper.Create<ParticipantException>(NOT_FOUND_BY_ID_MESSAGE);
         }
         participation.Remove(competitionId);
+        if (!participation.CompetitionsIds.Any())
+        {
+            this.state.Participations.Remove(participation);
+        }
     }
 }

@@ -33,6 +33,17 @@ internal class PocParticipant
     
     public bool IsValid { get; }
 
+    public bool Start()
+    {
+        if (this.laps.Any())
+        {
+            this.participant.RaiseInvalidChange("Competitions is already started.");
+            return false;
+        }
+        this.CreateLap(this.competition.StartTime);
+        return true;
+    }
+    
     public void SetLapTime(DateTime time)
     {
         if (this.IsComplete(this.participant))

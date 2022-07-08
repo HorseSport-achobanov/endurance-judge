@@ -5,6 +5,7 @@ using EnduranceJudge.Gateways.Desktop.Views.Content.Import;
 using EnduranceJudge.Gateways.Desktop.Core.Services.Implementations;
 using EnduranceJudge.Gateways.Desktop.Views.Content.Configuration.Roots.Events;
 using EnduranceJudge.Gateways.Desktop.Views.Content.Manager;
+using EnduranceJudge.Gateways.Desktop.Views.Content.PoC;
 using EnduranceJudge.Gateways.Desktop.Views.Content.Ranking;
 using Prism.Regions;
 using System;
@@ -69,6 +70,17 @@ public class NavigationService : NavigationServiceBase, INavigationService
                 throw new AppException(SELECT_WORK_DIRECTORY_MESSAGE);
             }
             this.ChangeTo<RankingView>(Regions.CONTENT_LEFT);
+        });
+    }
+    public void NavigateToPoC()
+    {
+        this.executor.Execute(() =>
+        {
+            if (!this.context.IsInitialized)
+            {
+                throw new AppException(SELECT_WORK_DIRECTORY_MESSAGE);
+            }
+            this.ChangeTo<PoCView>(Regions.CONTENT_LEFT);
         });
     }
 

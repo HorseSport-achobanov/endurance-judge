@@ -17,5 +17,5 @@ public partial class PocLapControl
     }
     
     public static readonly DependencyProperty PERFORMANCE_PROPERTY
-        = DependencyProperty.Register(nameof(NewLapRecord), typeof(PocLapControl), typeof(NewLapRecord));
+        = DependencyProperty.Register(nameof(PocLapControl.Lap), typeof(NewLapRecord), typeof(PocLapControl));
 }

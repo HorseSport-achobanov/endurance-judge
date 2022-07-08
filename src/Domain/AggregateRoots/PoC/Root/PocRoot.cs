@@ -19,13 +19,24 @@ public class PocRoot : INewAggregateRoot
         PoCEvents.LapRecordChange += this.OnLapRecordChange;
         PoCEvents.Start += this.OnStart;
     }
+    
     private void OnStart()
     {
-        var participants = this.state.Participations.Select(x => (x.NewParticipant, x.CompetitionConstraint));
+        var participants = this.state.Participations
+            .Select(x => (x.NewParticipant, x.CompetitionConstraint))
+            .ToList();
         foreach (var (participant, competition) in participants)
         {
             var domain = new PocParticipant(participant, competition);
+            domain.Start();
+            
+            if (!domain.IsValid)
+            {
+                return;
+            }
         }
+
+        PoCEvents.RaiseDomainChanged(participants.Select(x => x.NewParticipant));
     }
 
     public void OnParticipantChange(object sender, StateChangeArguments<NewParticipant> args)
@@ -37,7 +48,7 @@ public class PocRoot : INewAggregateRoot
 
         if (domain.IsValid)
         {
-            PoCEvents.RaiseParticipantChanged(args);
+            PoCEvents.RaiseDomainChanged(args.ChangedObject);
         }
     }
 
@@ -50,7 +61,7 @@ public class PocRoot : INewAggregateRoot
 
         if (domain.IsValid)
         {
-            PoCEvents.RaiseLapChanged(args);
+            PoCEvents.RaiseDomainChanged(args.ChangedObject);
         }
     }
 }

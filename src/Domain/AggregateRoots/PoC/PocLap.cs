@@ -34,6 +34,7 @@ internal class PocLap
             return;
         } 
 
+        this.lap.TotalLength = this.CalculateTotalLength();
         if (this.vetTime.HasValue)
         {
             this.lap.NextStartTime = this.vetTime.Value.AddMinutes(this.lap.RestTimeInMins);
@@ -44,7 +45,6 @@ internal class PocLap
             this.lap.RecoverySpan = this.CalculateRecoverySpan();
             this.lap.Time = this.CalculateCurrentTime();
             this.lap.AverageSpeed = this.CalculateAverageSpeed();
-            this.lap.TotalLength = this.CalculateTotalLength();
             this.lap.AverageSpeedTotal = this.CalculateTotalAverageSpeed();
         }
     }

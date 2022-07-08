@@ -6,7 +6,9 @@
 
     <!-- Number -->
     <Border Style="{StaticResource Border-Performance-Cell}" >
-        <TextBlock Name="NumberText" Style="{StaticResource Text-Bold}" Foreground="{Binding Color}" />
+        <TextBlock Style="{StaticResource Text-Bold}"
+                   Text="{Binding Number}"
+                   Foreground="{Binding Color}" />
     </Border>
     <!-- Arrive -->
     <Border Style="{StaticResource Border-Performance-Cell}">

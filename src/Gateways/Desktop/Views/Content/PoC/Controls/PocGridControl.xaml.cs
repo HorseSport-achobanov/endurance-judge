@@ -1,5 +1,4 @@
-﻿using EnduranceJudge.Domain.State.LapRecords;
-using EnduranceJudge.Domain.State.Participants;
+﻿using EnduranceJudge.Domain.State.Participants;
 using System.Windows;
 
 namespace EnduranceJudge.Gateways.Desktop.Views.Content.PoC.Controls;
@@ -18,5 +17,8 @@ public partial class PocGridControl
     }
     
     public static readonly DependencyProperty PARTICIPANT_PROPERTY
-        = DependencyProperty.Register(nameof(NewParticipant), typeof(PocGridControl), typeof(NewParticipant));
+        = DependencyProperty.Register(
+            nameof(PocGridControl.Participant),
+            typeof(NewParticipant),
+            typeof(PocGridControl));
 }

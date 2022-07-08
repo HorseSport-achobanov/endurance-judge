@@ -4,6 +4,7 @@ using EnduranceJudge.Application.State;
 using EnduranceJudge.Core.ConventionalServices;
 using EnduranceJudge.Core.Services;
 using EnduranceJudge.Domain.AggregateRoots.Manager.WitnessEvents;
+using EnduranceJudge.Domain.AggregateRoots.PoC.Root;
 using EnduranceJudge.Domain.State;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,8 @@ public class Persistence : IPersistence
         this.file = file;
         this.serialization = serialization;
         Witness.StateChanged += (_, _) => this.SaveState();
+
+        PoCEvents.DomainChanged += (_, _) => this.SaveState();
     }
 
     public string LogError(string message, string stackTrace)

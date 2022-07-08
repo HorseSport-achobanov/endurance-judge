@@ -55,7 +55,7 @@ public class PocViewModel : ViewModelBase
         {
             return;
         }
-        this.Participations = new ObservableCollection<Participation>(this.participationQueries.GetAll());
+        this.Participations.AddRange(this.participationQueries.GetAll());
     }
 
     public DelegateCommand<object[]> Select { get; }
@@ -68,7 +68,7 @@ public class PocViewModel : ViewModelBase
     public DelegateCommand RequireInspection { get; }
     public DelegateCommand StartList { get; }
 
-    public ObservableCollection<Participation> Participations { get; private set; } = new();
+    public ObservableCollection<Participation> Participations { get; } = new();
     public Participation SelectedParticipation
     {
         get => this.selectedParticipation;
@@ -97,7 +97,7 @@ public class PocViewModel : ViewModelBase
     private void SelectAction(Participation participation)
     {
         this.SelectedParticipation = participation;
-        this.SelectedLap = participation.NewParticipant.LapRecords.Last();
+        this.SelectedLap = participation.NewParticipant.LapRecords.LastOrDefault();
     }
     
     private void AllowReInspectionAction()

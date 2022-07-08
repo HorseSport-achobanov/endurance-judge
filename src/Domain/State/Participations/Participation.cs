@@ -16,6 +16,9 @@ public class Participation : DomainBase<ParticipationException>
         {
             RfId = participant.RfId,
             Number = participant.Number,
+            Horse = participant.Horse,
+            Athlete = participant.Athlete,
+            MaxAverageSpeedInKmPh = participant.MaxAverageSpeedInKmPh,
         };
         this.CompetitionConstraint = competition;
     }

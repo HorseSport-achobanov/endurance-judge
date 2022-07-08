@@ -12,6 +12,7 @@ public class JsonSerializationService : IJsonSerializationService
         settings.ContractResolver = new PrivatePropertySetterResolver();
         settings.ConstructorHandling = ConstructorHandling.AllowNonPublicDefaultConstructor;
         settings.PreserveReferencesHandling = PreserveReferencesHandling.Objects;
+        settings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
     }
 
     private readonly JsonSerializerSettings settings;

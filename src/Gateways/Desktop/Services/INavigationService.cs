@@ -10,6 +10,7 @@ public interface INavigationService : ISingletonService
     void NavigateToEvent();
     void NavigateToManager();
     void NavigateToRanking();
+    void NavigateToPoC();
     void ChangeTo<T>()
         where T : IView;
     void ChangeToNewConfiguration<T>(int principalId, int childViewId)

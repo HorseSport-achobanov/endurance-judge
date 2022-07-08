@@ -139,23 +139,24 @@
                                 <TextBlock Style="{StaticResource Text-Bold}"
                                            Width="40px" TextAlignment="Center"
                                            Padding="5px"
-                                           Foreground="{Binding Color}"
-                                           Text="{Binding Number}" />
+                                           DataContext="{Binding NewParticipant}"
+                                           Text="{Binding Number}" /> <!-- TODO: add color converter -->
                             </DataTemplate>
                         </TabControl.ItemTemplate>
                         <TabControl.ContentTemplate>
                             <DataTemplate>
-                                <StackPanel Style="{StaticResource List-Vertical}">
-                                    <controls:PocGridControl Participant="{Binding NewParticipant}" />
-                                </StackPanel>
+                                <!-- <TextBlock Text="Test" /> -->
+                                <controls:PocGridControl Participant="{Binding NewParticipant}" />
+                                <!-- <StackPanel Style="{StaticResource List-Vertical}"> -->
+                                <!-- </StackPanel> -->
                             </DataTemplate>
                         </TabControl.ContentTemplate>
-                        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                        <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <prism:InvokeCommandAction Command="{Binding Select}"
                                                            TriggerParameterPath="AddedItems" />
                             </i:EventTrigger>
-                        xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+                        </i:Interaction.Triggers>
                     </TabControl>
                 </StackPanel>
             </Border>

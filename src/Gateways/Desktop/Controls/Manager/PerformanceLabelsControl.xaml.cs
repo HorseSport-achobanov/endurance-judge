@@ -12,8 +12,8 @@ public partial class PerformanceLabelsControl
 
     public string Number
     {
-        get => $"#{this.NumberText}";
-        set => this.NumberText.Text = $"#{value}";
+        get => (string) this.GetValue(NUMBER_PROPERTY);
+        set => this.SetValue(NUMBER_PROPERTY, value);
     }
 
     public static readonly DependencyProperty NUMBER_PROPERTY =
