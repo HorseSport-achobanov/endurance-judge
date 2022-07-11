@@ -12,14 +12,12 @@ public class Participation : DomainBase<ParticipationException>
     internal Participation(Participant participant, Competition competition) : base(GENERATE_ID)
     {
         this.Participant = participant;
-        this.NewParticipant = new NewParticipant
-        {
-            RfId = participant.RfId,
-            Number = participant.Number,
-            Horse = participant.Horse,
-            Athlete = participant.Athlete,
-            MaxAverageSpeedInKmPh = participant.MaxAverageSpeedInKmPh,
-        };
+        this.NewParticipant = new NewParticipant(
+            participant.RfId,
+            participant.Number,
+            participant.Horse,
+            participant.Athlete,
+            participant.MaxAverageSpeedInKmPh);
         this.CompetitionConstraint = competition;
     }
 

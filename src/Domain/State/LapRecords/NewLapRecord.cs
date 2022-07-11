@@ -25,13 +25,16 @@ public class NewLapRecord : NewDomainBase, IPerformance
     private double? averageSpeedTotal;
     private double totalLength;
     private Result result;
-    
+
+    private NewLapRecord()
+    {
+    }
     public NewLapRecord(
         DateTime startTime,
         DateTime? arrivalTime,
         ILapState lap,
         IEnumerable<double> previousLengths,
-        IEnumerable<double> previousAverageSpeeds)
+        IEnumerable<double> previousAverageSpeeds) : base(GENERATE_ID)
     {
         this.StartTime = startTime;
         this.ArrivalTime = arrivalTime;
@@ -129,7 +132,7 @@ public class NewLapRecord : NewDomainBase, IPerformance
             return header;
         }
     }
-    
-    public List<double> PreviousLengths { get; private set; }
-    public List<double> PreviousAverageSpeeds { get; private set; }
+
+    public List<double> PreviousLengths { get; private set; } = new();
+    public List<double> PreviousAverageSpeeds { get; private set; } = new();
 }

@@ -14,6 +14,19 @@ public class NewParticipant : NewDomainBase, IParticipantState
     private int? maxAverageSpeedInKmPh;
     private Horse horse;
     private Athlete athlete;
+
+    private NewParticipant()
+    {
+    }
+    public NewParticipant(string rfId, string number, Horse horse, Athlete athlete, int? maxAverageSpeedInKmPh)
+        : base(GENERATE_ID)
+    {
+        this.RfId = rfId;
+        this.Number = number;
+        this.Horse = horse;
+        this.Athlete = athlete;
+        this.MaxAverageSpeedInKmPh = maxAverageSpeedInKmPh;
+    }
     
     public Horse Horse 
     { 

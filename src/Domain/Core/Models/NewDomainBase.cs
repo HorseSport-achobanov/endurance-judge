@@ -12,6 +12,16 @@ namespace EnduranceJudge.Domain.Core.Models;
 
 public class NewDomainBase : DomainBase<NewDomainException>, INotifyPropertyChanged
 {
+    protected NewDomainBase()
+    {
+    }
+    // Unused variable is needed mark the constructor which generates Id
+    // That constructor should ONLY be used when creating NEW (no database entry) objects
+    protected NewDomainBase(string generateIdFlag) : base(GENERATE_ID)
+    {
+        this.Id = DomainIdProvider.Generate();
+    }
+    
     private DomainValidationArguments validationArguments;
     public event PropertyChangedEventHandler PropertyChanged;
     public event DomainValidationHandler InvalidChange;
