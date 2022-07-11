@@ -69,10 +69,11 @@ internal class PocParticipant
         return true;
     }
 
-    public void Disqualify(ResultType type, string message)
+    public bool Disqualify(ResultType type, string message)
     {
         var lap = this.GetCurrentLapDomain();
         lap.Complete(type, message);
+        return true;
     }
 
     private PocLap GetCurrentLapDomain()
@@ -81,7 +82,7 @@ internal class PocParticipant
         return new PocLap(record, this.competition.Type);
     }
 
-    public void CreateLap(DateTime startTime)
+    private void CreateLap(DateTime startTime)
     {
         var config = this.competition.Laps
             .Skip(this.participant.LapRecords.Count)

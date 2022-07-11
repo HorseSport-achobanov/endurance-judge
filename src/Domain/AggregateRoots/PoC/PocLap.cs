@@ -38,14 +38,14 @@ internal class PocLap
     public NewLapRecord Record => this.lap;
     public bool IsValid { get; private set; }
 
-    public void Arrive(DateTime time)
+    internal void Arrive(DateTime time)
     {
         if (this.IsValidTime(time, this.lap.StartTime, ARRIVAL_TERM))
         {
             this.lap.ArrivalTime = time;
         }
     }
-    public void Inspect(DateTime time)
+    internal void Inspect(DateTime time)
     {
         if (this.IsValidTime(time, this.lap.ArrivalTime, INSPECTION_TERM))
         {
@@ -56,7 +56,7 @@ internal class PocLap
             this.GenerateLapPerformanceData();
         }
     }
-    public void ReInspect(DateTime time)
+    internal void ReInspect(DateTime time)
     {
         if (this.IsValidTime(time, this.lap.InspectionTime, RE_INSPECTION_TERM))
         {
@@ -64,7 +64,7 @@ internal class PocLap
         }
         this.GenerateLapPerformanceData();
     }
-    public void Complete(ResultType? type = null, string message = null)
+    internal void Complete(ResultType? type = null, string message = null)
     {
         this.lap.Result = new Result(type ?? ResultType.Successful, message);
     }

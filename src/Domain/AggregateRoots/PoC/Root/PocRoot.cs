@@ -1,9 +1,10 @@
-﻿using EnduranceJudge.Core.Mappings;
-using EnduranceJudge.Domain.AggregateRoots.PoC.Events;
+﻿using EnduranceJudge.Domain.AggregateRoots.PoC.Events;
 using EnduranceJudge.Domain.Core.Models;
 using EnduranceJudge.Domain.State;
 using EnduranceJudge.Domain.State.LapRecords;
 using EnduranceJudge.Domain.State.Participants;
+using EnduranceJudge.Domain.State.Participations;
+using EnduranceJudge.Domain.State.Results;
 using System;
 using System.Linq;
 
@@ -21,22 +22,27 @@ public class PocRoot : INewAggregateRoot
         PoCEvents.LapRecordChange += this.OnLapRecordChange;
         PoCEvents.Start += this.OnStart;
         PoCEvents.SetLapTime += this.OnSetLapTime;
+        PoCEvents.Disqualify += this.OnDisqualify;
     }
+    private void OnDisqualify(object sender, (string number, ResultType result, string message) args)
+    {
+        var participation = this.GetParticipation(args.number);
+        var participantDomain = new PocParticipant(participation.NewParticipant, participation.CompetitionConstraint);
+
+        if (participantDomain.Disqualify(args.result, args.message))
+        {
+            PoCEvents.RaiseDomainChanged(participation.NewParticipant);
+        }
+    }
+    
     private void OnSetLapTime(object sender, (string number, DateTime time) args)
     {
-        var (number, time) = args;
-        var participation = this.state.Participations.FirstOrDefault(x => x.Participant.Number == number);
-        if (participation == null)
-        {
-            //TODO: Raise generic invalid event
-            throw new NotImplementedException();
-        }
+        var participation = this.GetParticipation(args.number);
         var participant = participation.NewParticipant;
         var competition = participation.CompetitionConstraint;
 
         var participantDomain = new PocParticipant(participant, competition);
-        var isValid = participantDomain.SetLapTime(time);
-        if (isValid)
+        if (participantDomain.SetLapTime(args.time))
         {
             PoCEvents.RaiseDomainChanged(participant);
         }
@@ -85,5 +91,16 @@ public class PocRoot : INewAggregateRoot
         {
             PoCEvents.RaiseDomainChanged(args.ChangedObject);
         }
+    }
+
+    private Participation GetParticipation(string number)
+    {
+        var participation = this.state.Participations.FirstOrDefault(x => x.Participant.Number == number);
+        if (participation == null)
+        {
+            //TODO: Raise generic invalid event
+            throw new NotImplementedException();
+        }
+        return participation;
     }
 }
