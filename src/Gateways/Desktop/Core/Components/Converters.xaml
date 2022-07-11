@@ -7,9 +7,9 @@
     <converters:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
     <converters1:SeverityToColorConverter x:Key="SeverityToColorConverter" />
     <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
-    <converters:TimeSpanToStringConverter x:Key="TTimeSpanToStringConverter"/>
-    <converters:DoubleToStringConverter x:Key="DoubleToStringConverter"/>
     <converters2:ParticipantToBrushConverter x:Key="ParticipantToBrushConverter"/>
     <converters2:LapHeaderConverter x:Key="LapHeaderConverter"/>
+    <converters2:TimeSpanToStringHoursConverter x:Key="TimeSpanToStringHoursConverter"/>
+    <converters2:DoubleToSpeedConverter x:Key="DoubleToSpeedConverter"/>
     
 </ResourceDictionary>

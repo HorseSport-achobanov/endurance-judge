@@ -41,22 +41,22 @@
     <!-- RecoverySpan-->
     <Border Style="{StaticResource Border-Performance-Cell}">
         <TextBlock Style="{StaticResource Text}" 
-                   Text="{Binding RecoverySpan, Converter={StaticResource TTimeSpanToStringConverter} }" />
+                   Text="{Binding RecoverySpan, Converter={StaticResource TimeSpanToStringHoursConverter} }" />
     </Border>
     <!-- Time -->
     <Border Style="{StaticResource Border-Performance-Cell}">
         <TextBlock Style="{StaticResource Text}" 
-                   Text="{Binding Time, Converter={StaticResource TTimeSpanToStringConverter} }" />
+                   Text="{Binding Time, Converter={StaticResource TimeSpanToStringHoursConverter} }" />
     </Border>
     <!-- AverageSpeed -->
     <Border Style="{StaticResource Border-Performance-Cell}">
         <TextBlock Style="{StaticResource Text}" 
-                   Text="{Binding AverageSpeed, Converter={StaticResource DoubleToStringConverter} }" />
+                   Text="{Binding AverageSpeed, Converter={StaticResource DoubleToSpeedConverter} }" />
     </Border>
     <!-- AverageSpeed Total -->
     <Border Style="{StaticResource Border-Performance-Cell}">
         <TextBlock Style="{StaticResource Text}" 
-                   Text="{Binding AverageSpeedTotal, Converter={StaticResource DoubleToStringConverter} }" />
+                   Text="{Binding AverageSpeedTotal, Converter={StaticResource DoubleToSpeedConverter} }" />
     </Border>
     
 </StackPanel>
