@@ -1,25 +1,10 @@
-﻿using System;
-using System.Globalization;
-using System.Windows.Data;
+﻿using EnduranceJudge.Gateways.Desktop.Converters;
+using System;
 
 namespace EnduranceJudge.Gateways.Desktop.Core.Components.Converters;
 
-[ValueConversion(typeof(DateTime?), typeof(bool))]
-public class DateTimeToStringConverter : IValueConverter
+public class DateTimeToStringConverter : XamlConverterBase<DateTime, string>
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        if (value is null)
-        {
-            return ValueSerializer.DEFAULT_TIME;
-        }
-        if (value is not DateTime date)
-        {
-            throw new InvalidOperationException($"Cannot convert '{value}' to string. Expected a DateTime object.");
-        }
-        return ValueSerializer.FormatTime(date);
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        => throw new NotImplementedException();
+    protected override string Convert(DateTime source)
+        => ValueSerializer.FormatTime(source);
 }

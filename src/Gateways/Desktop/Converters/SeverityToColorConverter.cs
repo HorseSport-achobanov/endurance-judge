@@ -1,34 +1,20 @@
 ﻿using EnduranceJudge.Gateways.Desktop.Core.Objects;
 using System;
-using System.Globalization;
-using System.Windows.Data;
 using System.Windows.Media;
 
 namespace EnduranceJudge.Gateways.Desktop.Converters;
 
-public class SeverityToColorConverter : IValueConverter
+public class SeverityToColorConverter : XamlConverterBase<MessageSeverity, SolidColorBrush>
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    protected override SolidColorBrush Convert(MessageSeverity source)
     {
-        if (value is not MessageSeverity severity)
+        var color = source switch
         {
-            throw new ArgumentException("Invalid value", nameof(value));
-        }
-
-        var color = new SolidColorBrush(Colors.Green);
-        switch (severity)
-        {
-            case MessageSeverity.Warning:
-                color = new SolidColorBrush(Colors.Goldenrod);
-                break;
-            case MessageSeverity.Error:
-                color = new SolidColorBrush(Colors.DarkRed);
-                break;
-        }
-
-        return color;
+            MessageSeverity.Warning => Colors.Goldenrod,
+            MessageSeverity.Error => Colors.DarkRed,
+            MessageSeverity.Success => Colors.Green,
+            _ => throw new ArgumentOutOfRangeException($"Invalid Message severity: '{source}'"),
+        };
+        return new SolidColorBrush(color);
     }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        => throw new NotImplementedException();
 }

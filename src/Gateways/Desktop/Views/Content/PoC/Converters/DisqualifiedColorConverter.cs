@@ -1,32 +1,17 @@
 ﻿using EnduranceJudge.Domain.State.Participants;
-using System;
-using System.Globalization;
+using EnduranceJudge.Gateways.Desktop.Converters;
 using System.Linq;
-using System.Windows.Data;
 using System.Windows.Media;
 
 namespace EnduranceJudge.Gateways.Desktop.Views.Content.PoC.Converters;
 
-public class ParticipantToBrushConverter : IValueConverter
+public class ParticipantToBrushConverter : XamlConverterBase<NewParticipant, SolidColorBrush>
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    protected override SolidColorBrush Convert(NewParticipant source)
     {
-        if (value is null)
-        {
-            return default;
-        }
-        if (value is not NewParticipant participant)
-        {
-            var message = $"Cannot convert '{value.GetType()}' to Brush object. Expected '{nameof(NewParticipant)}'";
-            throw new Exception(message);
-        }
-        var color = participant.LapRecords.Any(x => x.Result?.IsNotQualified ?? false)
+        var color = source.LapRecords.Any(x => x.Result?.IsNotQualified ?? false)
             ? Colors.Red
             : Colors.Black;
-
-        return new SolidColorBrush(color);
+        return new SolidColorBrush(color);   
     }
-    
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        => throw new NotImplementedException();
 }

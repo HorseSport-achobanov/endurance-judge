@@ -1,25 +1,9 @@
-﻿using System;
-using System.Globalization;
-using System.Windows.Data;
+﻿using EnduranceJudge.Gateways.Desktop.Converters;
 
 namespace EnduranceJudge.Gateways.Desktop.Core.Components.Converters;
 
-[ValueConversion(typeof(double?), typeof(bool))]
-public class DoubleToStringConverter : IValueConverter
+public class DoubleToStringConverter : XamlConverterBase<double, string>
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        if (value is null)
-        {
-            return ValueSerializer.DEFAULT_DOUBLE;
-        }
-        if (value is not double doubleValue)
-        {
-            throw new InvalidOperationException($"Cannot convert '{value}' to string. Expected a 'double' object.");
-        }
-        return ValueSerializer.FormatDouble(doubleValue);
-    }
-
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-        => throw new NotImplementedException();
+    protected override string Convert(double source)
+        => ValueSerializer.FormatDouble(source);
 }
