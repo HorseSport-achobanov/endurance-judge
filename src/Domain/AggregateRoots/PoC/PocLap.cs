@@ -1,7 +1,6 @@
 ﻿using EnduranceJudge.Domain.Enums;
 using EnduranceJudge.Domain.State.LapRecords;
 using EnduranceJudge.Domain.State.Results;
-using EnduranceJudge.Localization;
 using System;
 using System.Linq;
 using static EnduranceJudge.Localization.Strings;
@@ -17,13 +16,11 @@ internal class PocLap
     public const int COMPULSORY_INSPECTION_TIME_OFFSET = -15;
     private readonly NewLapRecord lap;
     private readonly CompetitionType competitionType;
-    private readonly DateTime? vetTime;
 
     public PocLap(NewLapRecord lap, CompetitionType competitionType)
     {
         this.lap = lap;
         this.competitionType = competitionType;
-        this.vetTime = GetVetTime(lap);
 
         var areTimesValid = this.IsValidTime(this.lap.ArrivalTime, this.lap.StartTime, ARRIVAL_TERM)
             || this.IsValidTime(this.lap.InspectionTime, this.lap.ArrivalTime, INSPECTION_TERM)
@@ -35,18 +32,7 @@ internal class PocLap
         } 
 
         this.lap.TotalLength = this.CalculateTotalLength();
-        if (this.vetTime.HasValue)
-        {
-            this.lap.NextStartTime = this.vetTime.Value.AddMinutes(this.lap.RestTimeInMins);
-            if (this.lap.IsRequiredInspectionRequired || this.lap.IsCompulsoryInspectionRequired)
-            {
-                this.lap.RequiredInspectionTime = this.CalculateRequiredInspectionTime();
-            }
-            this.lap.RecoverySpan = this.CalculateRecoverySpan();
-            this.lap.Time = this.CalculateCurrentTime();
-            this.lap.AverageSpeed = this.CalculateAverageSpeed();
-            this.lap.AverageSpeedTotal = this.CalculateTotalAverageSpeed();
-        }
+        this.GenerateLapPerformanceData();
     }
 
     public NewLapRecord Record => this.lap;
@@ -65,6 +51,10 @@ internal class PocLap
         {
             this.lap.InspectionTime = time;
         }
+        if (!this.lap.IsReInspectionRequired)
+        {
+            this.GenerateLapPerformanceData();
+        }
     }
     public void ReInspect(DateTime time)
     {
@@ -72,6 +62,7 @@ internal class PocLap
         {
             this.lap.ReInspectionTime = time;
         }
+        this.GenerateLapPerformanceData();
     }
     public void Complete(ResultType? type = null, string message = null)
     {
@@ -93,11 +84,30 @@ internal class PocLap
         return true;
     }
 
+    private void GenerateLapPerformanceData()
+    {
+        var vetTime = GetVetTime(this.lap);
+        if (vetTime == null)
+        {
+            return;
+        }
+        
+        this.lap.NextStartTime = vetTime.Value.AddMinutes(this.lap.RestTimeInMins);
+        if (this.lap.IsRequiredInspectionRequired || this.lap.IsCompulsoryInspectionRequired)
+        {
+            this.lap.RequiredInspectionTime = this.CalculateRequiredInspectionTime();
+        }
+        this.lap.RecoverySpan = this.CalculateRecoverySpan(vetTime.Value);
+        this.lap.Time = this.CalculateCurrentTime();
+        this.lap.AverageSpeed = this.CalculateAverageSpeed();
+        this.lap.AverageSpeedTotal = this.CalculateTotalAverageSpeed();
+    }
+
     private DateTime? CalculateRequiredInspectionTime()
         => this.lap.NextStartTime?.AddMinutes(COMPULSORY_INSPECTION_TIME_OFFSET);
     
-    private TimeSpan? CalculateRecoverySpan()
-        => this.vetTime - this.lap.ArrivalTime;
+    private TimeSpan? CalculateRecoverySpan(DateTime vetTime)
+        => vetTime - this.lap.ArrivalTime;
 
     public TimeSpan CalculateCurrentTime()
         => CalculateTime(this.lap, this.competitionType)!.Value;

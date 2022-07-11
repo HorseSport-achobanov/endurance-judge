@@ -2,9 +2,7 @@
 using EnduranceJudge.Domain.State.LapRecords;
 using EnduranceJudge.Domain.State.Participants;
 using EnduranceJudge.Domain.State.Results;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace EnduranceJudge.Domain.AggregateRoots.PoC;
@@ -19,7 +17,6 @@ internal class PocParticipant
 {
     private readonly NewParticipant participant;
     private readonly Competition competition;
-    private readonly List<PocLap> laps = new();
     
     public PocParticipant(NewParticipant participant, Competition competition)
     {
@@ -35,7 +32,7 @@ internal class PocParticipant
 
     public bool Start()
     {
-        if (this.laps.Any())
+        if (this.participant.LapRecords.Any())
         {
             this.participant.RaiseInvalidChange("Competitions is already started.");
             return false;
@@ -44,13 +41,13 @@ internal class PocParticipant
         return true;
     }
     
-    public void SetLapTime(DateTime time)
+    public bool SetLapTime(DateTime time)
     {
         if (this.IsComplete(this.participant))
         {
-            return;
+            return false;
         }
-        var lap = this.GetCurrentLap();
+        var lap = this.GetCurrentLapDomain();
         if (lap.Record.ArrivalTime == null)
         {
             lap.Arrive(time);
@@ -63,19 +60,26 @@ internal class PocParticipant
         {
             lap.ReInspect(time);
         }
+        else
+        {
+            this.CreateLap(lap.Record.NextStartTime!.Value);
+            return this.SetLapTime(time);
+        }
 
-        this.CreateLap(lap.Record.NextStartTime!.Value);
-        this.SetLapTime(time);
+        return true;
     }
 
     public void Disqualify(ResultType type, string message)
     {
-        var lap = this.GetCurrentLap();
+        var lap = this.GetCurrentLapDomain();
         lap.Complete(type, message);
     }
 
-    private PocLap GetCurrentLap()
-        => this.laps.Last();
+    private PocLap GetCurrentLapDomain()
+    {
+        var record = this.participant.LapRecords.Last();
+        return new PocLap(record, this.competition.Type);
+    }
 
     public void CreateLap(DateTime startTime)
     {
@@ -87,9 +91,6 @@ internal class PocParticipant
         
         var newLap = new NewLapRecord(startTime, null, config, lengths, averageSpeeds);
         this.participant.LapRecords.Add(newLap);
-
-        var domainLap = new PocLap(newLap, this.competition.Type);
-        this.laps.Add(domainLap);
     }
     
     private bool IsComplete(NewParticipant participant)
@@ -128,7 +129,6 @@ internal class PocParticipant
             {
                 return true;
             }
-            this.laps.Add(lapDomain);
         }
         return false;
     }

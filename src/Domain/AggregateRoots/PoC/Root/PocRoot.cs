@@ -1,8 +1,10 @@
-﻿using EnduranceJudge.Domain.AggregateRoots.PoC.Events;
+﻿using EnduranceJudge.Core.Mappings;
+using EnduranceJudge.Domain.AggregateRoots.PoC.Events;
 using EnduranceJudge.Domain.Core.Models;
 using EnduranceJudge.Domain.State;
 using EnduranceJudge.Domain.State.LapRecords;
 using EnduranceJudge.Domain.State.Participants;
+using System;
 using System.Linq;
 
 namespace EnduranceJudge.Domain.AggregateRoots.PoC.Root;
@@ -18,8 +20,28 @@ public class PocRoot : INewAggregateRoot
         PoCEvents.ParticipantChange += this.OnParticipantChange;
         PoCEvents.LapRecordChange += this.OnLapRecordChange;
         PoCEvents.Start += this.OnStart;
+        PoCEvents.SetLapTime += this.OnSetLapTime;
     }
-    
+    private void OnSetLapTime(object sender, (string number, DateTime time) args)
+    {
+        var (number, time) = args;
+        var participation = this.state.Participations.FirstOrDefault(x => x.Participant.Number == number);
+        if (participation == null)
+        {
+            //TODO: Raise generic invalid event
+            throw new NotImplementedException();
+        }
+        var participant = participation.NewParticipant;
+        var competition = participation.CompetitionConstraint;
+
+        var participantDomain = new PocParticipant(participant, competition);
+        var isValid = participantDomain.SetLapTime(time);
+        if (isValid)
+        {
+            PoCEvents.RaiseDomainChanged(participant);
+        }
+    }
+
     private void OnStart()
     {
         var participants = this.state.Participations

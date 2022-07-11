@@ -35,7 +35,7 @@
     </Border>
     <!-- NextStartTime-->
     <Border Style="{StaticResource Border-Performance-Cell}">
-        <TextBlock Style="{StaticResource Text}" 
+        <TextBlock Style="{StaticResource Text}" FontWeight="Bold" 
                    Text="{Binding NextStartTime, Converter={StaticResource DateTimeToStringConverter} }" />
     </Border>
     <!-- RecoverySpan-->
