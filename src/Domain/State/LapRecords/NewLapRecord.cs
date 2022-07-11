@@ -5,7 +5,6 @@ using EnduranceJudge.Domain.State.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using static EnduranceJudge.Localization.Strings;
 
 namespace EnduranceJudge.Domain.State.LapRecords;
 
@@ -120,17 +119,6 @@ public class NewLapRecord : NewDomainBase, IPerformance
     {
         get => this.result;
         internal set => this.SetValue(ref this.result, value);
-    }
-    public string Header
-    {
-        get
-        {
-            var lap = this.IsFinal
-                ? $"{FINAL}"
-                : $"{GATE.ToUpper()}{this.PreviousLengths.Count + 1}";
-            var header = $"{lap}/{this.TotalLength} {KM}";
-            return header;
-        }
     }
 
     public List<double> PreviousLengths { get; private set; } = new();

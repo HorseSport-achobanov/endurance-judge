@@ -10,5 +10,6 @@
     <converters:TimeSpanToStringConverter x:Key="TTimeSpanToStringConverter"/>
     <converters:DoubleToStringConverter x:Key="DoubleToStringConverter"/>
     <converters2:ParticipantToBrushConverter x:Key="ParticipantToBrushConverter"/>
+    <converters2:LapHeaderConverter x:Key="LapHeaderConverter"/>
     
 </ResourceDictionary>

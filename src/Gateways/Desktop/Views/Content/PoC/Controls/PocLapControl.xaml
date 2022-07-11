@@ -5,7 +5,7 @@
     <!-- Total Lenght -->
     <Border Style="{StaticResource Border-Performance-Cell}">
         <TextBlock Style="{StaticResource Text}" 
-                   Text="{Binding Header}" />
+                   Text="{Binding ., Converter={StaticResource LapHeaderConverter} }" />
     </Border>
     
     <!-- Arrival Time -->
