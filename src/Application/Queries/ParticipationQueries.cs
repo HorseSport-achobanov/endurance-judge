@@ -12,5 +12,5 @@ public class ParticipationQueries : QueriesBase<Participation>
     {
     }
 
-    protected override List<Participation> Set => this.State.Participations.ToList();
+    protected override List<Participation> Set => this.State.Participations.ToList(); // TODO: order
 }

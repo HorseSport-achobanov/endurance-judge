@@ -55,7 +55,12 @@ public class PocViewModel : ViewModelBase
         {
             return;
         }
-        this.Participations.AddRange(this.participationQueries.GetAll());
+        var participations = this.participationQueries.GetAll();
+        if (participations.Any())
+        {
+            this.Participations.AddRange(participations);
+            this.SelectAction(this.Participations.First());
+        }
     }
 
     public DelegateCommand<object[]> Select { get; }
@@ -98,6 +103,9 @@ public class PocViewModel : ViewModelBase
     {
         this.SelectedParticipation = participation;
         this.SelectedLap = participation.NewParticipant.LapRecords.LastOrDefault();
+        
+        this.InputNumber = this.SelectedParticipation.Participant.Number;
+        this.NotQualifiedReason = this.SelectedLap?.Result?.Code;
     }
     
     private void AllowReInspectionAction()
