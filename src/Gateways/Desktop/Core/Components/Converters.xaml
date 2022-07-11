@@ -1,12 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:converters="clr-namespace:EnduranceJudge.Gateways.Desktop.Core.Components.Converters"
-                    xmlns:converters1="clr-namespace:EnduranceJudge.Gateways.Desktop.Converters">
+                    xmlns:converters1="clr-namespace:EnduranceJudge.Gateways.Desktop.Converters"
+                    xmlns:converters2="clr-namespace:EnduranceJudge.Gateways.Desktop.Views.Content.PoC.Converters">
 
     <converters:VisibilityToBooleanConverter x:Key="VisibilityToBooleanConverter" />
     <converters1:SeverityToColorConverter x:Key="SeverityToColorConverter" />
     <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter"/>
     <converters:TimeSpanToStringConverter x:Key="TTimeSpanToStringConverter"/>
     <converters:DoubleToStringConverter x:Key="DoubleToStringConverter"/>
+    <converters2:ParticipantToBrushConverter x:Key="ParticipantToBrushConverter"/>
     
 </ResourceDictionary>

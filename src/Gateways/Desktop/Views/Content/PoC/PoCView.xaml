@@ -140,7 +140,8 @@
                                            Width="40px" TextAlignment="Center"
                                            Padding="5px"
                                            DataContext="{Binding NewParticipant}"
-                                           Text="{Binding Number}" /> <!-- TODO: add color converter -->
+                                           Text="{Binding Number}"
+                                           Foreground="{Binding ., Converter={StaticResource ParticipantToBrushConverter} }" /> <!-- TODO: add color converter -->
                             </DataTemplate>
                         </TabControl.ItemTemplate>
                         <TabControl.ContentTemplate>
