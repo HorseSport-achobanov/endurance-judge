@@ -43,10 +43,12 @@ internal class PocParticipant
     
     public bool SetLapTime(DateTime time)
     {
-        if (this.IsComplete(this.participant))
+        if (!this.participant.LapRecords.Any())
         {
+            this.participant.RaiseInvalidChange($"Cannot set Lap time. Competition has not started yet.");
             return false;
         }
+        
         var lap = this.GetCurrentLapDomain();
         if (lap.Record.ArrivalTime == null)
         {
@@ -62,8 +64,12 @@ internal class PocParticipant
         }
         else
         {
-            this.CreateLap(lap.Record.NextStartTime!.Value);
-            return this.SetLapTime(time);
+            lap.Complete();
+            if (!this.IsComplete(this.participant))
+            {
+                this.CreateLap(lap.Record.NextStartTime!.Value);
+                return this.SetLapTime(time);
+            }
         }
 
         return true;

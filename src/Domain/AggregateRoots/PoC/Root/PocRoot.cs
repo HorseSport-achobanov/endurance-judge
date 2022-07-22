@@ -37,6 +37,7 @@ public class PocRoot : INewAggregateRoot
     
     private void OnSetLapTime(object sender, (string number, DateTime time) args)
     {
+        // TODO: check if Competition has started.
         var participation = this.GetParticipation(args.number);
         var participant = participation.NewParticipant;
         var competition = participation.CompetitionConstraint;
@@ -90,6 +91,7 @@ public class PocRoot : INewAggregateRoot
         if (domain.IsValid)
         {
             PoCEvents.RaiseDomainChanged(args.ChangedObject);
+            participation.RaisePropertyChanged(nameof(Participation.NewParticipant));
         }
     }
 

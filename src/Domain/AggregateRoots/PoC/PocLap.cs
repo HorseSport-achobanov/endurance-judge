@@ -22,17 +22,14 @@ internal class PocLap
         this.lap = lap;
         this.competitionType = competitionType;
 
-        var areTimesValid = this.IsValidTime(this.lap.ArrivalTime, this.lap.StartTime, ARRIVAL_TERM)
+        this.IsValid = this.IsValidTime(this.lap.ArrivalTime, this.lap.StartTime, ARRIVAL_TERM)
             || this.IsValidTime(this.lap.InspectionTime, this.lap.ArrivalTime, INSPECTION_TERM)
             || this.IsValidTime(this.lap.ReInspectionTime, this.lap.InspectionTime, RE_INSPECTION_TERM);
-        if (!areTimesValid)
+        if (this.IsValid)
         {
-            this.IsValid = false;
-            return;
-        } 
-
-        this.lap.TotalLength = this.CalculateTotalLength();
-        this.GenerateLapPerformanceData();
+            this.lap.TotalLength = this.CalculateTotalLength();
+            this.GenerateLapPerformanceData();
+        }
     }
 
     public NewLapRecord Record => this.lap;

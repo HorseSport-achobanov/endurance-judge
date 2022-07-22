@@ -36,7 +36,6 @@ public class PocViewModel : ViewModelBase
         this.Disqualify = new DelegateCommand(() => this.DisqualifyAction(ResultType.Disqualified));
         this.FailToQualify = new DelegateCommand(() => this.DisqualifyAction(ResultType.FailedToQualify));
         this.Resign = new DelegateCommand(() => this.DisqualifyAction(ResultType.Resigned));
-        this.ReInspection = new DelegateCommand(this.AllowReInspectionAction);
         this.RequireInspection = new DelegateCommand(this.RequireInspectionAction);
         this.StartList = new DelegateCommand(popupService.RenderStartList);
         this.Select = new DelegateCommand<object[]>(list =>
@@ -69,7 +68,6 @@ public class PocViewModel : ViewModelBase
     public DelegateCommand Disqualify { get; }
     public DelegateCommand FailToQualify { get; }
     public DelegateCommand Resign { get; }
-    public DelegateCommand ReInspection { get; }
     public DelegateCommand RequireInspection { get; }
     public DelegateCommand StartList { get; }
 
@@ -106,14 +104,12 @@ public class PocViewModel : ViewModelBase
         
         this.InputNumber = this.SelectedParticipation.Participant.Number;
         this.NotQualifiedReason = this.SelectedLap?.Result?.Code;
+        this.SelectedParticipation.NewParticipant.LapRecords.CollectionChanged += (_, _) =>
+        {
+            this.SelectAction(this.SelectedParticipation);
+        };
     }
     
-    private void AllowReInspectionAction()
-    {
-        this.selectedLap.IsReInspectionRequired = !this.selectedLap.IsReInspectionRequired;
-        var args = new StateChangeArguments<NewLapRecord>(this.selectedLap);
-        PoCEvents.RaiseLapRecordChange(args);
-    }
     private void RequireInspectionAction()
     {
         this.selectedLap.IsRequiredInspectionRequired = !this.selectedLap.IsRequiredInspectionRequired;

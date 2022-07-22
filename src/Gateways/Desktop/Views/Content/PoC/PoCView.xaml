@@ -3,7 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"
              prism:ViewModelLocator.AutoWireViewModel="True"
-             xmlns:manager="clr-namespace:EnduranceJudge.Gateways.Desktop.Controls.Manager"
              xmlns:localization="clr-namespace:EnduranceJudge.Localization;assembly=EnduranceJudge.Localization"
              xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              xmlns:controls="clr-namespace:EnduranceJudge.Gateways.Desktop.Views.Content.PoC.Controls">
@@ -83,18 +82,15 @@
                         <StackPanel Style="{StaticResource List-Horizontal}">
                             <!-- Re Inspection checkbox -->
                             <CheckBox Style="{StaticResource CheckBox}" Margin="5px 0 0 0"
-                                      Command="{Binding ReInspection}"
-                                      DataContext="{Binding Path=SelectedLap}"
-                                      IsChecked="{Binding Path=IsReInspectionRequired}"
+                                      IsChecked="{Binding SelectedLap, Path=IsReInspectionRequired}"
                                       Name="ReInspectionCheckbox" />
                             <Label Style="{StaticResource Label-Primary}"
                                    Target="{Binding ElementName=ReInspectionCheckbox}"
                                    Content="{x:Static localization:Strings._RE_INSPECTION}"/>
                             <!-- Require Inspection checkbox -->
                             <CheckBox Style="{StaticResource CheckBox}" Margin="15px 0 0 0"
-                                      Command="{Binding RequireInspection}"
-                                      DataContext="{Binding Path=SelectedLap}"
-                                      IsChecked="{Binding Path=IsRequiredInspectionRequired}"
+                                      Command="{Binding RequireInspection }"
+                                      IsChecked="{Binding SelectedLap, Path=IsRequiredInspectionRequired}"
                                       Name="RequireInspectionCheckbox" />
                             <Label Style="{StaticResource Label-Primary}"
                                    Target="{Binding ElementName=RequireInspectionCheckbox}"
@@ -141,15 +137,14 @@
                                            Padding="5px"
                                            DataContext="{Binding NewParticipant}"
                                            Text="{Binding Number}"
-                                           Foreground="{Binding ., Converter={StaticResource ParticipantToBrushConverter} }" /> <!-- TODO: add color converter -->
+                                           Foreground="{
+                                               Binding .,
+                                               Converter={StaticResource ParticipantToBrushConverter} }" />
                             </DataTemplate>
                         </TabControl.ItemTemplate>
                         <TabControl.ContentTemplate>
                             <DataTemplate>
-                                <!-- <TextBlock Text="Test" /> -->
                                 <controls:PocGridControl Participant="{Binding NewParticipant}" />
-                                <!-- <StackPanel Style="{StaticResource List-Vertical}"> -->
-                                <!-- </StackPanel> -->
                             </DataTemplate>
                         </TabControl.ContentTemplate>
                         <i:Interaction.Triggers>

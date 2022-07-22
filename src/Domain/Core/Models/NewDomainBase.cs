@@ -36,7 +36,7 @@ public class NewDomainBase : DomainBase<NewDomainException>, INotifyPropertyChan
     }
     
     [NotifyPropertyChangedInvocator]
-    protected virtual void RaisePropertyChanged(string propertyName)
+    public virtual void RaisePropertyChanged(string propertyName)
     {
         this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }

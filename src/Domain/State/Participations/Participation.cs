@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace EnduranceJudge.Domain.State.Participations;
 
-public class Participation : DomainBase<ParticipationException>
+public class Participation : NewDomainBase
 {
     internal Participation() {}
     internal Participation(Participant participant, Competition competition) : base(GENERATE_ID)
